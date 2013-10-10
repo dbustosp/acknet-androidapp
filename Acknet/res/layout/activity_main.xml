@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    tools:context=".MainActivity" >
+
+    	<TextView
+    	    android:id="@+id/acknet"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignLeft="@+id/txtSignUp"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_alignRight="@+id/txtSignUp"
+    	    android:layout_marginTop="46dp"
+    	    android:text="Acknet"
+    	    android:gravity="center"
+    	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    	<Button
+    	    android:id="@+id/login"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="200sp"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginBottom="80dp"
+    	    android:text="Login" />
+
+    	<Button
+    	    android:id="@+id/signup"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="200sp"
+    	    android:layout_height="wrap_content"
+    	    android:layout_above="@+id/txtLogin"
+    	    android:layout_alignLeft="@+id/login"
+    	    android:layout_marginBottom="60dp"
+    	    android:text="Sign Up" />
+
+    	<TextView
+    	    android:id="@+id/txtSignUp"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_above="@+id/signup"
+    	    android:layout_alignLeft="@+id/signup"
+    	    android:layout_alignRight="@+id/signup"
+    	    android:layout_marginBottom="14dp"
+    	    android:text="New to Acknet?"
+    	    android:gravity="center"
+    	    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    	<TextView
+    	    android:id="@+id/txtLogin"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_above="@+id/login"
+    	    android:layout_alignLeft="@+id/login"
+    	    android:layout_alignRight="@+id/login"
+    	    android:layout_marginBottom="16dp"
+    	    android:text="Already have a Acknet account?"
+    	    android:gravity="center"
+    	    android:textAppearance="?android:attr/textAppearanceLarge" />
+    	
+</RelativeLayout>
