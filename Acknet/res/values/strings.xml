@@ -4,5 +4,8 @@
     <string name="app_name">Acknet</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="login">Login</string>
+	<string name="signup">Sign Up</string>
+	<string name="newString">New to Acknet?</string>
+    <string name="haveAccount">Already have a Acknet account?</string>
 </resources>
