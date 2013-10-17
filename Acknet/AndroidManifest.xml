@@ -7,7 +7,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-
+	
+	<uses-permission android:name="android.premission.INTERNET"/>
+	
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -25,6 +27,16 @@
         <activity  android:name=".LoginActivity">
 		     <intent-filter>
 		        <action android:name="android.intent.action.LOGIN" />                   
+		     </intent-filter>
+		</activity>
+		<activity  android:name=".SignUpActivity">
+		     <intent-filter>
+		        <action android:name="android.intent.action.SIGNUP" />                   
+		     </intent-filter>
+		</activity>
+		<activity  android:name=".WallActivity">
+		     <intent-filter>
+		        <action android:name="android.intent.action.WALL" />                   
 		     </intent-filter>
 		</activity>
 	</application>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,9 +13,19 @@
     	    android:layout_centerHorizontal="true"
     	    android:layout_marginTop="50dp"
     	    android:gravity="center"
-    	    android:text="Acknet"
+    	    android:text="@string/app_name"
     	    android:textAppearance="?android:attr/textAppearanceLarge" />
-
+		
+    	<Button
+    	    android:id="@+id/login"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="200sp"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/password"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginTop="43dp"
+    	    android:text="@string/login" />
+    	
     	<EditText
     	    android:id="@+id/password"
     	    android:layout_width="wrap_content"
@@ -26,17 +35,7 @@
     	    android:layout_marginTop="26dp"
     	    android:ems="10"
     	    android:inputType="textPassword"
-    	    android:hint="Password" />
-
-    	<Button
-    	    android:id="@+id/login"
-    	    style="?android:attr/buttonStyleSmall"
-    	    android:layout_width="200sp"
-    	    android:layout_height="wrap_content"
-    	    android:layout_below="@+id/password"
-    	    android:layout_centerHorizontal="true"
-    	    android:layout_marginTop="43dp"
-    	    android:text="Login" />
+    	    android:hint="@string/password" />
 
     	<EditText
     	    android:id="@+id/username"
@@ -46,6 +45,6 @@
     	    android:layout_centerHorizontal="true"
     	    android:layout_marginTop="59dp"
     	    android:ems="10"
-    	    android:hint="Username" />
+    	    android:hint="@string/username" />
     	
 </RelativeLayout>

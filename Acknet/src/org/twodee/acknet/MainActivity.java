@@ -29,14 +29,20 @@ public class MainActivity extends Activity {
 				return false;
 			}
 	    });
-    }
+        
+        final Button signup = (Button) findViewById(R.id.signUp);
+        
+        signup.setOnTouchListener(new OnTouchListener(){
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        	@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+        		 Intent i = new Intent(MainActivity.this, SignUpActivity.class);     
+                 startActivity(i);
+                 finish(); //should use the finish if you need to preserve memory
+                           //other wise don't use it.
+				return false;
+			}
+	    });
     }
     
 }
