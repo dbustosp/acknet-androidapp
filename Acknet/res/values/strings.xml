@@ -11,4 +11,5 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login_2">Sign Up</string>
+    <string name="string_timeline">Timeline</string>
 </resources>
