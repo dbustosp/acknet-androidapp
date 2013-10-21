@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class LoginActivity extends Activity {
 	 EditText login_username;
 	 EditText login_password;
 	 String token;
+	 Boolean status;
 	
 	
 	@Override
@@ -51,14 +53,20 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Log.i("info", "Llamando makeConnection");
-				makeConnection();
+				
+				makeConnection(arg0);
+				
 				Log.i("info", "Fin makeConnection");
 				
 			}
 	    });
+	
 	}
 	
-	private void makeConnection() {
+	private void makeConnection(final View v) {
+		
+		
+		
 		
 		new AsyncTask<Void, Void, HttpResponse>() {
 			
@@ -67,16 +75,15 @@ public class LoginActivity extends Activity {
 			@Override
 			protected HttpResponse doInBackground(Void... params) {
 				
+				
+				
 				System.out.println("HAhaHAHA");
 				Log.i("info", "Init doInBackGround ");
 				HttpClient httpclient = new DefaultHttpClient();
 				String URL = "http://137.28.230.99:3000/session/" + login_username.getText().toString();
 				HttpPost httppost = new HttpPost(URL);
 			    HttpResponse response = null;
-			    JSONObject json;
-			    
-			    
-			    
+			   			    
 			    try {
 			        // Add your data
 			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -90,32 +97,25 @@ public class LoginActivity extends Activity {
 			        
 			        Scanner in = new Scanner(response.getEntity().getContent());
 			        in.useDelimiter("\\Z");
+			        
 			        String body = in.next();
+			        
 			        in.close();
-			        json = new JSONObject(body);
 			        
-			        System.out.println(json);
+			        System.out.println("BODYY: " + body);
 			        
-			        Boolean status = json.getBoolean("succes");
+			        JSONObject json = new JSONObject(body);
+			        
+			        System.out.println("JSOOON: " + json);
+			        
+			        status = json.getBoolean("success");
 			        
 			        if(status){
-			        	// Server returned => True
-			        	System.out.println("Status = True");
-			        	token = json.getString("token");
-			        	System.out.println("token = " + token);
-			        	
-			        	// Token guardado en la variable local token
-			        	
-			        	
-			        }else{
-			        	// Server returned => False
-			        	System.out.println("Status = False");
-			        	
-			        	
+			        	String token_aux = json.getString("token");
+			        	System.out.println("token_aux = " + token_aux);
 			        }
 			        
-			        
-			        
+			        System.out.println("Status: ===> " + status);
 
 			    } catch (ClientProtocolException e) {
 			        // TODO Auto-generated catch block
@@ -135,9 +135,28 @@ public class LoginActivity extends Activity {
 			protected void onPostExecute(HttpResponse response){
 				//use it wherever you want
 				Log.i("info", "onPostExecute");
+				System.out.println("Status: " + status);
+				
+		        if(status){
+		        	// Server returned => True
+		        	System.out.println("Status = True");
+		        	System.out.println("Token = " + token);
+
+					Intent myIntent = new Intent(v.getContext(), Timeline.class);
+					startActivityForResult(myIntent, 0);
+
+		        }else{
+		        	// Server returned => False
+		        	System.out.println("onPostExecute -  status => False");
+		        }
+		        
 			}
 			
 		}.execute();
+	
+	
+        
+		
 	}
 	
 	
