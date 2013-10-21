@@ -25,11 +25,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity  android:name=".LoginActivity">
 		     <intent-filter>
 		        <action android:name="android.intent.action.LOGIN" />                   
 		     </intent-filter>
 		</activity>
+		
+         <activity  android:name=".Timeline">
+		     <intent-filter>
+		        <action android:name="android.intent.action.TIMELINE" />                   
+		     </intent-filter>
+		</activity>
+        
+        
+        <activity  android:name=".MyPreferenceActivity">
+            
+            
+        </activity>
+        
 	</application>
 
 </manifest>

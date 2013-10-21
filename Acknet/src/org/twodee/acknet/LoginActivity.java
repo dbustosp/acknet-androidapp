@@ -18,13 +18,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	
@@ -32,8 +36,10 @@ public class LoginActivity extends Activity {
 	 EditText login_password;
 	 String token;
 	 Boolean status;
+	 public static final String PREFS_NAME = "preferences.xml";
+	 SharedPreferences SP;
 	
-	
+	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -80,7 +86,7 @@ public class LoginActivity extends Activity {
 				System.out.println("HAhaHAHA");
 				Log.i("info", "Init doInBackGround ");
 				HttpClient httpclient = new DefaultHttpClient();
-				String URL = "http://137.28.230.99:3000/session/" + login_username.getText().toString();
+				String URL = "http://137.28.131.27:3000/session/" + login_username.getText().toString();
 				HttpPost httppost = new HttpPost(URL);
 			    HttpResponse response = null;
 			   			    
@@ -108,11 +114,33 @@ public class LoginActivity extends Activity {
 			        
 			        System.out.println("JSOOON: " + json);
 			        
+			        
 			        status = json.getBoolean("success");
 			        
 			        if(status){
+			        	
+			        	 //SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+			        	
 			        	String token_aux = json.getString("token");
 			        	System.out.println("token_aux = " + token_aux);
+			        	token = token_aux;
+			        	token_aux = null;
+			        	
+			        	
+			        	
+			        	
+			            
+			            //Toast.makeText(LoginActivity.this,
+			            //        "Reverted string sequence of user name.",
+			            //        Toast.LENGTH_LONG).show();
+			            
+			            
+			           
+			        	//String token_preference = SP.getString("token", "null");
+			        	
+			        	//System.out.println("Tooooken preferences: " + token_preference);
+			        	
+			        	
 			        }
 			        
 			        System.out.println("Status: ===> " + status);
@@ -131,6 +159,7 @@ public class LoginActivity extends Activity {
 				return response;
 			}
 			
+			
 			@Override
 			protected void onPostExecute(HttpResponse response){
 				//use it wherever you want
@@ -142,6 +171,21 @@ public class LoginActivity extends Activity {
 		        	System.out.println("Status = True");
 		        	System.out.println("Token = " + token);
 
+		        	SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		        	Editor edit = SP.edit();
+		        	edit.putString("token", token);
+		            edit.commit();
+		            
+		            
+		            // Verify sabe in correct form
+		            // Read from preferences.xml
+		            //String token_preference = SP.getString("token", "null");
+		                	
+		        	//System.out.println("TOOOKEN: " + token);
+		        	//System.out.println("TOOOKEN_PREFERENCE: " + token_preference);
+		  
+		        	
+		        	//System.out.println("End shared preferences");
 					Intent myIntent = new Intent(v.getContext(), Timeline.class);
 					startActivityForResult(myIntent, 0);
 
