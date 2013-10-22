@@ -12,4 +12,5 @@
     <string name="password">Password</string>
     <string name="login_2">Sign Up</string>
     <string name="string_timeline">Timeline</string>
+    <string name="post">Enviar post</string>
 </resources>

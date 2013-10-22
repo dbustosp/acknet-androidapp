@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	
@@ -86,7 +85,8 @@ public class LoginActivity extends Activity {
 				System.out.println("HAhaHAHA");
 				Log.i("info", "Init doInBackGround ");
 				HttpClient httpclient = new DefaultHttpClient();
-				String URL = "http://137.28.131.27:3000/session/" + login_username.getText().toString();
+				String IP = Connection.getInstance().getIp();
+				String URL = IP + "/session/" + login_username.getText().toString();
 				HttpPost httppost = new HttpPost(URL);
 			    HttpResponse response = null;
 			   			    
