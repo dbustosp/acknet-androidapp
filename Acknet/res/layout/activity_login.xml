@@ -37,6 +37,19 @@
     	    android:inputType="textPassword"
     	    android:hint="@string/password" />
 
+<<<<<<< HEAD
+=======
+    	<Button
+    	    android:id="@+id/signup_go"
+    	    style="?android:attr/buttonStyleSmall"
+    	    android:layout_width="200sp"
+    	    android:layout_height="wrap_content"
+    	    android:layout_below="@+id/password"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginTop="43dp"
+    	    android:text="@string/login_2" />
+
+>>>>>>> Added request /login/, file timeline.xml
     	<EditText
     	    android:id="@+id/username"
     	    android:layout_width="wrap_content"

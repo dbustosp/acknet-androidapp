@@ -8,6 +8,11 @@
 	<string name="newString">New to Acknet?</string>
     <string name="haveAccount">Already have a Acknet account?</string>
     <string name="password">Password</string>
+<<<<<<< HEAD
     <string name="username">Username</string>
     <string name="confrimpassword">Confirm Password</string>
+=======
+    <string name="login_2">Sign Up</string>
+    <string name="string_timeline">Timeline</string>
+>>>>>>> Added request /login/, file timeline.xml
 </resources>
