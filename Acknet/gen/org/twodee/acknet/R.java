@@ -25,9 +25,13 @@ public final class R {
     }
     public static final class id {
         public static final int acknet=0x7f090000;
-        public static final int action_settings=0x7f09000c;
+        public static final int action_settings=0x7f090010;
         public static final int addTodayButton=0x7f090009;
         public static final int datePicker=0x7f090008;
+        public static final int go_camera=0x7f09000e;
+        public static final int imageView=0x7f09000c;
+        public static final int layout_pictures=0x7f09000f;
+        public static final int loadButton=0x7f09000d;
         public static final int logView=0x7f09000a;
         public static final int login=0x7f090005;
         public static final int password=0x7f090001;
@@ -50,8 +54,12 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int camera=0x7f06000f;
+        public static final int desc=0x7f06000d;
+        public static final int go_camera=0x7f06000e;
         public static final int haveAccount=0x7f060006;
         public static final int hello_world=0x7f060002;
+        public static final int load=0x7f06000c;
         public static final int login=0x7f060003;
         public static final int login_2=0x7f060009;
         public static final int newString=0x7f060005;

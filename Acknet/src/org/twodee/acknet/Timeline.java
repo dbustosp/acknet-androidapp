@@ -51,24 +51,7 @@ public class Timeline extends Activity{
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
-		
-		final Button go_cammera = (Button) findViewById(R.id.go_camera);
-		
-		go_cammera.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				
-				Intent myIntent = new Intent(arg0.getContext(), CameraDemoActivity.class);
-	        	startActivityForResult(myIntent, 0);
-				
-			}
-			
-		});
-        
-		
-		
-		
+		    		
 		final Button send_post = (Button) findViewById(R.id.send_post);
 		
 		send_post.setOnClickListener(new OnClickListener(){
