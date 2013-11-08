@@ -13,4 +13,8 @@
     <string name="login_2">Sign Up</string>
     <string name="string_timeline">Timeline</string>
     <string name="post">Enviar post</string>
+    <string name="load">Load</string>
+    <string name="desc">Description Image</string>
+    <string name="go_camera">go_cammera</string>
+    <string name="camera">Cammera</string>
 </resources>
