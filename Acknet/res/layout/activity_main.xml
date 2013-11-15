@@ -60,5 +60,15 @@
     	    android:layout_alignLeft="@+id/txtLogin"
     	    android:layout_marginBottom="59dp"
     	    android:text="@string/signup" />
+
+    	<Button
+    	    android:id="@+id/pick_photo"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignLeft="@+id/login"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_alignRight="@+id/login"
+    	    android:layout_marginBottom="19dp"
+    	    android:text="@string/pick_photo" />
 	
 </RelativeLayout>

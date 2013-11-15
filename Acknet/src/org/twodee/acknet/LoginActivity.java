@@ -46,15 +46,15 @@ public class LoginActivity extends Activity {
 	    
 	    Log.i("info", "holaaaaaa");
 	
-	    final Button signupButtonGo = (Button) findViewById(R.id.signup_go);
-	    login_username = (EditText)findViewById(R.id.username);
-	    login_password = (EditText)findViewById(R.id.password);
+	    //final Button signupButtonGo = (Button) findViewById(R.id.signup_go);
+	    //login_username = (EditText)findViewById(R.id.username);
+	    //login_password = (EditText)findViewById(R.id.password);
 	    
 	    	    
-	    signupButtonGo.setOnClickListener(new OnClickListener(){
+	    //signupButtonGo.setOnClickListener(new OnClickListener(){
 	    
 	    	
-	    	
+/*	    	
 			@Override
 			public void onClick(View arg0) {
 				Log.i("info", "Llamando makeConnection");
@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
 				Log.i("info", "Fin makeConnection");
 				
 			}
-	    });
+	    });*/
 	
 	}
 	

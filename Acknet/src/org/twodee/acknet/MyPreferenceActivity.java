@@ -15,9 +15,6 @@ public class MyPreferenceActivity extends PreferenceActivity{
 		
 		
 		
-		
-		
-		
 	}
 	
     public static class MyPreferenceFragment extends PreferenceFragment

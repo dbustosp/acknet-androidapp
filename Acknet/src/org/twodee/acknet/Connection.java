@@ -9,7 +9,7 @@ public final class Connection {
 	
 	
 	private Connection(){
-		IP = "http://137.28.231.69:3000";	
+		IP = "http://137.28.229.205:3000";	
 	}
 	
 	public static Connection getInstance(){

@@ -16,5 +16,6 @@
     <string name="load">Load</string>
     <string name="desc">Description Image</string>
     <string name="go_camera">go_cammera</string>
-    <string name="camera">Cammera</string>
+    <string name="pick_photo">pick a picture</string>
+    
 </resources>
