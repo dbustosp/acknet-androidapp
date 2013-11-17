@@ -21,4 +21,12 @@
     <string name="playing">are playing right now</string>
     <string name="earned">earned</string>
     <string name="text_true">true</string>
+    <string name="new_feed">News Feed</string>
+    <string name="messages">Messages</string>
+    <string name="places">Places</string>
+    <string name="events">Events</string> 
+    <string name="photos">Photos</string>
+	<string name="friends">Friends</string>
+	<string name="url_acknet">www.acknet.com</string>
+	
 </resources>

@@ -54,6 +54,15 @@
             
         </activity>
         
+        <activity android:name=".AndroidDashboardDesignActivity" ></activity>
+        
+        <activity android:name=".NewsFeedActivity" ></activity>
+        <activity android:name=".FriendsActivity" ></activity>
+        <activity android:name=".PlacesActivity" ></activity>
+        <activity android:name=".MessagesActivity" ></activity>
+        <activity android:name=".EventsActivity" ></activity>
+        <activity android:name=".PhotosActivity" ></activity>
+        
 	</application>
 
 </manifest>

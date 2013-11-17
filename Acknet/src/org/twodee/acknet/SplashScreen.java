@@ -128,8 +128,8 @@ public class SplashScreen extends Activity {
 		        // If status == true ==> logged true
 		        // else ==> User has to login
 		        if(status){
-		        	// menu or timeline
-		        	Intent intent = new Intent(getApplicationContext(), Timeline.class);
+		        	// Dashboard
+		        	Intent intent = new Intent(getApplicationContext(), AndroidDashboardDesignActivity.class);
 					startActivityForResult(intent, 0);
 		        }else{
 		        	// login
