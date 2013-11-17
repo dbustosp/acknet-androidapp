@@ -17,5 +17,8 @@
     <string name="desc">Description Image</string>
     <string name="go_camera">go_cammera</string>
     <string name="pick_photo">pick a picture</string>
-    
+    <string name="hint_">Edit text hint</string>
+    <string name="playing">are playing right now</string>
+    <string name="earned">earned</string>
+    <string name="text_true">true</string>
 </resources>

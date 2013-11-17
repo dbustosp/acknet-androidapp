@@ -11,6 +11,7 @@
 
     <ImageView
         android:id="@+id/bgImage"
+        android:contentDescription="@string/desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -28,11 +29,12 @@
 
         <TextView
             android:id="@+id/txtNowPlaying"
+            android:textIsSelectable="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#ff6c00"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -40,16 +42,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="are playing right now"
+            android:text="@string/playing"
             android:textColor="#eaeaea" />
 
         <TextView
             android:id="@+id/txtEarned"
+             android:textIsSelectable="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#e86200"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -57,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:gravity="center"
-            android:text="earned"
+            android:text="@string/earned"
             android:textColor="#eaeaea" />
     </LinearLayout>
 
@@ -72,11 +75,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Email"
+            android:text="@string/username"
             android:textColor="#ffffff" />
 
         <EditText
-            android:id="@+id/txtEmail"
+            android:id="@+id/username"
+            android:hint="@string/hint_"
+            android:inputType="text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -87,17 +92,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Password"
+            android:text="@string/password"
             android:textColor="#ffffff" />
 
         <EditText
-            android:id="@+id/txtPassword"
+            android:id="@+id/password"
+            android:inputType="textPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="0dp"
-            android:password="true" />
+            android:layout_marginRight="0dp"/>
 
         <Button
             android:id="@+id/btnLogin"
@@ -105,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="Login" />
+            android:text="@string/login" />
     </LinearLayout>
 
 </RelativeLayout>

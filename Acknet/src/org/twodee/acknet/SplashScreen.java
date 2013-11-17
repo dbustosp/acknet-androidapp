@@ -52,7 +52,7 @@ public class SplashScreen extends Activity {
         // If the application has the token ==> is logged
         // else ==> is not logged
         
-        System.out.println(token);
+        System.out.println("Initial token:" + token);
         
         if(token.equals("null")){
         	// Application doesn't have token ==> Login.xml 

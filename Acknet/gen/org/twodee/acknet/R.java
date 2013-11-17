@@ -44,15 +44,15 @@ public final class R {
         public static final int loadButton=0x7f090014;
         public static final int logView=0x7f090011;
         public static final int login=0x7f09000a;
+        public static final int password=0x7f090006;
         public static final int pick_photo=0x7f09000d;
         public static final int send_post=0x7f090012;
         public static final int signup=0x7f09000b;
         public static final int txtEarned=0x7f090003;
-        public static final int txtEmail=0x7f090005;
         public static final int txtLogin=0x7f09000c;
         public static final int txtNowPlaying=0x7f090002;
-        public static final int txtPassword=0x7f090006;
         public static final int txtSignUp=0x7f090009;
+        public static final int username=0x7f090005;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
@@ -68,18 +68,22 @@ public final class R {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int desc=0x7f06000d;
+        public static final int earned=0x7f060012;
         public static final int go_camera=0x7f06000e;
         public static final int haveAccount=0x7f060006;
         public static final int hello_world=0x7f060002;
+        public static final int hint_=0x7f060010;
         public static final int load=0x7f06000c;
         public static final int login=0x7f060003;
         public static final int login_2=0x7f060009;
         public static final int newString=0x7f060005;
         public static final int password=0x7f060008;
         public static final int pick_photo=0x7f06000f;
+        public static final int playing=0x7f060011;
         public static final int post=0x7f06000b;
         public static final int signup=0x7f060004;
         public static final int string_timeline=0x7f06000a;
+        public static final int text_true=0x7f060013;
         public static final int username=0x7f060007;
     }
     public static final class style {

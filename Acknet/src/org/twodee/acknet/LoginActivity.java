@@ -1,6 +1,7 @@
 package org.twodee.acknet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,20 +25,28 @@ import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+@SuppressLint("NewApi")
 public class LoginActivity extends Activity {
 	
 	 EditText login_username;
 	 EditText login_password;
+	 String username;
+	 String password;
 	 String token;
 	 Boolean status;
 	 public static final String PREFS_NAME = "preferences.xml";
 	 SharedPreferences SP;
+	 final static String IP = Connection.getInstance().getIp();
+	 final static String URL = IP + "/session";
+	 HttpPost httppost;
+	 HttpClient httpclient;
+	 HttpResponse response;
+	 List<NameValuePair> nameValuePairs;
 	
 	 
 	@Override
@@ -44,165 +54,127 @@ public class LoginActivity extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_login);
 	    
-	    Log.i("info", "holaaaaaa");
-	
+	    // Button login
+	    final Button btonLogin = (Button) findViewById(R.id.btnLogin);;
+	    
+	    login_username = (EditText)findViewById(R.id.username);
+	    login_password = (EditText)findViewById(R.id.password);
+	    	    
 	    //final Button signupButtonGo = (Button) findViewById(R.id.signup_go);
 	    //login_username = (EditText)findViewById(R.id.username);
 	    //login_password = (EditText)findViewById(R.id.password);
-	    
-	    	    
-	    //signupButtonGo.setOnClickListener(new OnClickListener(){
-	    
-	    	
-/*	    	
+	    btonLogin.setOnClickListener(new OnClickListener(){
+
 			@Override
-			public void onClick(View arg0) {
-				Log.i("info", "Llamando makeConnection");
+			public void onClick(View v) {
 				
-				makeConnection(arg0);
+				// TODO Auto-generated method stub
+				System.out.println("Click Login");
 				
-				Log.i("info", "Fin makeConnection");
+				username = login_username.getText().toString();
+			    password = login_password.getText().toString();
 				
+			    System.out.println("prueba: " + login_username.getText().toString());
+				
+				// Check if email and password are not null
+				if(username.equals("") || password.equals("")){
+					System.out.println("||");
+					System.out.println("username" +  username);
+					
+					FireMissilesDialogFragment dialog = new FireMissilesDialogFragment();
+					
+					dialog.show(getFragmentManager(), "missiles");
+				}else{
+					// Check if is a real email
+					System.out.println("else ||");
+					// Make request background
+					httpclient = new DefaultHttpClient();
+					httppost = new HttpPost(URL);
+				    response = null;
+				    nameValuePairs = new ArrayList<NameValuePair>(2);
+			        nameValuePairs.add(new BasicNameValuePair("username",username));
+			        nameValuePairs.add(new BasicNameValuePair("password",password));
+			        makeConnection();
+				}
 			}
-	    });*/
-	
+	    	
+	    });
 	}
 	
-	private void makeConnection(final View v) {
-		
-		
-		
-		
+	
+	private void makeConnection() {		
 		new AsyncTask<Void, Void, HttpResponse>() {
-			
-			
 			
 			@Override
 			protected HttpResponse doInBackground(Void... params) {
 				
-				
-				
-				System.out.println("HAhaHAHA");
-				Log.i("info", "Init doInBackGround ");
-				HttpClient httpclient = new DefaultHttpClient();
-				String IP = Connection.getInstance().getIp();
-				String URL = IP + "/session/" + login_username.getText().toString();
-				HttpPost httppost = new HttpPost(URL);
-			    HttpResponse response = null;
-			   			    
-			    try {
-			        // Add your data
-			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			        nameValuePairs.add(new BasicNameValuePair("username", login_username.getText().toString()));
-			        nameValuePairs.add(new BasicNameValuePair("password", login_password.getText().toString()));
-			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-			        Log.i("info", "After httppost.setEntity");
-			        // Execute HTTP Post Request
+				System.out.println("Init -- doInBackground -- send for login ");
+				try{
+			    
+					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			        response = httpclient.execute(httppost);
-			        
 			        Scanner in = new Scanner(response.getEntity().getContent());
-			        in.useDelimiter("\\Z");
-			        
-			        String body = in.next();
-			        
-			        in.close();
-			        
-			        System.out.println("BODYY: " + body);
-			        
-			        JSONObject json = new JSONObject(body);
-			        
-			        System.out.println("JSOOON: " + json);
-			        
-			        
+				    in.useDelimiter("\\Z");
+				    String body = in.next();
+				    in.close();       			        
+				    JSONObject json = new JSONObject(body);
 			        status = json.getBoolean("success");
-			        
-			        if(status){
-			        	
-			        	 //SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-			        	
-			        	String token_aux = json.getString("token");
-			        	System.out.println("token_aux = " + token_aux);
-			        	token = token_aux;
-			        	token_aux = null;
-			        	
-			        	
-			        	
-			        	
-			            
-			            //Toast.makeText(LoginActivity.this,
-			            //        "Reverted string sequence of user name.",
-			            //        Toast.LENGTH_LONG).show();
-			            
-			            
-			           
-			        	//String token_preference = SP.getString("token", "null");
-			        	
-			        	//System.out.println("Tooooken preferences: " + token_preference);
-			        	
-			        	
-			        }
-			        
-			        System.out.println("Status: ===> " + status);
-
-			    } catch (ClientProtocolException e) {
-			        // TODO Auto-generated catch block
-			    	Log.i("info", "Protocol Exception");
-			    } catch (IOException e) {
-			        // TODO Auto-generated catch block
-			    	Log.i("info", "IOEXCEPTION");
-			    	System.out.println("Got an IOException: " + e.getMessage());
-			    } catch (JSONException e) {
+			        token = json.getString("token");
+				
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		        
 				return response;
 			}
 			
 			
 			@Override
 			protected void onPostExecute(HttpResponse response){
-				//use it wherever you want
-				Log.i("info", "onPostExecute");
-				System.out.println("Status: " + status);
+				
+				System.out.println("onPostExecute -- Login ");
 				
 		        if(status){
 		        	// Server returned => True
-		        	System.out.println("Status = True");
-		        	System.out.println("Token = " + token);
-
+		        	System.out.println("onPostExecute -- Login -- status ==> True");
+		        	
+		        	// Change the token value and redirect to menu
 		        	SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		        	
 		        	Editor edit = SP.edit();
+		        	
 		        	edit.putString("token", token);
+		        	
 		            edit.commit();
 		            
+		            String new_token = SP.getString("token", "null");
 		            
-		            // Verify sabe in correct form
-		            // Read from preferences.xml
-		            //String token_preference = SP.getString("token", "null");
-		                	
-		        	//System.out.println("TOOOKEN: " + token);
-		        	//System.out.println("TOOOKEN_PREFERENCE: " + token_preference);
-		  
+		            System.out.println("new_token: " + new_token);
 		        	
 		        	//System.out.println("End shared preferences");
-					Intent myIntent = new Intent(v.getContext(), Timeline.class);
+					Intent myIntent = new Intent(getApplicationContext(), Timeline.class);
 					startActivityForResult(myIntent, 0);
 
 		        }else{
 		        	// Server returned => False
 		        	System.out.println("onPostExecute -  status => False");
+		        	FireMissilesDialogFragment dialogo = new FireMissilesDialogFragment();
+					dialogo.show(getFragmentManager(), "missiles");
 		        }
 		        
 			}
 			
-		}.execute();
-	
-	
-        
-		
+		}.execute();	
 	}
-	
-	
-	
 }
+
