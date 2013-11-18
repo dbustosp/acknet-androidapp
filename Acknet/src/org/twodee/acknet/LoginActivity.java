@@ -55,7 +55,7 @@ public class LoginActivity extends Activity {
 	    setContentView(R.layout.activity_login);
 	    
 	    // Button login
-	    final Button btonLogin = (Button) findViewById(R.id.btnLogin);;
+	    final Button btonLogin = (Button) findViewById(R.id.btnLogin);
 	    
 	    login_username = (EditText)findViewById(R.id.username);
 	    login_password = (EditText)findViewById(R.id.password);
@@ -154,6 +154,7 @@ public class LoginActivity extends Activity {
 		        	Editor edit = SP.edit();
 		        	
 		        	edit.putString("token", token);
+		        	edit.putString("username", username);
 		        	
 		            edit.commit();
 		            

@@ -58,15 +58,10 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				startActivityForResult(pickPhoto , 1);
-				
-				
-				
 			}
         	
         });
         
-        
-
         
         loginButton.setOnClickListener(new OnClickListener(){
 
