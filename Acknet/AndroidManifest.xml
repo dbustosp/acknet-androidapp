@@ -62,6 +62,7 @@
         <activity android:name=".MessagesActivity" ></activity>
         <activity android:name=".EventsActivity" ></activity>
         <activity android:name=".PhotosActivity" ></activity>
+        <activity android:name=".CustomizedListView" ></activity>
         
 	</application>
 

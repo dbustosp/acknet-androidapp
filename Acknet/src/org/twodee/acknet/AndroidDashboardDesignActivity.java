@@ -44,7 +44,7 @@ public class AndroidDashboardDesignActivity extends Activity{
             @Override
             public void onClick(View view) {
                 // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), NewsFeedActivity.class);
+                Intent i = new Intent(getApplicationContext(), CustomizedListView.class);
                 startActivity(i);
             }
         });
