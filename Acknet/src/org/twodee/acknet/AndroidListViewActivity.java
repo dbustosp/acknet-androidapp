@@ -1,0 +1,275 @@
+package org.twodee.acknet;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class AndroidListViewActivity extends ListActivity {
+	private static final int RESULT_LOAD_IMAGE = 1;
+	 private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+	    private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
+	    public static final int MEDIA_TYPE_IMAGE = 1;
+	    public static final int MEDIA_TYPE_VIDEO = 2;
+		
+	    // directory name to store captured images and videos
+	    private static final String IMAGE_DIRECTORY_NAME = "Acknet";
+	    
+	    private Uri fileUri; // file url to store image/video
+	
+	
+
+	@Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+         
+        // storing string resources into Array
+        String[] adobe_products = getResources().getStringArray(R.array.adobe_products);
+         
+        // Binding resources Array to ListAdapter
+        this.setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, R.id.label, adobe_products));
+         
+        ListView lv = getListView();
+ 
+        // listening to single list item on click
+        lv.setOnItemClickListener(new OnItemClickListener() {
+          public void onItemClick(AdapterView<?> parent, View view,
+              int position, long id) {
+               
+              // selected item 
+              
+        	  //String product = ((TextView) view).getText().toString();
+               
+              switch(position){
+	              case 0: viewPictures(); break;
+	              case 1: pickFromGallery(); break;
+	              case 2: captureImage(); break;
+              }
+            	 
+              
+              
+              
+              // Launching new Activity on selecting single List Item
+              //Intent i = new Intent(getApplicationContext(), SingleListItem.class);
+              // sending data to new activity
+              //i.putExtra("product", product);
+              //startActivity(i);
+             
+          }
+
+
+        });
+    }
+	
+	private void pickFromGallery() {
+		Intent i = new Intent(
+		Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+		startActivityForResult(i, RESULT_LOAD_IMAGE);
+	}
+	
+	private void captureImage() {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+	    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+	    // start the image capture Intent
+	    startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);		
+	}
+	
+	
+	private Uri getOutputMediaFileUri(int type) {
+		return Uri.fromFile(getOutputMediaFile(type));		
+	}
+	
+	private static File getOutputMediaFile(int type) {
+	    
+	       // External sdcard location
+	       File mediaStorageDir = new File(
+	               Environment
+	                       .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+	               IMAGE_DIRECTORY_NAME);
+	    
+	       // Create the storage directory if it does not exist
+	       if (!mediaStorageDir.exists()) {
+	           if (!mediaStorageDir.mkdirs()) {
+	               Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
+	                       + IMAGE_DIRECTORY_NAME + " directory");
+	               return null;
+	           }
+	       }
+	    
+	       // Create a media file name
+	       String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+	               Locale.getDefault()).format(new Date());
+	       File mediaFile;
+	       if (type == MEDIA_TYPE_IMAGE) {
+	           mediaFile = new File(mediaStorageDir.getPath() + File.separator
+	                   + "IMG_" + timeStamp + ".jpg");
+	       } else if (type == MEDIA_TYPE_VIDEO) {
+	           mediaFile = new File(mediaStorageDir.getPath() + File.separator
+	                   + "VID_" + timeStamp + ".mp4");
+	       } else {
+	           return null;
+	       }
+	    
+	       return mediaFile;
+	   }
+
+	@Override
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	     super.onActivityResult(requestCode, resultCode, data);
+	     
+	     // If take good the picture
+	     // if the result is capturing Image
+			if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+				if (resultCode == RESULT_OK) {
+					// successfully captured the image
+					// display it in image view
+					putNewImage(fileUri.getPath());
+				} else if (resultCode == RESULT_CANCELED) {
+					// user cancelled Image capture
+					Toast.makeText(getApplicationContext(),
+							"User cancelled image capture", Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					// failed to capture image
+					Toast.makeText(getApplicationContext(),
+							"Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+	     
+	     
+	     if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+	         Uri selectedImage = data.getData();
+	         String[] filePathColumn = { MediaStore.Images.Media.DATA };
+	 
+	         Cursor cursor = getContentResolver().query(selectedImage,
+	                 filePathColumn, null, null, null);
+	         cursor.moveToFirst();
+	 
+	         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+	         String picturePath = cursor.getString(columnIndex);
+	         cursor.close();
+	                      
+	         // String picturePath contains the path of selected Image
+	         System.out.println("calling Put newImage");
+	         putNewImage(picturePath);
+	     }
+	}
+	
+	
+	
+	
+	private void viewPictures() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+	
+
+	
+	private void putNewImage(final String url){
+		new AsyncTask<Void, Void, HttpResponse>() {
+
+			@Override
+			protected HttpResponse doInBackground(Void... params) {
+				
+				System.out.println("Init background doInBackground");
+				
+				//Implementation send request post to 
+				String IP = Connection.getInstance().getIp();
+				String URL = IP + "/upload_image";
+			    HttpResponse response = null;
+			    
+			    JSONObject json = new JSONObject();
+			    
+			    
+			    Bitmap bitmap = BitmapFactory.decodeFile(url);
+				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream); //compress to which format 
+				byte [] byte_arr = stream.toByteArray();
+				String image_str = Base644.encodeBytes(byte_arr);
+				ArrayList<NameValuePair> nameValuePairs = new  ArrayList<NameValuePair>();
+				
+				SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+				String username = SP.getString("username", "null");
+				
+				nameValuePairs.add(new BasicNameValuePair("image",image_str));
+				nameValuePairs.add(new BasicNameValuePair("username",username));
+				
+				json = makeRequest(URL, nameValuePairs);			    
+				
+				return null;
+			}
+			
+		}.execute();
+	}
+	
+	private JSONObject makeRequest(String url, ArrayList<NameValuePair> nameValuePairs) {
+		System.out.println("Init makeRequest");
+		
+		try{
+            HttpClient httpclient = new DefaultHttpClient();
+            
+            HttpPost httppost = new HttpPost(Connection.getInstance().getIp() + "/upload_image");
+            
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            
+            HttpResponse response = httpclient.execute(httppost);
+            
+            Scanner in = new Scanner(response.getEntity().getContent());
+		    in.useDelimiter("\\Z");
+		    String body = in.next();
+		    in.close();
+		      
+		    Log.d("makeRequest - FOOOOO", body);
+            
+            System.out.println("body: " + body);
+
+            return new JSONObject(body);
+        
+		}catch(Exception e){
+			e.printStackTrace();
+        }    
+		
+		System.out.println("End makeRequest");		
+		return null;
+		
+	}
+	
+	
+}

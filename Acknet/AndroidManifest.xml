@@ -8,13 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 	
-	<uses-permission 
-	    android:name="android.permission.INTERNET" />
 	
-	<uses-feature android:name="android.hardware.camera" />
- 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     
     <application
         android:allowBackup="true"
@@ -68,7 +62,13 @@
         <activity android:name=".EventsActivity" ></activity>
         <activity android:name=".PhotosActivity" ></activity>
         <activity android:name=".CustomizedListView" ></activity>
+        <activity android:name=".AndroidListViewActivity" ></activity>
+        <activity android:name=".SingleListItem"
+        android:label="Single Item Selected"></activity>
         
 	</application>
 
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    
 </manifest>

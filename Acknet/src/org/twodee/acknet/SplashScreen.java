@@ -33,7 +33,6 @@ public class SplashScreen extends Activity {
     static final String IP = Connection.getInstance().getIp();
     static final String URL = IP + "/validateToken";
     HttpClient httpclient;
-    HttpResponse response; 
     HttpPost httppost;
     List<NameValuePair> nameValuePairs;
     Boolean status;
@@ -84,7 +83,7 @@ public class SplashScreen extends Activity {
             // To prepare variables
             httpclient = new DefaultHttpClient(); 
             httppost = new HttpPost(URL);
-            response = null;
+
             
             // To prepare data to send
             nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -95,16 +94,66 @@ public class SplashScreen extends Activity {
         protected Void doInBackground(Void... arg0) {
         	System.out.println("init -- doInBackground");
         	try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		        response = httpclient.execute(httppost);
+				
+        		httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        		System.out.println("setEntity");
+        		HttpResponse response = httpclient.execute(httppost);
+				System.out.println("httpclient.execute");
+				
+				
+				
+				//**************************************//
+		           System.out.println("init -- onPostExecute");
+		            
+		            try {
+						Scanner in = new Scanner(response.getEntity().getContent());
+						in.useDelimiter("\\Z");
+						String body = in.next();
+				        in.close();
+				        JSONObject json = new JSONObject(body);
+				        status = json.getBoolean("success");
+				        
+				        // If status == true ==> logged true
+				        // else ==> User has to login
+				        if(status){
+				        	// Dashboard
+				        	Intent intent = new Intent(getApplicationContext(), AndroidDashboardDesignActivity.class);
+							startActivityForResult(intent, 0);
+				        }else{
+				        	// login
+				        	System.out.println("Intent");
+				        	Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+							startActivityForResult(intent, 0);
+				        }
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						System.out.println("IllegalStateException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					} catch (JSONException e) {
+						System.out.println("JSONException");
+						e.printStackTrace();
+					}catch(NullPointerException e){
+						System.out.println("NullPointerException");
+						e.printStackTrace();
+					}
+		            
+		            System.out.println("end -- onPostExecute");
+		            // close this activity
+		            finish();
+				
+				
+				
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
+				System.out.println("UnsupportedEncodingException");
 				e.printStackTrace();
 			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
+				System.out.println("ClientProtocolException");
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				System.out.println("IOException");
 				e.printStackTrace();
 			}
         	System.out.println("end -- doInBackground");
@@ -115,42 +164,7 @@ public class SplashScreen extends Activity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             
-            System.out.println("init -- onPostExecute");
-            
-            try {
-				Scanner in = new Scanner(response.getEntity().getContent());
-				in.useDelimiter("\\Z");
-				String body = in.next();
-		        in.close();
-		        JSONObject json = new JSONObject(body);
-		        status = json.getBoolean("success");
-		        
-		        // If status == true ==> logged true
-		        // else ==> User has to login
-		        if(status){
-		        	// Dashboard
-		        	Intent intent = new Intent(getApplicationContext(), AndroidDashboardDesignActivity.class);
-					startActivityForResult(intent, 0);
-		        }else{
-		        	// login
-		        	System.out.println("Intent");
-		        	Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-					startActivityForResult(intent, 0);
-		        }
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            
-            System.out.println("end -- onPostExecute");
-            // close this activity
-            finish();
+ 
         }
     }
 }

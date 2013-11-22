@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="adobe_products">
+        <item>View pictures</item>
+        <item>Send picture from gallery </item>
+        <item>Take picture and send it</item>
+    </string-array>
+</resources>

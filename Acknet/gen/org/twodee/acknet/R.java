@@ -8,6 +8,9 @@
 package org.twodee.acknet;
 
 public final class R {
+    public static final class array {
+        public static final int adobe_products=0x7f060000;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -63,105 +66,112 @@ public final class R {
         public static final int uwec=0x7f020027;
     }
     public static final class id {
-        public static final int acknet=0x7f090008;
-        public static final int action_settings=0x7f09002a;
-        public static final int addTodayButton=0x7f090011;
-        public static final int artist=0x7f09001c;
-        public static final int bgImage=0x7f090000;
-        public static final int boxPost=0x7f090023;
-        public static final int btnCapturePicture=0x7f09001e;
-        public static final int btnLogin=0x7f090007;
-        public static final int btnRecordVideo=0x7f09001f;
-        public static final int btn_events=0x7f090017;
-        public static final int btn_friends=0x7f090014;
-        public static final int btn_messages=0x7f090015;
-        public static final int btn_news_feed=0x7f090013;
-        public static final int btn_photos=0x7f090018;
-        public static final int btn_places=0x7f090016;
-        public static final int datePicker=0x7f090010;
-        public static final int duration=0x7f09001d;
-        public static final int formLogin=0x7f090004;
-        public static final int go_camera=0x7f090027;
-        public static final int home_root=0x7f09000f;
-        public static final int imageView=0x7f090025;
-        public static final int imgLogo=0x7f09000e;
-        public static final int imgPreview=0x7f090020;
-        public static final int layout_pictures=0x7f090028;
-        public static final int list=0x7f090029;
-        public static final int list_image=0x7f09001a;
-        public static final int llStats=0x7f090001;
-        public static final int loadButton=0x7f090026;
-        public static final int logView=0x7f090012;
-        public static final int login=0x7f09000a;
-        public static final int password=0x7f090006;
-        public static final int pick_photo=0x7f09000d;
-        public static final int post=0x7f090022;
-        public static final int send_post=0x7f090024;
-        public static final int signup=0x7f09000b;
-        public static final int thumbnail=0x7f090019;
-        public static final int title=0x7f09001b;
-        public static final int txtEarned=0x7f090003;
-        public static final int txtLogin=0x7f09000c;
-        public static final int txtNowPlaying=0x7f090002;
-        public static final int txtSignUp=0x7f090009;
-        public static final int username=0x7f090005;
-        public static final int videoPreview=0x7f090021;
+        public static final int acknet=0x7f0a0008;
+        public static final int action_settings=0x7f0a002e;
+        public static final int addTodayButton=0x7f0a0013;
+        public static final int artist=0x7f0a001f;
+        public static final int bgImage=0x7f0a0000;
+        public static final int boxPost=0x7f0a0026;
+        public static final int btnCapturePicture=0x7f0a0021;
+        public static final int btnLogin=0x7f0a0007;
+        public static final int btnRecordVideo=0x7f0a0022;
+        public static final int btn_events=0x7f0a0019;
+        public static final int btn_friends=0x7f0a0016;
+        public static final int btn_messages=0x7f0a0017;
+        public static final int btn_news_feed=0x7f0a0015;
+        public static final int btn_photos=0x7f0a001a;
+        public static final int btn_places=0x7f0a0018;
+        public static final int buttonLoadPicture=0x7f0a0010;
+        public static final int datePicker=0x7f0a0012;
+        public static final int duration=0x7f0a0020;
+        public static final int formLogin=0x7f0a0004;
+        public static final int go_camera=0x7f0a002b;
+        public static final int home_root=0x7f0a0011;
+        public static final int imageView=0x7f0a0029;
+        public static final int imgLogo=0x7f0a000e;
+        public static final int imgPreview=0x7f0a0023;
+        public static final int imgView=0x7f0a000f;
+        public static final int label=0x7f0a001b;
+        public static final int layout_pictures=0x7f0a002c;
+        public static final int list=0x7f0a002d;
+        public static final int list_image=0x7f0a001d;
+        public static final int llStats=0x7f0a0001;
+        public static final int loadButton=0x7f0a002a;
+        public static final int logView=0x7f0a0014;
+        public static final int login=0x7f0a000a;
+        public static final int password=0x7f0a0006;
+        public static final int pick_photo=0x7f0a000d;
+        public static final int post=0x7f0a0025;
+        public static final int product_label=0x7f0a0027;
+        public static final int send_post=0x7f0a0028;
+        public static final int signup=0x7f0a000b;
+        public static final int thumbnail=0x7f0a001c;
+        public static final int title=0x7f0a001e;
+        public static final int txtEarned=0x7f0a0003;
+        public static final int txtLogin=0x7f0a000c;
+        public static final int txtNowPlaying=0x7f0a0002;
+        public static final int txtSignUp=0x7f0a0009;
+        public static final int username=0x7f0a0005;
+        public static final int videoPreview=0x7f0a0024;
     }
     public static final class layout {
         public static final int actionbar_layout=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_main=0x7f030002;
         public static final int activity_splash=0x7f030003;
-        public static final int dashboard_layout=0x7f030004;
-        public static final int events_layout=0x7f030005;
-        public static final int example_layout=0x7f030006;
-        public static final int footer_layout=0x7f030007;
-        public static final int fragment_layout=0x7f030008;
-        public static final int friends_layout=0x7f030009;
-        public static final int list_row=0x7f03000a;
-        public static final int messages_layout=0x7f03000b;
-        public static final int news_feed_layout=0x7f03000c;
-        public static final int photos_layout=0x7f03000d;
-        public static final int places_layout=0x7f03000e;
-        public static final int timeline=0x7f03000f;
-        public static final int timeline2=0x7f030010;
+        public static final int choice_picture_gallery=0x7f030004;
+        public static final int dashboard_layout=0x7f030005;
+        public static final int events_layout=0x7f030006;
+        public static final int example_layout=0x7f030007;
+        public static final int footer_layout=0x7f030008;
+        public static final int fragment_layout=0x7f030009;
+        public static final int friends_layout=0x7f03000a;
+        public static final int list_item=0x7f03000b;
+        public static final int list_row=0x7f03000c;
+        public static final int messages_layout=0x7f03000d;
+        public static final int news_feed_layout=0x7f03000e;
+        public static final int photos_layout=0x7f03000f;
+        public static final int places_layout=0x7f030010;
+        public static final int single_list_item_view=0x7f030011;
+        public static final int timeline=0x7f030012;
+        public static final int timeline2=0x7f030013;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f090000;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
-        public static final int app_name=0x7f060000;
-        public static final int desc=0x7f06000d;
-        public static final int earned=0x7f060012;
-        public static final int events=0x7f060017;
-        public static final int friends=0x7f060019;
-        public static final int go_camera=0x7f06000e;
-        public static final int haveAccount=0x7f060006;
-        public static final int hello_world=0x7f060002;
-        public static final int hint_=0x7f060010;
-        public static final int load=0x7f06000c;
-        public static final int login=0x7f060003;
-        public static final int login_2=0x7f060009;
-        public static final int messages=0x7f060015;
-        public static final int newString=0x7f060005;
-        public static final int new_feed=0x7f060014;
-        public static final int password=0x7f060008;
-        public static final int photos=0x7f060018;
-        public static final int pick_photo=0x7f06000f;
-        public static final int places=0x7f060016;
-        public static final int playing=0x7f060011;
-        public static final int post=0x7f06000b;
-        public static final int signup=0x7f060004;
-        public static final int string_timeline=0x7f06000a;
-        public static final int text_true=0x7f060013;
-        public static final int url_acknet=0x7f06001a;
-        public static final int username=0x7f060007;
+        public static final int action_settings=0x7f070001;
+        public static final int app_name=0x7f070000;
+        public static final int desc=0x7f07000d;
+        public static final int earned=0x7f070012;
+        public static final int events=0x7f070017;
+        public static final int friends=0x7f070019;
+        public static final int go_camera=0x7f07000e;
+        public static final int haveAccount=0x7f070006;
+        public static final int hello_world=0x7f070002;
+        public static final int hint_=0x7f070010;
+        public static final int load=0x7f07000c;
+        public static final int login=0x7f070003;
+        public static final int login_2=0x7f070009;
+        public static final int messages=0x7f070015;
+        public static final int newString=0x7f070005;
+        public static final int new_feed=0x7f070014;
+        public static final int password=0x7f070008;
+        public static final int photos=0x7f070018;
+        public static final int pick_photo=0x7f07000f;
+        public static final int places=0x7f070016;
+        public static final int playing=0x7f070011;
+        public static final int post=0x7f07000b;
+        public static final int signup=0x7f070004;
+        public static final int string_timeline=0x7f07000a;
+        public static final int text_true=0x7f070013;
+        public static final int url_acknet=0x7f07001a;
+        public static final int username=0x7f070007;
     }
     public static final class style {
         /**  Added 
          */
-        public static final int ActionBarCompat=0x7f070002;
+        public static final int ActionBarCompat=0x7f080002;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -183,13 +193,13 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int DashboardButton=0x7f070003;
-        public static final int FooterBar=0x7f070004;
+        public static final int AppTheme=0x7f080001;
+        public static final int DashboardButton=0x7f080003;
+        public static final int FooterBar=0x7f080004;
     }
     public static final class xml {
         public static final int preferences=0x7f040000;

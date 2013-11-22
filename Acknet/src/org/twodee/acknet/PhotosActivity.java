@@ -88,6 +88,7 @@ public class PhotosActivity extends Activity {
        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
    }
       
+  
    
    /**
     * Creating file uri to store image/video
@@ -96,6 +97,10 @@ public class PhotosActivity extends Activity {
        return Uri.fromFile(getOutputMediaFile(type));
    }
     
+   
+   
+   
+   
    /*
     * returning image / video
     */
