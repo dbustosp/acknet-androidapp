@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import com.cs491.acknet.R;
 
 @SuppressLint("NewApi")
 public class LoginActivity extends Activity {
@@ -59,7 +60,7 @@ public class LoginActivity extends Activity {
 	    
 	    login_username = (EditText)findViewById(R.id.username);
 	    login_password = (EditText)findViewById(R.id.password);
-	    	    
+	    	 
 	    //final Button signupButtonGo = (Button) findViewById(R.id.signup_go);
 	    //login_username = (EditText)findViewById(R.id.username);
 	    //login_password = (EditText)findViewById(R.id.password);

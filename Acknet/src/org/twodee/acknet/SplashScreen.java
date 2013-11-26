@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import com.cs491.acknet.R;
 
 public class SplashScreen extends Activity {
 	 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.twodee.acknet"
+    package="com.cs491.acknet"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -28,43 +28,46 @@
         </activity>
         
         
-        <activity  android:name=".MainActivity">
+        <activity  android:name="org.twodee.acknet.MainActivity">
 		     <intent-filter>
 		        <action android:name="android.intent.action.MainActivity" />                   
 		     </intent-filter>
 		</activity>
         
         
-        <activity  android:name=".LoginActivity">
+        <activity  android:name="org.twodee.acknet.LoginActivity">
 		     <intent-filter>
 		        <action android:name="android.intent.action.LOGIN" />                   
 		     </intent-filter>
 		</activity>
 		
-         <activity  android:name=".Timeline">
+         <activity  android:name="org.twodee.acknet.Timeline">
 		     <intent-filter>
 		        <action android:name="android.intent.action.TIMELINE" />                   
 		     </intent-filter>
 		</activity>
         
         
-        <activity  android:name=".MyPreferenceActivity">
+        <activity  android:name="org.twodee.acknet.MyPreferenceActivity">
             
             
         </activity>
         
-        <activity android:name=".AndroidDashboardDesignActivity" ></activity>
+        <activity android:name="org.twodee.acknet.AndroidDashboardDesignActivity" ></activity>
         
-        <activity android:name=".NewsFeedActivity" ></activity>
-        <activity android:name=".FriendsActivity" ></activity>
-        <activity android:name=".PlacesActivity" ></activity>
-        <activity android:name=".MessagesActivity" ></activity>
-        <activity android:name=".EventsActivity" ></activity>
-        <activity android:name=".PhotosActivity" ></activity>
-        <activity android:name=".CustomizedListView" ></activity>
-        <activity android:name=".AndroidListViewActivity" ></activity>
-        <activity android:name=".SingleListItem"
+        <activity android:name="org.twodee.acknet.NewsFeedActivity" ></activity>
+        <activity android:name="org.twodee.acknet.FriendsActivity" ></activity>
+        <activity android:name="org.twodee.acknet.PlacesActivity" ></activity>
+        <activity android:name="org.twodee.acknet.MessagesActivity" ></activity>
+        <activity android:name="org.twodee.acknet.EventsActivity" ></activity>
+        <activity android:name="org.twodee.acknet.PhotosActivity" ></activity>
+        <activity android:name="org.twodee.acknet.CustomizedListView" ></activity>
+        <activity android:name="org.twodee.acknet.AndroidListViewActivity" ></activity>
+        <activity android:name="org.twodee.acknet.SingleListItem"
         android:label="Single Item Selected"></activity>
+        
+        
+        <activity android:name="org.twodee.acknet.AndroidYoutube" ></activity>
         
 	</application>
 

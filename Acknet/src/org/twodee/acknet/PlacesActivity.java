@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import com.cs491.acknet.R;
 
 public class PlacesActivity extends Activity {
 	String text_post;

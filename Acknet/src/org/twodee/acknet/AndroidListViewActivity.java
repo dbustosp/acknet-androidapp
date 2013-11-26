@@ -37,6 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import com.cs491.acknet.R;
 
 public class AndroidListViewActivity extends ListActivity {
 	private static final int RESULT_LOAD_IMAGE = 1;
@@ -93,6 +94,7 @@ public class AndroidListViewActivity extends ListActivity {
 	            	  startActivityForResult(cameraIntent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
 	              }; 
 	              break;
+	              case 3: videos(); break;
 	              }
               }
             	 
@@ -217,7 +219,11 @@ public class AndroidListViewActivity extends ListActivity {
 
 	
 	
-	
+	private void videos(){
+		System.out.println("Videos");
+		Intent myIntent = new Intent(getApplicationContext(), AndroidYoutube.class);
+    	startActivityForResult(myIntent, 0);		
+	}
 	
 	private void viewPictures() {
 		// TODO Auto-generated method stub

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import com.cs491.acknet.R;
 
 public class SingleListItem extends Activity{
     @Override

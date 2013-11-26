@@ -35,6 +35,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.cs491.acknet.R;
 
 public class MainActivity extends Activity {
 	InputStream inputStream;

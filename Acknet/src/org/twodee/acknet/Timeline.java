@@ -39,6 +39,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import com.cs491.acknet.R;
 
 public class Timeline extends Activity{
 	private RelativeLayout timelineLayout;

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import com.cs491.acknet.R;
 
 @SuppressLint("NewApi")
 public class MyPreferenceActivity extends PreferenceActivity{

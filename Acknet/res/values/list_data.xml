@@ -4,5 +4,6 @@
         <item>View pictures</item>
         <item>Send picture from gallery </item>
         <item>Take picture and send it</item>
+        <item>Videos</item>
     </string-array>
 </resources>

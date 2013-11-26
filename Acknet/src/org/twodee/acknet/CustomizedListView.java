@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import com.cs491.acknet.R;
 
 public class CustomizedListView extends Activity {
 	// All static variables

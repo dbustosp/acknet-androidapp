@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.cs491.acknet.R;
 
 public class AndroidDashboardDesignActivity extends Activity{
 	
