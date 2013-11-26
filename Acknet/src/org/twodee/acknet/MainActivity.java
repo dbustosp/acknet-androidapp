@@ -96,7 +96,6 @@ public class MainActivity extends Activity {
     
 
     
-    
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
     	    super.onActivityResult(requestCode, resultCode, imageReturnedIntent); 
     	    

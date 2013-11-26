@@ -107,10 +107,7 @@ public class PhotosActivity extends Activity {
    private static File getOutputMediaFile(int type) {
     
        // External sdcard location
-       File mediaStorageDir = new File(
-               Environment
-                       .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-               IMAGE_DIRECTORY_NAME);
+       File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),IMAGE_DIRECTORY_NAME);
     
        // Create the storage directory if it does not exist
        if (!mediaStorageDir.exists()) {
@@ -149,6 +146,10 @@ public class PhotosActivity extends Activity {
 				// successfully captured the image
 				// display it in image view
 				previewCapturedImage();
+				
+							
+				
+				
 			} else if (resultCode == RESULT_CANCELED) {
 				// user cancelled Image capture
 				Toast.makeText(getApplicationContext(),
