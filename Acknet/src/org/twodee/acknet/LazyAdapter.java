@@ -3,8 +3,11 @@ package org.twodee.acknet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.http.HttpResponse;
+
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import com.cs491.acknet.R;
 public class LazyAdapter extends BaseAdapter{
 	
     private Activity activity;
+    private AsyncTask<Void, Void, HttpResponse> activity2;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
@@ -27,7 +31,8 @@ public class LazyAdapter extends BaseAdapter{
         imageLoader=new ImageLoader(activity.getApplicationContext());
     }
 
-    public int getCount() {
+
+	public int getCount() {
         return data.size();
     }
 

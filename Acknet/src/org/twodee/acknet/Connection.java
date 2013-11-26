@@ -9,7 +9,7 @@ public final class Connection {
 	
 	
 	private Connection(){
-		IP = "http://137.28.131.4:3000";	
+		IP = "http://arcane-crag-4782.herokuapp.com";	
 	}
 	
 	public static Connection getInstance(){

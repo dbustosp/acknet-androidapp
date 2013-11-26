@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -40,151 +41,86 @@ public class CustomizedListView extends Activity {
 	
 	ListView list;
     LazyAdapter adapter;
-
+    ArrayList<HashMap<String, String>> songsList;
+    
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline2);
 		
-		// Llenar con objetos Json
-		ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
+		makeRequest();
+	}
+	
+	
+	private void makeRequest() {		
 
-		//Get Post from get request
-		HttpClient httpclient = new DefaultHttpClient();
-	    HttpResponse response = null;
-		try {
-			response = httpclient.execute(new HttpGet(URL));
-		} catch (ClientProtocolException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	    StatusLine statusLine = response.getStatusLine();
-		
-	    if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-	        ByteArrayOutputStream out = new ByteArrayOutputStream();
-	        try {
-				response.getEntity().writeTo(out);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        try {
-				out.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        String responseString = out.toString();
-	        
-	        //System.out.println("responseString => : " + responseString);
-	        
-	        try {
+				System.out.println("init doInBackground - CustomizedListView");
 				
-	        	JSONObject response_json = new JSONObject(responseString);
-				Boolean status = response_json.getBoolean("success");
-	        	
-	        	if(status){
-	        		System.out.println("Status true");
-	        		JSONArray jsonPosts = new JSONArray();
-	        		jsonPosts = response_json.getJSONArray("posts");
-	        		for(int i=0;i<jsonPosts.length();i++){
-	        			HashMap<String, String> map = new HashMap<String, String>();
-	        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
-	        			String body = childJSONObject.getString("body");
-	        			String username = childJSONObject.getString("user");
-	        			map.put(KEY_TITLE, body);
-	        			map.put(KEY_ARTIST, username);
-	        			// adding HashList to ArrayList
-	        			songsList.add(map);
-	        		}
-	        		
-	        		// ListView que ser‡ renderizado
-	        		list=(ListView)findViewById(R.id.list);
-	        		
-	        		// Getting adapter by passing xml data ArrayList
-	                adapter=new LazyAdapter(this, songsList);        
-	                list.setAdapter(adapter);
-	        		
-	        		
-	        		
-	        	}else{
-	        		System.out.println("Status false");
-	        		
-	        	
-	        	}
-	        	
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-	        
-	        
-	    } else{
-	        //Closes the connection.
-	        try {
-				response.getEntity().getContent().close();
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        try {
-				throw new IOException(statusLine.getReasonPhrase());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	    
-	    
-		
-		/*XMLParser parser = new XMLParser();
-		String xml = parser.getXmlFromUrl(URL); // getting XML from URL
-		Document doc = parser.getDomElement(xml); // getting DOM element
-		
-		NodeList nl = doc.getElementsByTagName(KEY_SONG);
-		// looping through all song nodes <song>
-		for (int i = 0; i < nl.getLength(); i++) {
-			// creating new HashMap
-			HashMap<String, String> map = new HashMap<String, String>();
-			Element e = (Element) nl.item(i);
-			// adding each child node to HashMap key => value
-			map.put(KEY_ID, parser.getValue(e, KEY_ID));
-			map.put(KEY_TITLE, parser.getValue(e, KEY_TITLE));
-			map.put(KEY_ARTIST, parser.getValue(e, KEY_ARTIST));
-			map.put(KEY_DURATION, parser.getValue(e, KEY_DURATION));
-			map.put(KEY_THUMB_URL, parser.getValue(e, KEY_THUMB_URL));
+				songsList = new ArrayList<HashMap<String, String>>();
+				//Get Post from get request
+				HttpClient httpclient = new DefaultHttpClient();
+			    HttpResponse response = null;
+			    
+			    try {
+					response = httpclient.execute(new HttpGet(URL));
+					StatusLine statusLine = response.getStatusLine();
+					if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+						ByteArrayOutputStream out = new ByteArrayOutputStream();
+						response.getEntity().writeTo(out);
+						out.close();
+						String responseString = out.toString();
+						
+						JSONObject response_json = new JSONObject(responseString);
+						Boolean status = response_json.getBoolean("success");
+						
+						if(status){
+			        		System.out.println("Status true");
+			        		JSONArray jsonPosts = new JSONArray();
+			        		jsonPosts = response_json.getJSONArray("posts");
+			        		for(int i=0;i<jsonPosts.length();i++){
+			        			HashMap<String, String> map = new HashMap<String, String>();
+			        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
+			        			String body = childJSONObject.getString("body");
+			        			String username = childJSONObject.getString("user");
+			        			map.put(KEY_TITLE, body);
+			        			map.put(KEY_ARTIST, username);
+			        			// adding HashList to ArrayList
+			        			songsList.add(map);
+			        		}
+			        		
+			        		// ListView que ser‡ renderizado
+			        		list=(ListView)findViewById(R.id.list);
+			        		// Getting adapter by passing xml data ArrayList		        		
 
-			// adding HashList to ArrayList
-			songsList.add(map);
-		}
-		
-		
-		// ListView que ser‡ renderizado
-		list=(ListView)findViewById(R.id.list);
-		
-		// Getting adapter by passing xml data ArrayList
-        adapter=new LazyAdapter(this, songsList);        
-        list.setAdapter(adapter);
-        */
+			        		adapter=new LazyAdapter(this, songsList);        
+			                list.setAdapter(adapter);
+			        		
+			        		
+			        	}else{
+			        		System.out.println("Status false");
+			        		
+			        	
+			        	}
+						
+						
+					}else{
+						
+					}
+					
+			    } catch (ClientProtocolException e) {
+					System.out.println("ClientProtocolException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    
+			    System.out.println("End doInBackground - CustomizedListView");
 
-        // Click event for single list row
-        /*list.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-							
-
-			}
-		});
-		*/		
-	}	
+	}
+	
 }
