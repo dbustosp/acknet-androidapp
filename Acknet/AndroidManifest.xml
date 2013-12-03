@@ -3,18 +3,59 @@
     package="com.cs491.acknet"
     android:versionCode="1"
     android:versionName="1.0" >
+    
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="18" />
+ 
+   
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+ 
+    
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+    <permission android:name="com.cs491.acknet.gcm.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    
+    <uses-permission android:name="com.cs491.acknet.permission.C2D_MESSAGE" />
+    
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    
+    <uses-permission android:name="com.google.android.c2dm.SEND" />
 	
-	
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    
+    
+    
+    <uses-permission android:name="com.androidhive.pushnotifications.permission.C2D_MESSAGE" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+  	<uses-feature android:name="android.hardware.camera" />
+  	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
     
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        
+        
+        <receiver
+            android:name="org.twodee.acknet.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.cs491.acknet" />
+            </intent-filter>
+        </receiver>
+        
+        <service android:name="org.twodee.acknet.GcmIntentService" />
         
         
         <activity
@@ -67,16 +108,26 @@
         <activity android:name="org.twodee.acknet.SingleListItem"
         android:label="Single Item Selected"></activity>
         
+        <activity android:name="org.twodee.acknet.DemoActivity" ></activity>
+        <activity android:name="org.twodee.acknet.UnregisterActivity" ></activity>
+        
         
         <activity android:name="org.twodee.acknet.AndroidYoutube" ></activity>
         
+	
+		<meta-data
+    android:name="com.google.android.gms.version"
+    android:value="@integer/google_play_services_version" />
+	
+	
+		
+		
 	</application>
 
     
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-  	<uses-feature android:name="android.hardware.camera" />
-  	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     
+  	
+  	
+  	
 </manifest>

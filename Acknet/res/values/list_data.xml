@@ -5,5 +5,7 @@
         <item>Send picture from gallery </item>
         <item>Take picture and send it</item>
         <item>Videos</item>
+        <item>GCM Register</item>
+        <item>GCM UnRegister</item>
     </string-array>
 </resources>

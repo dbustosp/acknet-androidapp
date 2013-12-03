@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -39,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import com.cs491.acknet.R;
 
+@SuppressLint("NewApi")
 public class AndroidListViewActivity extends ListActivity {
 	private static final int RESULT_LOAD_IMAGE = 1;
 	 private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -95,6 +97,8 @@ public class AndroidListViewActivity extends ListActivity {
 	              }; 
 	              break;
 	              case 3: videos(); break;
+	              case 4: checkGCM(); break;
+	              case 5: UnRegisterGCM(); break;
 	              }
               }
             	 
@@ -213,11 +217,25 @@ public class AndroidListViewActivity extends ListActivity {
 	}
 	
 	private void captureImage() {
-		
+		Intent myIntent = new Intent(getApplicationContext(), AndroidYoutube.class);
+    	startActivityForResult(myIntent, 0);	
 	}
 	 	
 
+	private void checkGCM(){
+		System.out.println("check CGM");
+		
+		Intent myIntent = new Intent(getApplicationContext(), DemoActivity.class);
+    	startActivityForResult(myIntent, 0);	
+		
+	}
 	
+	private void UnRegisterGCM(){
+		System.out.println("Unregister GCM");
+		
+		Intent myIntent = new Intent(getApplicationContext(), UnregisterActivity.class);
+    	startActivityForResult(myIntent, 0);
+	}
 	
 	private void videos(){
 		System.out.println("Videos");
