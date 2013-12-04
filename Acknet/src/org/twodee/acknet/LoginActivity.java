@@ -58,6 +58,9 @@ public class LoginActivity extends Activity {
 	    // Button login
 	    final Button btonLogin = (Button) findViewById(R.id.btnLogin);
 	    
+	    //TextView
+	    
+	    
 	    login_username = (EditText)findViewById(R.id.username);
 	    login_password = (EditText)findViewById(R.id.password);
 	    	 

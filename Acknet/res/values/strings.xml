@@ -28,5 +28,7 @@
     <string name="photos">Photos</string>
 	<string name="friends">Friends</string>
 	<string name="url_acknet">www.acknet.com</string>
+	<string name="logIn">Log In</string>
+	<string name="register">Register</string>
 	
 </resources>

@@ -113,4 +113,16 @@
             android:text="@string/login" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/formLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        android:clickable="true"
+        android:text="@string/register"
+        android:textColor="#0030FF"
+        android:textSize="25sp" />
+
 </RelativeLayout>

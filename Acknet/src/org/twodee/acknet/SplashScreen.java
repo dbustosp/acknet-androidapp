@@ -59,7 +59,7 @@ public class SplashScreen extends Activity {
         	// Application doesn't have token ==> Login.xml 
         	// Start Activity ==> login view
         	System.out.println("Intent login activity");
-        	Intent loginIntent = new Intent(this, MainActivity.class);
+        	Intent loginIntent = new Intent(this, RegisterActivity.class);
 			startActivityForResult(loginIntent, 0);
         }
         System.out.println("Pasado el if");
