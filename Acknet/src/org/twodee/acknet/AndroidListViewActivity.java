@@ -232,7 +232,6 @@ public class AndroidListViewActivity extends ListActivity {
 	
 	private void UnRegisterGCM(){
 		System.out.println("Unregister GCM");
-		
 		Intent myIntent = new Intent(getApplicationContext(), UnregisterActivity.class);
     	startActivityForResult(myIntent, 0);
 	}

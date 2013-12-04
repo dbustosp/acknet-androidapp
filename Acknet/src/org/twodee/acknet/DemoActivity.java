@@ -27,6 +27,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 import com.cs491.acknet.R;
@@ -41,6 +42,7 @@ public class DemoActivity extends Activity {
     public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    SharedPreferences SP;
     
     /**
      * Substitute you own sender ID here. This is the project number you got
@@ -73,10 +75,6 @@ public class DemoActivity extends Activity {
         context = getApplicationContext();
         
         System.out.println(" getApplicationContent ");
-        
-        
-        FireMissilesDialogFragment dialog = new FireMissilesDialogFragment();
-		dialog.show(getFragmentManager(), "message log");
         
         // Check device for Play Services APK. If check succeeds, proceed with
         //  GCM registration.
@@ -234,10 +232,13 @@ public class DemoActivity extends Activity {
         // Your implementation here.
     	String URL = Connection.getInstance().getIp() + "/registerDevice";
     	HttpResponse response = null;
-    	JSONObject json = new JSONObject();
-    	
+    	JSONObject json = new JSONObject();    	
+    	SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+    	String username = SP.getString("token", "username");
+
     	try {
 			json.put("regid", regid);
+			json.put("username", "usernameAuxiliar");
 			System.out.println("Sending reqid");
 			json = makeRequest(URL, json);
 			System.out.println("Finish reqid");
@@ -245,7 +246,6 @@ public class DemoActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
     }
 
 	private JSONObject makeRequest(String url, JSONObject json) {

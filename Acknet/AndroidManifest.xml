@@ -49,8 +49,10 @@
         <receiver
             android:name="org.twodee.acknet.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
+            
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
                 <category android:name="com.cs491.acknet" />
             </intent-filter>
         </receiver>

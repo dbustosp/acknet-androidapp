@@ -53,22 +53,24 @@ public class UnregisterActivity extends Activity{
     	setContentView(R.layout.gcm);
         mDisplay = (TextView) findViewById(R.id.display);
         
-        
+        System.out.println("mDisplay = (TextView) findViewById(R.id.display);");
         
         context = getApplicationContext();
         
-        
+        System.out.println("getApplicationContext");
         
         // Check device for Play Services APK. If check succeeds, proceed with
         //  GCM registration.
         if (checkPlayServices()) {
+        	
+        	System.out.println("CheckPlayServices");
+        	
         	gcm = GoogleCloudMessaging.getInstance(this);
             regid = getRegistrationId(context);
 
-            if ( regid.isEmpty() ) {
-            	
+            if ( !(regid.isEmpty()) ) {
+            	System.out.println("Unregistering in background!");
                 unregisterInBackground();
-            
             }
             
         } else {
@@ -184,6 +186,9 @@ public class UnregisterActivity extends Activity{
         int appVersion = getAppVersion(context);
         Log.i(TAG, "Saving regId on app version " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
+        
+        
+        
         editor.putString(PROPERTY_REG_ID, regId);
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
