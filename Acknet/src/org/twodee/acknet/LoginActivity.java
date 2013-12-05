@@ -29,6 +29,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import com.cs491.acknet.R;
 
 @SuppressLint("NewApi")
@@ -59,6 +61,21 @@ public class LoginActivity extends Activity {
 	    final Button btonLogin = (Button) findViewById(R.id.btnLogin);
 	    
 	    //TextView
+	    final TextView register = (TextView) findViewById(R.id.register);
+	    
+	    register.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent loginIntent = new Intent(getApplicationContext(), RegisterActivity.class);
+				startActivityForResult(loginIntent, 0);
+			
+			}
+	    });
+	    
+	    
+	    
 	    
 	    
 	    login_username = (EditText)findViewById(R.id.username);
@@ -85,9 +102,8 @@ public class LoginActivity extends Activity {
 					System.out.println("||");
 					System.out.println("username" +  username);
 					
-					FireMissilesDialogFragment dialog = new FireMissilesDialogFragment();
-					
-					dialog.show(getFragmentManager(), "missiles");
+					//FireMissilesDialogFragment dialog = new FireMissilesDialogFragment();
+					//dialog.show(getFragmentManager(), "missiles");
 				}else{
 					// Check if is a real email
 					System.out.println("else ||");
@@ -101,7 +117,6 @@ public class LoginActivity extends Activity {
 			        makeConnection();
 				}
 			}
-	    	
 	    });
 	}
 	
@@ -173,12 +188,10 @@ public class LoginActivity extends Activity {
 		        }else{
 		        	// Server returned => False
 		        	System.out.println("onPostExecute -  status => False");
-		        	FireMissilesDialogFragment dialogo = new FireMissilesDialogFragment();
-					dialogo.show(getFragmentManager(), "missiles");
-		        }
-		        
+		        	//FireMissilesDialogFragment dialogo = new FireMissilesDialogFragment();
+					//dialogo.show(getFragmentManager(), "missiles");
+		        }   
 			}
-			
 		}.execute();	
 	}
 }

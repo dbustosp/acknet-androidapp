@@ -37,7 +37,7 @@
         android:id="@+id/btn_events"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_events"
-        android:text="@string/events" />
+        android:text="@string/logout" />
  
     <!--  Photos Button -->
     <Button

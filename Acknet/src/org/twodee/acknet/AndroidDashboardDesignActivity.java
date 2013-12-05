@@ -1,10 +1,22 @@
 package org.twodee.acknet;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.http.HttpResponse;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+
 import com.cs491.acknet.R;
 
 public class AndroidDashboardDesignActivity extends Activity{
@@ -90,9 +102,10 @@ public class AndroidDashboardDesignActivity extends Activity{
              
             @Override
             public void onClick(View view) {
-                // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), EventsActivity.class);
-                startActivity(i);
+                // Call Logout function
+            	logout();
+            	
+            	
             }
         });
          
@@ -105,8 +118,54 @@ public class AndroidDashboardDesignActivity extends Activity{
                 Intent i = new Intent(getApplicationContext(), AndroidListViewActivity.class);
                 startActivity(i);
             }
-        });
-        
+        });  
     }
+	
+	private void logout(){
+		new AsyncTask<Void, Void, HttpResponse>() {
 
+			@Override
+			protected HttpResponse doInBackground(Void... params) {
+				
+				SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+				String token = SP.getString("token", "null");
+				String username = SP.getString("username", "null");
+				
+				// Prepare the URL
+				String address = Connection.getInstance().getIp() + "/session/" + username + "/" + token; 
+
+				try {
+					
+					URL url = new URL(address);
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+					connection.setRequestMethod("DELETE");
+					int responseCode = connection.getResponseCode();
+					
+					
+
+				} catch (MalformedURLException e) {
+					// SHOW A MESSAGE 
+					
+					
+					e.printStackTrace();
+				}catch(IOException e){
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return null;
+			}
+			
+			@Override
+			protected void onPostExecute(HttpResponse response){
+				Intent i = new Intent(getApplicationContext(), SplashScreen.class);
+                startActivity(i);
+			}
+			
+			
+			
+		}.execute();
+	}
+	
+	
 }

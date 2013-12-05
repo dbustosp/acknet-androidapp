@@ -124,7 +124,7 @@ public class SplashScreen extends Activity {
 				        }else{
 				        	// login
 				        	System.out.println("Intent");
-				        	Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+				        	Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
 							startActivityForResult(intent, 0);
 				        }
 					} catch (IllegalStateException e) {
