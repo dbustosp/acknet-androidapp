@@ -325,21 +325,20 @@ public class PostActivity extends Activity {
 							String image_str = Base644.encodeBytes(byte_arr);
 							attachment.put("source", image_str);
 						}else{
-							attachment.put("source", null);
+							attachment.put("source", "");
 						}						
 						attachment.put("type","image");
-						attachment.put("link", null);
+						attachment.put("link", "");
 					}else if (KIND_OF_POST == 1){
 						// Kind post video
 						attachment.put("type","video");
-						attachment.put("source", null);
+						attachment.put("source", "");
 						attachment.put("link", real_video);
 					}else{
 						// Kind post only text
-						attachment.put("source", null);
+						attachment.put("source", "");
 						attachment.put("type","text");
-						attachment.put("link", null);
-						
+						attachment.put("link", "");
 					}
 					json.put("attachment", attachment);
 					

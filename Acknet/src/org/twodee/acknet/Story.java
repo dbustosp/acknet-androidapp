@@ -30,7 +30,7 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 	String username;
 	String type;
 	String date;
-	String link;
+	String url;
 	String lat;
 	String lon;
 	String alt;
@@ -59,7 +59,7 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 		username = extras.getString("username");
 		type = extras.getString("type");
 		date = extras.getString("date");
-		link = extras.getString("link");
+		url = extras.getString("url");
 		lat = extras.getString("lat");
 		lon = extras.getString("lon");
 		alt = extras.getString("alt");
@@ -84,6 +84,8 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
         
         txtView_body = (TextView) findViewById(R.id.textView3);
         txtView_body.setText(body);
+        
+        
 	}
 	
 	
@@ -99,11 +101,9 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 		// Post Video
 		System.out.println("It's video!");
 		// get Id_VIDEO
-		System.out.println("link: " + link);
-		String[] split = link.split("v="); 
-		VIDEO_ID = split[1];
 		
-		System.out.println("link: " + split[1]);
+		VIDEO_ID = url;
+		System.out.println("VIDEO_KEY: " + url);
 		
 		YouTubePlayerView youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtubeplayerview);
         youTubePlayerView.initialize(API_KEY, this);
@@ -118,8 +118,8 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 				
 				Bitmap bmap = null;
 				try{
-					 URL url = new URL(link);
-                     URLConnection con = url.openConnection();
+					 URL url_ = new URL(url);
+                     URLConnection con = url_.openConnection();
                      InputStream in = con.getInputStream();
                      bmap = BitmapFactory.decodeStream(in);
 	             } catch (MalformedURLException e){

@@ -67,7 +67,7 @@ public class Timeline extends Activity{
 				intent.putExtra("username", storyList.get(position).get("username") );
 				intent.putExtra("date", storyList.get(position).get("date") );
 				intent.putExtra("body", storyList.get(position).get("body"));
-				intent.putExtra("link", storyList.get(position).get("link"));
+				intent.putExtra("url", storyList.get(position).get("url"));
 				intent.putExtra("type", storyList.get(position).get("type"));
 				
 				intent.putExtra("lat", storyList.get(position).get("lat"));
@@ -115,6 +115,7 @@ public class Timeline extends Activity{
 			        			HashMap<String, String> map = new HashMap<String, String>();
 			        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
 			        			
+			        			System.out.println(childJSONObject);
 			        			
 			        			
 			        			String body = childJSONObject.getString("body");
@@ -122,7 +123,7 @@ public class Timeline extends Activity{
 			        			String date = childJSONObject.getString("date");
 			        			JSONObject attachment = childJSONObject.getJSONObject("attachment");
 			        			String type = attachment.getString("type");
-			        			String link = attachment.getString("url");
+			        			String url = attachment.getString("url");
 			        			
 			        			JSONObject geolocation = childJSONObject.getJSONObject("geolocation");
 			        			String lat = geolocation.getString("lat");
@@ -133,7 +134,7 @@ public class Timeline extends Activity{
 			        			System.out.println(username);
 			        			System.out.println(date);
 			        			System.out.println(type);
-			        			System.out.println(link);
+			        			System.out.println(url);
 			        			
 			        					        			
 			        			
@@ -145,7 +146,7 @@ public class Timeline extends Activity{
 			        			map.put(KEY_DATE, date);
 			        			map.put("date", date);
 			        			map.put("type", type);
-			        			map.put("link", link);
+			        			map.put("url", url);
 			        			map.put("lat", lat);
 			        			map.put("lon", lon);
 			        			map.put("alt", alt);
