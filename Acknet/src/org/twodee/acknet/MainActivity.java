@@ -131,10 +131,6 @@ public class MainActivity extends Activity {
 	    	            //File finalFile = new File(getRealPathFromURI(tempUri));
 						System.out.println("path: " + getRealPathFromURI(selectedImageUri));
 
-	    	        	
-	    	        
-	    	        	
-	    	            
 						putNewImage(getRealPathFromURI(selectedImageUri));
 	    	        	
 	    	            //imageview.setImageURI(selectedImage);
@@ -143,10 +139,6 @@ public class MainActivity extends Activity {
 	    	        }
 	    	    break;
     	    }
-    	    
-    	    
-    	    
-    	    
     	    System.out.println("onActivityResult End ");
     	}
     

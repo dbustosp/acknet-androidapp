@@ -3,49 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/send_post"
-        android:layout_width="266dp"
-        android:layout_height="wrap_content"
-        android:text="@string/post" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher"
-        android:contentDescription="@string/desc" />
-
-    <Button
-        android:id="@+id/loadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/load" />
 	 
-  	<!--  <Button
-	    android:id="@+id/alertButton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:layout_marginBottom="16dp"
-	    android:text="Alert" />
-    -->
-
-    <Button
-        android:id="@+id/go_camera"
-        android:layout_width="wrap_content"
+	<ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go_camera" />
-
-  	<RelativeLayout
-  	    android:id="@+id/layout_pictures"
-  	    android:layout_width="match_parent"
-  	    android:layout_height="241dp" >
-
-  	</RelativeLayout>
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector" />
     
 </LinearLayout>
 

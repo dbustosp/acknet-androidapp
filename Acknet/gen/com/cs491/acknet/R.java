@@ -225,73 +225,78 @@ containing a value of this type.
         public static final int gradient_background=0x7f02002a;
         public static final int gradient_bg=0x7f02002b;
         public static final int gradient_bg_hover=0x7f02002c;
-        public static final int ic_action_help=0x7f02002d;
-        public static final int ic_action_location_found=0x7f02002e;
-        public static final int ic_action_refresh=0x7f02002f;
-        public static final int ic_action_search=0x7f020030;
-        public static final int ic_launcher=0x7f020031;
-        public static final int ic_plusone_medium_off_client=0x7f020032;
-        public static final int ic_plusone_small_off_client=0x7f020033;
-        public static final int ic_plusone_standard_off_client=0x7f020034;
-        public static final int ic_plusone_tall_off_client=0x7f020035;
-        public static final int image_bg=0x7f020036;
-        public static final int large_sunset_bg=0x7f020037;
-        public static final int list_selector=0x7f020038;
-        public static final int loco_acknet=0x7f020039;
-        public static final int logoacknet=0x7f02003a;
-        public static final int messages_default=0x7f02003b;
-        public static final int messages_pressed=0x7f02003c;
-        public static final int messages_selected=0x7f02003d;
-        public static final int news_feed_default=0x7f02003e;
-        public static final int news_feed_pressed=0x7f02003f;
-        public static final int news_feed_selected=0x7f020040;
-        public static final int no_image=0x7f020041;
-        public static final int photos_default=0x7f020042;
-        public static final int photos_pressed=0x7f020043;
-        public static final int photos_selected=0x7f020044;
-        public static final int places_default=0x7f020045;
-        public static final int places_pressed=0x7f020046;
-        public static final int places_selected=0x7f020047;
-        public static final int rihanna=0x7f020048;
-        public static final int solid_sunset_button=0x7f020049;
-        public static final int uwec=0x7f02004a;
+        public static final int ic_action_camera=0x7f02002d;
+        public static final int ic_action_help=0x7f02002e;
+        public static final int ic_action_location_found=0x7f02002f;
+        public static final int ic_action_new_picture=0x7f020030;
+        public static final int ic_action_refresh=0x7f020031;
+        public static final int ic_action_search=0x7f020032;
+        public static final int ic_action_video=0x7f020033;
+        public static final int ic_action_warning=0x7f020034;
+        public static final int ic_launcher=0x7f020035;
+        public static final int ic_plusone_medium_off_client=0x7f020036;
+        public static final int ic_plusone_small_off_client=0x7f020037;
+        public static final int ic_plusone_standard_off_client=0x7f020038;
+        public static final int ic_plusone_tall_off_client=0x7f020039;
+        public static final int image_bg=0x7f02003a;
+        public static final int large_sunset_bg=0x7f02003b;
+        public static final int list_selector=0x7f02003c;
+        public static final int loco_acknet=0x7f02003d;
+        public static final int logoacknet=0x7f02003e;
+        public static final int messages_default=0x7f02003f;
+        public static final int messages_pressed=0x7f020040;
+        public static final int messages_selected=0x7f020041;
+        public static final int news_feed_default=0x7f020042;
+        public static final int news_feed_pressed=0x7f020043;
+        public static final int news_feed_selected=0x7f020044;
+        public static final int no_image=0x7f020045;
+        public static final int photos_default=0x7f020046;
+        public static final int photos_pressed=0x7f020047;
+        public static final int photos_selected=0x7f020048;
+        public static final int places_default=0x7f020049;
+        public static final int places_pressed=0x7f02004a;
+        public static final int places_selected=0x7f02004b;
+        public static final int rihanna=0x7f02004c;
+        public static final int solid_sunset_button=0x7f02004d;
+        public static final int textlines=0x7f02004e;
+        public static final int uwec=0x7f02004f;
     }
     public static final class id {
-        public static final int action_settings=0x7f06003a;
+        public static final int action_settings=0x7f060039;
         public static final int addTodayButton=0x7f06001e;
-        public static final int artist=0x7f06002a;
+        public static final int artist=0x7f060030;
         public static final int bgImage=0x7f060005;
-        public static final int boxPost=0x7f060031;
-        public static final int btnCapturePicture=0x7f06002c;
+        public static final int btnCapturePicture=0x7f060032;
         public static final int btnLogin=0x7f06000c;
-        public static final int btnRecordVideo=0x7f06002d;
+        public static final int btnRecordVideo=0x7f060033;
+        public static final int btn_camera=0x7f060027;
         public static final int btn_events=0x7f060024;
         public static final int btn_friends=0x7f060021;
+        public static final int btn_library=0x7f060026;
         public static final int btn_messages=0x7f060022;
         public static final int btn_news_feed=0x7f060020;
         public static final int btn_photos=0x7f060025;
-        public static final int btn_places=0x7f060023;
+        public static final int btn_posts=0x7f060023;
+        public static final int btn_video=0x7f060028;
         public static final int buttonLoadPicture=0x7f06001b;
+        public static final int date=0x7f060031;
         public static final int datePicker=0x7f06001d;
         public static final int display=0x7f06000e;
-        public static final int duration=0x7f06002b;
         public static final int editText1=0x7f060014;
         public static final int editText2=0x7f060015;
         public static final int editText3=0x7f060016;
         public static final int formLogin=0x7f060009;
-        public static final int go_camera=0x7f060036;
         public static final int home_root=0x7f06001c;
         public static final int hybrid=0x7f060004;
-        public static final int imageView=0x7f060034;
+        public static final int imageView1=0x7f060029;
         public static final int imgLogo=0x7f060019;
-        public static final int imgPreview=0x7f06002e;
+        public static final int imgPreview=0x7f060034;
         public static final int imgView=0x7f06001a;
-        public static final int label=0x7f060026;
-        public static final int layout_pictures=0x7f060037;
-        public static final int list=0x7f060038;
-        public static final int list_image=0x7f060028;
+        public static final int info_attach=0x7f06002a;
+        public static final int label=0x7f06002c;
+        public static final int list=0x7f060037;
+        public static final int list_image=0x7f06002e;
         public static final int llStats=0x7f060006;
-        public static final int loadButton=0x7f060035;
         public static final int logView=0x7f06001f;
         public static final int login=0x7f060010;
         public static final int loginButton=0x7f060018;
@@ -299,23 +304,22 @@ containing a value of this type.
         public static final int normal=0x7f060001;
         public static final int password=0x7f06000b;
         public static final int pick_photo=0x7f060013;
-        public static final int post=0x7f060030;
-        public static final int product_label=0x7f060032;
+        public static final int product_label=0x7f060036;
         public static final int register=0x7f06000d;
         public static final int registerButton=0x7f060017;
         public static final int satellite=0x7f060002;
-        public static final int send_post=0x7f060033;
+        public static final int send_post=0x7f06002b;
         public static final int signup=0x7f060011;
         public static final int terrain=0x7f060003;
-        public static final int thumbnail=0x7f060027;
-        public static final int title=0x7f060029;
+        public static final int thumbnail=0x7f06002d;
+        public static final int title=0x7f06002f;
         public static final int txtEarned=0x7f060008;
         public static final int txtLogin=0x7f060012;
         public static final int txtNowPlaying=0x7f060007;
         public static final int txtSignUp=0x7f06000f;
         public static final int username=0x7f06000a;
-        public static final int videoPreview=0x7f06002f;
-        public static final int youtubeplayerview=0x7f060039;
+        public static final int videoPreview=0x7f060035;
+        public static final int youtubeplayerview=0x7f060038;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
@@ -333,33 +337,33 @@ containing a value of this type.
         public static final int fragment_layout=0x7f030009;
         public static final int friends_layout=0x7f03000a;
         public static final int gcm=0x7f03000b;
-        public static final int list_item=0x7f03000c;
-        public static final int list_row=0x7f03000d;
-        public static final int messages_layout=0x7f03000e;
-        public static final int news_feed_layout=0x7f03000f;
-        public static final int photos_layout=0x7f030010;
-        public static final int places_layout=0x7f030011;
-        public static final int single_list_item_view=0x7f030012;
-        public static final int timeline=0x7f030013;
-        public static final int timeline2=0x7f030014;
+        public static final int layout_posts=0x7f03000c;
+        public static final int list_item=0x7f03000d;
+        public static final int list_row=0x7f03000e;
+        public static final int messages_layout=0x7f03000f;
+        public static final int news_feed_layout=0x7f030010;
+        public static final int photos_layout=0x7f030011;
+        public static final int posts=0x7f030012;
+        public static final int single_list_item_view=0x7f030013;
+        public static final int timeline=0x7f030014;
         public static final int youtube_player_view=0x7f030015;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
     }
     public static final class string {
-        public static final int action_check_updates=0x7f07003f;
-        public static final int action_contacts=0x7f07003d;
-        public static final int action_help=0x7f07003e;
-        public static final int action_location_found=0x7f07003b;
-        public static final int action_refresh=0x7f07003c;
+        public static final int action_check_updates=0x7f070040;
+        public static final int action_contacts=0x7f07003e;
+        public static final int action_help=0x7f07003f;
+        public static final int action_location_found=0x7f07003c;
+        public static final int action_refresh=0x7f07003d;
         /**  Action Bar action items 
          */
-        public static final int action_search=0x7f07003a;
+        public static final int action_search=0x7f07003b;
         public static final int action_settings=0x7f07001b;
         /**  Activity titles 
          */
-        public static final int activity_location_found=0x7f070039;
+        public static final int activity_location_found=0x7f07003a;
         public static final int app_name=0x7f07001a;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -481,12 +485,13 @@ containing a value of this type.
         public static final int register=0x7f070036;
         /**  Search  
          */
-        public static final int search_hint=0x7f070040;
+        public static final int search_hint=0x7f070041;
         public static final int signup=0x7f07001e;
         public static final int string_timeline=0x7f070024;
         public static final int text_true=0x7f07002d;
         public static final int url_acknet=0x7f070034;
         public static final int username=0x7f070021;
+        public static final int writeStory=0x7f070039;
     }
     public static final class style {
         /**  Added 

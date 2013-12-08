@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import org.apache.http.HttpResponse;
@@ -28,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,6 +41,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import com.cs491.acknet.R;
 
@@ -46,176 +50,119 @@ public class Timeline extends Activity{
 	
 	String responseString = null;
 	String responseString1 = null;
+	static final String URL = Connection.getInstance().getIp() + "/story";
+	
+	static final String KEY_BODY = "title";
+	static final String KEY_USERNAME = "username";
+	static final String KEY_DATE = "date";
+	static final String KEY_THUMB_URL = "thumb_url";
+	
+	ListView list;
+    LazyAdapter adapter;
+	
+	ArrayList<HashMap<String, String>> storyList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
+		
+		
+		loadStories();
 		    		
-		final Button send_post = (Button) findViewById(R.id.send_post);
-		
-		send_post.setOnClickListener(new OnClickListener(){
-
-			@Override
-			public void onClick(View arg0) {
-				putNewPost(arg0);
-				
-			}
-		});
-		
-		
-		Button loadButton = (Button) findViewById(R.id.loadButton);
-		loadButton.setOnClickListener(new OnClickListener() {
-		      @Override
-		      public void onClick(View v) {
-		    	System.out.println("Init outside -- load image");
-		        loadImage();
-		        System.out.println("End outside -- load image");
-		      }
-		});
-		timelineLayout = (RelativeLayout) findViewById(R.id.layout_pictures);		
-	}
-	
-	private void loadImage() {
-		
-		new AsyncTask<Void, Void, ArrayList<Bitmap>>() {
-
-			@Override
-			protected ArrayList<Bitmap> doInBackground(Void... arg0) {
-				// TODO Auto-generated method stub
-				ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
-				HttpClient httpclient = new DefaultHttpClient();
-			    HttpResponse response;
-			    
-			    
-				
-				try {
-								       
-			        String IP = Connection.getInstance().getIp();
-			        String URL = IP + "/get_pictures";			        
-			        response = httpclient.execute(new HttpGet(URL));
-			        StatusLine statusLine = response.getStatusLine();
-			        
-			        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-			        	System.out.println("OK");
-			        	
-			        	ByteArrayOutputStream out = new ByteArrayOutputStream();
-				        response.getEntity().writeTo(out);
-		                out.close();
-		                responseString1 = out.toString();
-		                
-		                JSONObject jsnobject = null;
-						jsnobject = new JSONObject(responseString1);
-						JSONArray jsonArray = null;
-						jsonArray = jsnobject.getJSONArray("pictures");
-						
-						Bitmap bmap = null;
-						
-						for (int i = 0; i < jsonArray.length(); i++) {
-							JSONObject explrObject = null;
-							explrObject = jsonArray.getJSONObject(i);
-							
-							
-							
-							System.out.println(explrObject.get("path"));
-							
-							URL url = new URL(explrObject.get("path").toString());
-							URLConnection con = url.openConnection();
-							InputStream in = con.getInputStream();
-							
-							bmap = BitmapFactory.decodeStream(in);
-							
-							bitmaps.add(bmap);					
-							
-							bmap = null;						
-							
-		            	}
- 
-			        }else{
-			        	System.out.println("Else");
-			        }
-
-			        System.out.println("Timeline ---------------- try end");
-				}catch (MalformedURLException e) {
-			          e.printStackTrace();
-		        } catch (IOException e) {
-		          e.printStackTrace();
-		        } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		        return bitmaps;
-			}
 			
-			@Override
-		      protected void onPostExecute(ArrayList<Bitmap> bitmaps) {
-				
-				//bitmap.
-				
-				System.out.println("onPostExecute -- Init");
-				
-				for(Bitmap bmap : bitmaps){
-					
-					ImageView img = new ImageView(Timeline.this);
-					img.setImageBitmap(bmap);
-					timelineLayout.addView(img);				
-					
-				}
-				
-				System.out.println("onPostExecute -- End");
-			}
-			
-			
-		}.execute();
-	
 	}
 	
 	
-	
-	private void putNewPost(final View v) {		
+	public void loadStories(){
 		
 		new AsyncTask<Void, Void, HttpResponse>() {
-			
+
 			@Override
 			protected HttpResponse doInBackground(Void... params) {
-				
-				//Implementation send request post to 
-				String IP = Connection.getInstance().getIp();
-				String URL = IP + "/timeline";
+				storyList = new ArrayList<HashMap<String, String>>();
+				//Get Post from get request
+				HttpClient httpclient = new DefaultHttpClient();
 			    HttpResponse response = null;
-				
-			    JSONObject json = new JSONObject();
-			    try {
-					json.put("title", "myFirstPost");
-					json.put("body", "bodyPost");
-				    json.put("attached", "attachedFile");
-				    json.put("user", null);
-				    
-				    json = makeRequest(URL, json);
-				    
-				    System.out.println("JSOOOOON: " + json);
-				    
-				    
+			    
+			    try{
+			    	
+			    	response = httpclient.execute(new HttpGet(URL));
+			    	StatusLine statusLine = response.getStatusLine();
+			    	
+			    	if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+			    		ByteArrayOutputStream out = new ByteArrayOutputStream();
+						response.getEntity().writeTo(out);
+						out.close();
+						String responseString = out.toString();
+						
+						JSONObject response_json = new JSONObject(responseString);
+						Boolean status = response_json.getBoolean("success");
+						
+						if(status){
+							JSONArray jsonPosts = new JSONArray();
+			        		jsonPosts = response_json.getJSONArray("stories");
+			        		for(int i=0;i<jsonPosts.length();i++){
+			        			HashMap<String, String> map = new HashMap<String, String>();
+			        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
+			        			
+			        			
+			        			
+			        			String body = childJSONObject.getString("body");
+			        			String username = childJSONObject.getString("username");
+			        			
+			        			System.out.println(body);
+			        			System.out.println(username);
+			        			System.out.println();
+			        			
+			        			
+			        			map.put(KEY_BODY, body);
+			        			map.put(KEY_USERNAME, username);
+			        			// adding HashList to ArrayList
+			        			storyList.add(map);
+			        		}
+			        		// ListView que ser‡ renderizado
+			        		list = (ListView) findViewById(R.id.list);
+			        		// Getting adapter by passing xml data ArrayList		        		
+		
+			        		adapter = new LazyAdapter(Timeline.this, storyList);
+			        		
+			        		runOnUiThread(new Runnable() {
+			        		     public void run() {			        		
+			        		    	list.setAdapter(adapter);
+			        		    }
+			        		});
+			        		
+			        		
+						}else{
+							AlertDialog.Builder builder = new AlertDialog.Builder(Timeline.this);
+					        builder.setTitle("success: FALSE!")
+					        .setMessage("Show message here :) ")
+					        .setCancelable(false)
+					        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+					            public void onClick(DialogInterface dialog, int id) {
+					                dialog.cancel();
+					            }
+					        });
+					        AlertDialog alert = builder.create();
+					        alert.show();	
+						}
+			    	}
+			    	
+			    }catch (ClientProtocolException e) {
+					System.out.println("ClientProtocolException");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("IOException");
+					e.printStackTrace();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
+					System.out.println("JSONException");
 					e.printStackTrace();
 				}
 			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    return response;
-			}
-			
-			
-			
-			@Override
-			protected void onPostExecute(HttpResponse response){
-				System.out.println("onPostExecute - Init");								
+				return null;
 			}
 			
 		}.execute();
@@ -223,46 +170,6 @@ public class Timeline extends Activity{
 	}
 	
 	
-	private JSONObject makeRequest(String url, JSONObject json) {
-		
-		try{
-			
-			URI uri = new URI(String.format(url));
-			HttpPost post = new HttpPost(uri);
-			StringEntity entity = new StringEntity(json.toString());
-			
-			Log.d("FOO", "sending " + json.toString());
-			
-			entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-		    post.setEntity(entity);
-		    
-		    HttpClient client = new DefaultHttpClient();
-		    HttpResponse response = client.execute(post);
-		    
-		    Scanner in = new Scanner(response.getEntity().getContent());
-		    in.useDelimiter("\\Z");
-		    String body = in.next();
-		    in.close();
-		      
-		    Log.d("Timeline - FOOOOO", body);
-		    
-		    return new JSONObject(body);
-			
-			
-		}catch (URISyntaxException e) {
-		      e.printStackTrace();
-	    } catch (UnsupportedEncodingException e) {
-	      e.printStackTrace();
-	    } catch (ClientProtocolException e) {
-	      e.printStackTrace();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    } catch (JSONException e) {
-	      e.printStackTrace();
-	    }
-		
-		return null;
-	}
 	
 
 }

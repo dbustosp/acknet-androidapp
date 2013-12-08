@@ -19,7 +19,6 @@ import com.cs491.acknet.R;
 public class LazyAdapter extends BaseAdapter{
 	
     private Activity activity;
-    private AsyncTask<Void, Void, HttpResponse> activity2;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
@@ -50,18 +49,16 @@ public class LazyAdapter extends BaseAdapter{
             vi = inflater.inflate(R.layout.list_row, null);
 
         TextView title = (TextView)vi.findViewById(R.id.title); // title
-        TextView artist = (TextView)vi.findViewById(R.id.artist); // artist name
-        TextView duration = (TextView)vi.findViewById(R.id.duration); // duration
+        TextView username = (TextView)vi.findViewById(R.id.artist); // artist name
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
         
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
         
         // Setting all values in listview
-        title.setText(song.get(CustomizedListView.KEY_TITLE));
-        artist.setText(song.get(CustomizedListView.KEY_ARTIST));
-        duration.setText(song.get(CustomizedListView.KEY_DURATION));
-        imageLoader.DisplayImage(song.get(CustomizedListView.KEY_THUMB_URL), thumb_image);
+        title.setText(song.get(Timeline.KEY_BODY));
+        username.setText(song.get(Timeline.KEY_USERNAME));
+        imageLoader.DisplayImage(song.get(Timeline.KEY_THUMB_URL), thumb_image);
         return vi;
     }
 

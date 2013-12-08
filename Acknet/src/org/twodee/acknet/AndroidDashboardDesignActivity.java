@@ -39,7 +39,7 @@ public class AndroidDashboardDesignActivity extends Activity{
         Button btn_messages = (Button) findViewById(R.id.btn_messages);
          
         // Dashboard Places button
-        Button btn_places = (Button) findViewById(R.id.btn_places);
+        Button btn_posts = (Button) findViewById(R.id.btn_posts);
          
         // Dashboard Events button
         Button btn_events = (Button) findViewById(R.id.btn_events);
@@ -57,7 +57,7 @@ public class AndroidDashboardDesignActivity extends Activity{
             @Override
             public void onClick(View view) {
                 // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), CustomizedListView.class);
+                Intent i = new Intent(getApplicationContext(), Timeline.class);
                 startActivity(i);
             }
         });
@@ -87,12 +87,12 @@ public class AndroidDashboardDesignActivity extends Activity{
         });
          
         // Listening to Places button click
-        btn_places.setOnClickListener(new View.OnClickListener() {
+        btn_posts.setOnClickListener(new View.OnClickListener() {
              
             @Override
             public void onClick(View view) {
                 // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), PlacesActivity.class);
+                Intent i = new Intent(getApplicationContext(), PostActivity.class);
                 startActivity(i);
             }
         });
@@ -140,8 +140,6 @@ public class AndroidDashboardDesignActivity extends Activity{
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("DELETE");
 					int responseCode = connection.getResponseCode();
-					
-					
 
 				} catch (MalformedURLException e) {
 					// SHOW A MESSAGE 

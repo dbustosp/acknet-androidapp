@@ -27,7 +27,7 @@
      
     <!--  Places Button -->
     <Button
-        android:id="@+id/btn_places"
+        android:id="@+id/btn_posts"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_places"
         android:text="@string/places" />
