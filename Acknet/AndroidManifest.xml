@@ -105,7 +105,6 @@
         <activity android:name="org.twodee.acknet.MessagesActivity" ></activity>
         <activity android:name="org.twodee.acknet.EventsActivity" ></activity>
         <activity android:name="org.twodee.acknet.PhotosActivity" ></activity>
-        <activity android:name="org.twodee.acknet.CustomizedListView" ></activity>
         <activity android:name="org.twodee.acknet.AndroidListViewActivity" ></activity>
         <activity android:name="org.twodee.acknet.SingleListItem"
         android:label="Single Item Selected"></activity>
