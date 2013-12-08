@@ -2,16 +2,9 @@ package org.twodee.acknet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -19,11 +12,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,18 +20,12 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.text.format.DateFormat;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
 import com.cs491.acknet.R;
 
 public class Timeline extends Activity{
@@ -51,6 +34,7 @@ public class Timeline extends Activity{
 	String responseString = null;
 	String responseString1 = null;
 	static final String URL = Connection.getInstance().getIp() + "/story";
+	JSONArray jsonPosts;
 	
 	static final String KEY_BODY = "title";
 	static final String KEY_USERNAME = "username";
@@ -68,9 +52,12 @@ public class Timeline extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
 		
-		
 		loadStories();
 		    		
+		
+		// Add Listener List View
+		
+		
 			
 	}
 	
@@ -101,7 +88,7 @@ public class Timeline extends Activity{
 						Boolean status = response_json.getBoolean("success");
 						
 						if(status){
-							JSONArray jsonPosts = new JSONArray();
+							jsonPosts = new JSONArray();
 			        		jsonPosts = response_json.getJSONArray("stories");
 			        		for(int i=0;i<jsonPosts.length();i++){
 			        			HashMap<String, String> map = new HashMap<String, String>();
@@ -111,14 +98,21 @@ public class Timeline extends Activity{
 			        			
 			        			String body = childJSONObject.getString("body");
 			        			String username = childJSONObject.getString("username");
+			        			String date = childJSONObject.getString("date");
+			        			
 			        			
 			        			System.out.println(body);
 			        			System.out.println(username);
+			        			System.out.println(date);
+			        			
+			        					        			
+			        			
 			        			System.out.println();
 			        			
 			        			
 			        			map.put(KEY_BODY, body);
 			        			map.put(KEY_USERNAME, username);
+			        			map.put(KEY_DATE, date);
 			        			// adding HashList to ArrayList
 			        			storyList.add(map);
 			        		}

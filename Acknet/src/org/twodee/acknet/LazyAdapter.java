@@ -48,15 +48,18 @@ public class LazyAdapter extends BaseAdapter{
         if(convertView==null)
             vi = inflater.inflate(R.layout.list_row, null);
 
-        TextView title = (TextView)vi.findViewById(R.id.title); // title
-        TextView username = (TextView)vi.findViewById(R.id.artist); // artist name
-        ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image); // thumb image
+        TextView title = (TextView)vi.findViewById(R.id.title); 
+        TextView username = (TextView)vi.findViewById(R.id.artist); 
+        TextView date = (TextView)vi.findViewById(R.id.date); 
+        
+        ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image);
         
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
         
         // Setting all values in listview
         title.setText(song.get(Timeline.KEY_BODY));
+        date.setText(song.get(Timeline.KEY_DATE));
         username.setText(song.get(Timeline.KEY_USERNAME));
         imageLoader.DisplayImage(song.get(Timeline.KEY_THUMB_URL), thumb_image);
         return vi;
