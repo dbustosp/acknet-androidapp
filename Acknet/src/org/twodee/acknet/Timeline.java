@@ -2,7 +2,6 @@ package org.twodee.acknet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,16 +19,17 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.DateFormat;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.cs491.acknet.R;
 
 public class Timeline extends Activity{
-	private RelativeLayout timelineLayout;
 	
 	String responseString = null;
 	String responseString1 = null;
@@ -52,11 +52,23 @@ public class Timeline extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timeline);
 		
+		// ListView que ser‡ renderizado
+		list = (ListView) findViewById(R.id.list);		
 		loadStories();
-		    		
+		
 		
 		// Add Listener List View
-		
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				System.out.println("Position: " + position);
+				Intent intent = new Intent(Timeline.this, Story.class);
+				intent.putExtra("story", storyList.get(position));
+				startActivity(intent);
+			}
+			
+		});
 		
 			
 	}
@@ -116,10 +128,7 @@ public class Timeline extends Activity{
 			        			// adding HashList to ArrayList
 			        			storyList.add(map);
 			        		}
-			        		// ListView que ser‡ renderizado
-			        		list = (ListView) findViewById(R.id.list);
-			        		// Getting adapter by passing xml data ArrayList		        		
-		
+			        			        		
 			        		adapter = new LazyAdapter(Timeline.this, storyList);
 			        		
 			        		runOnUiThread(new Runnable() {
@@ -127,8 +136,7 @@ public class Timeline extends Activity{
 			        		    	list.setAdapter(adapter);
 			        		    }
 			        		});
-			        		
-			        		
+
 						}else{
 							AlertDialog.Builder builder = new AlertDialog.Builder(Timeline.this);
 					        builder.setTitle("success: FALSE!")
@@ -142,8 +150,7 @@ public class Timeline extends Activity{
 					        AlertDialog alert = builder.create();
 					        alert.show();	
 						}
-			    	}
-			    	
+			    	}	
 			    }catch (ClientProtocolException e) {
 					System.out.println("ClientProtocolException");
 					e.printStackTrace();
@@ -158,12 +165,6 @@ public class Timeline extends Activity{
 			    
 				return null;
 			}
-			
-		}.execute();
-		
+		}.execute();	
 	}
-	
-	
-	
-
 }

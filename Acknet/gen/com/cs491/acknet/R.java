@@ -345,8 +345,9 @@ containing a value of this type.
         public static final int photos_layout=0x7f030011;
         public static final int posts=0x7f030012;
         public static final int single_list_item_view=0x7f030013;
-        public static final int timeline=0x7f030014;
-        public static final int youtube_player_view=0x7f030015;
+        public static final int story=0x7f030014;
+        public static final int timeline=0x7f030015;
+        public static final int youtube_player_view=0x7f030016;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
