@@ -36,7 +36,7 @@ public class Timeline extends Activity{
 	static final String URL = Connection.getInstance().getIp() + "/story";
 	JSONArray jsonPosts;
 	
-	static final String KEY_BODY = "title";
+	static final String KEY_BODY = "body";
 	static final String KEY_USERNAME = "username";
 	static final String KEY_DATE = "date";
 	static final String KEY_THUMB_URL = "thumb_url";
@@ -64,7 +64,16 @@ public class Timeline extends Activity{
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 				System.out.println("Position: " + position);
 				Intent intent = new Intent(Timeline.this, Story.class);
-				intent.putExtra("story", storyList.get(position));
+				intent.putExtra("username", storyList.get(position).get("username") );
+				intent.putExtra("date", storyList.get(position).get("date") );
+				intent.putExtra("body", storyList.get(position).get("body"));
+				intent.putExtra("link", storyList.get(position).get("link"));
+				intent.putExtra("type", storyList.get(position).get("type"));
+				
+				intent.putExtra("lat", storyList.get(position).get("lat"));
+				intent.putExtra("lon", storyList.get(position).get("lon"));
+				intent.putExtra("alt", storyList.get(position).get("alt"));
+				
 				startActivity(intent);
 			}
 			
@@ -111,11 +120,20 @@ public class Timeline extends Activity{
 			        			String body = childJSONObject.getString("body");
 			        			String username = childJSONObject.getString("username");
 			        			String date = childJSONObject.getString("date");
+			        			JSONObject attachment = childJSONObject.getJSONObject("attachment");
+			        			String type = attachment.getString("type");
+			        			String link = attachment.getString("url");
 			        			
+			        			JSONObject geolocation = childJSONObject.getJSONObject("geolocation");
+			        			String lat = geolocation.getString("lat");
+			        			String lon = geolocation.getString("lon");
+			        			String alt  = geolocation.getString("alt");
 			        			
 			        			System.out.println(body);
 			        			System.out.println(username);
 			        			System.out.println(date);
+			        			System.out.println(type);
+			        			System.out.println(link);
 			        			
 			        					        			
 			        			
@@ -125,6 +143,14 @@ public class Timeline extends Activity{
 			        			map.put(KEY_BODY, body);
 			        			map.put(KEY_USERNAME, username);
 			        			map.put(KEY_DATE, date);
+			        			map.put("date", date);
+			        			map.put("type", type);
+			        			map.put("link", link);
+			        			map.put("lat", lat);
+			        			map.put("lon", lon);
+			        			map.put("alt", alt);
+			        			
+			        			//map.put("link", )
 			        			// adding HashList to ArrayList
 			        			storyList.add(map);
 			        		}

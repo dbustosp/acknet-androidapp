@@ -27,7 +27,7 @@ import com.cs491.acknet.R;
 public class CustomizedListView extends Activity {
 	
 	static final String IP = Connection.getInstance().getIp();
-	
+	public String VIDEO_ID;
 	
 	// All static variables
 	static final String URL = IP + "/posts";

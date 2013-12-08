@@ -262,7 +262,7 @@ containing a value of this type.
         public static final int uwec=0x7f02004f;
     }
     public static final class id {
-        public static final int action_settings=0x7f060039;
+        public static final int action_settings=0x7f06003d;
         public static final int addTodayButton=0x7f06001e;
         public static final int artist=0x7f060030;
         public static final int bgImage=0x7f060005;
@@ -294,7 +294,7 @@ containing a value of this type.
         public static final int imgView=0x7f06001a;
         public static final int info_attach=0x7f06002a;
         public static final int label=0x7f06002c;
-        public static final int list=0x7f060037;
+        public static final int list=0x7f06003c;
         public static final int list_image=0x7f06002e;
         public static final int llStats=0x7f060006;
         public static final int logView=0x7f06001f;
@@ -311,6 +311,10 @@ containing a value of this type.
         public static final int send_post=0x7f06002b;
         public static final int signup=0x7f060011;
         public static final int terrain=0x7f060003;
+        public static final int textView1=0x7f060037;
+        public static final int textView2=0x7f060038;
+        public static final int textView3=0x7f060039;
+        public static final int textView4=0x7f06003a;
         public static final int thumbnail=0x7f06002d;
         public static final int title=0x7f06002f;
         public static final int txtEarned=0x7f060008;
@@ -319,7 +323,7 @@ containing a value of this type.
         public static final int txtSignUp=0x7f06000f;
         public static final int username=0x7f06000a;
         public static final int videoPreview=0x7f060035;
-        public static final int youtubeplayerview=0x7f060038;
+        public static final int youtubeplayerview=0x7f06003b;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
