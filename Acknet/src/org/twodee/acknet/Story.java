@@ -1,18 +1,29 @@
 package org.twodee.acknet;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cs491.acknet.R;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
+import com.google.android.youtube.player.YouTubePlayerView;
 
 public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener{
 	ArrayList<String> storyList;
@@ -27,9 +38,13 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 	TextView txtView_username;
 	TextView txtView_body;
 	
+	
+	
 	public static final String API_KEY = "AIzaSyCcdRKwLTXED-Lq27t94kI3kPrqmL-c1hk";
+	public String VIDEO_ID;
 	
-	
+	private ImageView imageView;
+	LinearLayout mainLayout;
 	
 	
 	@Override
@@ -52,29 +67,82 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 
 		if(type.equals("image")){
 			// Post image
+			setInformationPicture();
+			imageView = new ImageView(Story.this);
+			mainLayout = (LinearLayout) findViewById(R.id.mainLayout);
 		}else if(type.equals("video")){
-			// Post Video
+			setInformationVideo();
 		}else{
 			// Post only text
+			setInformationText();
 		}
-		
-		
-		setInformation();
 	}
 	
-	 private void setInformation(){
-		 
-		  
-		 
+	private void setInformationText(){
+		txtView_username = (TextView) findViewById(R.id.textView1);
+        txtView_username.setText(username);
+        
+        txtView_body = (TextView) findViewById(R.id.textView3);
+        txtView_body.setText(body);
+	}
+	
+	
+	private void setInformationVideo(){
+		
+		txtView_username = (TextView) findViewById(R.id.textView1);
+        txtView_username.setText(username);
+        
+        txtView_body = (TextView) findViewById(R.id.textView3);
+        txtView_body.setText(body);
+		
+		
+		// Post Video
+		System.out.println("It's video!");
+		// get Id_VIDEO
+		System.out.println("link: " + link);
+		String[] split = link.split("v="); 
+		VIDEO_ID = split[1];
+		
+		System.out.println("link: " + split[1]);
+		
+		YouTubePlayerView youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtubeplayerview);
+        youTubePlayerView.initialize(API_KEY, this);
+	}
+	
+	 private void setInformationPicture(){
+
          new AsyncTask<Void, Void, Bitmap>() {
 
 			@Override
 			protected Bitmap doInBackground(Void... params) {
 				
-				
-				
-				return null;
+				Bitmap bmap = null;
+				try{
+					 URL url = new URL(link);
+                     URLConnection con = url.openConnection();
+                     InputStream in = con.getInputStream();
+                     bmap = BitmapFactory.decodeStream(in);
+	             } catch (MalformedURLException e){
+	                     e.printStackTrace();       
+	             } catch (IOException e) {
+	                     e.printStackTrace();
+	             }
+	             return bmap;
 			}
+			
+			@Override
+            protected void onPostExecute(Bitmap bmap){
+				imageView.setImageBitmap(bmap);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(300,300);
+	            imageView.setLayoutParams(lp);
+	            ImageView img2 = new ImageView(Story.this);
+	            img2.setImageBitmap(bmap);
+	            ImageView img3 = new ImageView(Story.this);
+	            img3.setImageBitmap(bmap);
+	            mainLayout.addView(imageView, lp);
+	            //mainLayout.addView(img2, lp);
+	            //mainLayout.addView(img3, lp);
+            }
         	 
          }.execute();
 	 
@@ -89,15 +157,17 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 	@Override
 	public void onInitializationFailure(Provider arg0,
 			YouTubeInitializationResult arg1) {
-		// TODO Auto-generated method stub
-		
+		 Toast.makeText(getApplicationContext(), 
+				    "onInitializationFailure()", 
+				    Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	public void onInitializationSuccess(Provider arg0, YouTubePlayer arg1,
 			boolean arg2) {
-		// TODO Auto-generated method stub
-		
+		if (!arg2) {
+			arg1.cueVideo(VIDEO_ID);
+	      }
 	}
 
 }

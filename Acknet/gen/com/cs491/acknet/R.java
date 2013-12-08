@@ -262,7 +262,7 @@ containing a value of this type.
         public static final int uwec=0x7f02004f;
     }
     public static final class id {
-        public static final int action_settings=0x7f06003d;
+        public static final int action_settings=0x7f06003e;
         public static final int addTodayButton=0x7f06001e;
         public static final int artist=0x7f060030;
         public static final int bgImage=0x7f060005;
@@ -294,12 +294,13 @@ containing a value of this type.
         public static final int imgView=0x7f06001a;
         public static final int info_attach=0x7f06002a;
         public static final int label=0x7f06002c;
-        public static final int list=0x7f06003c;
+        public static final int list=0x7f06003d;
         public static final int list_image=0x7f06002e;
         public static final int llStats=0x7f060006;
         public static final int logView=0x7f06001f;
         public static final int login=0x7f060010;
         public static final int loginButton=0x7f060018;
+        public static final int mainLayout=0x7f06003c;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
         public static final int password=0x7f06000b;

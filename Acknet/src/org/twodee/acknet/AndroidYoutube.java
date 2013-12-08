@@ -47,13 +47,10 @@ YouTubePlayer.OnInitializedListener{
 	@Override
 	public void onInitializationSuccess(Provider arg0, YouTubePlayer arg1,
 			boolean arg2) {
-		
 			
 		if (!arg2) {
 			arg1.cueVideo(VIDEO_ID);
 	      }
-		
-		
 		
 	}
 
