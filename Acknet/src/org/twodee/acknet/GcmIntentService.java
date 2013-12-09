@@ -31,44 +31,41 @@ public class GcmIntentService extends IntentService {
     
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
 		System.out.println("Init -- onHandleIntent");
 		
 		Bundle extras = intent.getExtras();
+        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
+		String messageType = gcm.getMessageType(intent);		
 		
-		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 		
-		// The getMessageType() intent parameter must be the intent you received
-        // in your BroadcastReceiver.
-        String messageType = gcm.getMessageType(intent);
-        
+		System.out.println("messageType: " + messageType);
+		
+			
         if (!extras.isEmpty()) {
-        	String type = extras.getString("type");
-        	String username = extras.getString("username");
-        	System.out.println("type: " + type);
-        	System.out.println("username: " + username);        	
-        	sendNotification(username);
-
-        	
-        }else{
-        	System.out.println("Es empty!!");
+        	String action = intent.getAction();
+        	if (action.equals("com.google.android.c2dm.intent.REGISTRATION")) {
+                handleRegistration(intent);
+            } else if (action.equals("com.google.android.c2dm.intent.RECEIVE")) {
+                handleMessage(intent, extras);
+                
+            }    	
         }
-		
-		
-		
+        GcmBroadcastReceiver.completeWakefulIntent(intent);
 	}
 	
-	private void showMessage(){
-		new AsyncTask<Void, Void, HttpResponse>() {
-
-			@Override
-			protected HttpResponse doInBackground(Void... params) {
-				
-	        	// Show message from GCM
-				
-				return null;
-			}		
-		}.execute();
+	private void handleRegistration(Intent intent){
+		System.out.println("handleRegistration");
+	}
+	
+	private void handleMessage(Intent intent, Bundle extras){
+		System.out.println("handleMessage");
+		String type = extras.getString("type");
+		
+		if(type.equals("0")){
+			String username = extras.getString("username");
+			System.out.println("type: " + type + "   username: " + username);  
+    		sendNotification(username);
+		}	
 	}
 	
 	// Put the message into a notification and post it.
