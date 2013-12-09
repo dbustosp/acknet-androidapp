@@ -56,7 +56,6 @@ public class RegisterActivity extends Activity{
 	HttpResponse response;
 	HttpClient httpclient;
 	Boolean status;
-	String token;
 	Context context;
 	String regid;
 	SharedPreferences SP;
@@ -92,6 +91,29 @@ public class RegisterActivity extends Activity{
 
 			@Override
 			public void onClick(View v) {
+				
+				System.out.println("Registrando a GCM");
+				
+				//Instructions for registration in Google Cloud Messaging
+				context = getApplicationContext();
+				
+				if (checkPlayServices()) {
+					
+					regid = getRegistrationId(context);
+					
+					if (regid.isEmpty()) {
+		            	System.out.println("regid is Empty");
+		                registerInBackground();
+		            }else{
+		            	System.out.println("regid is not Empty: " + regid);
+		            }						
+				}else{
+					System.out.println(" !!! Check Play Services ");
+		        	System.out.println("No valid Google Play Services APK found.");
+				}
+				
+				System.out.println("Terminando a GCM");		
+				
 				Intent myIntent = new Intent(getApplicationContext(), LoginActivity.class);
 	        	startActivityForResult(myIntent, 0);		
 			}
@@ -148,24 +170,6 @@ public class RegisterActivity extends Activity{
 				}else{
 					// All OK
 					// Verify if is an email or not
-					
-					//Instructions for registration in Google Cloud Messaging
-					context = getApplicationContext();
-					
-					if (checkPlayServices()) {
-									
-			           
-						regid = getRegistrationId(context);
-						if (regid.isEmpty()) {
-			            	System.out.println("regid is Empty");
-			                registerInBackground();
-			            }else{
-			            	System.out.println("regid is not Empty: " + regid);
-			            }						
-					}else{
-						System.out.println(" !!! Check Play Services ");
-			        	System.out.println("No valid Google Play Services APK found.");
-					}
 	
 					// Method to send to database for registration
 					httpclient = new DefaultHttpClient();
@@ -209,9 +213,7 @@ public class RegisterActivity extends Activity{
 				    String body = in.next();
 				    in.close();       			        
 				    JSONObject json = new JSONObject(body);
-			        status = json.getBoolean("success");
-			        token = json.getString("token");
-			        
+			        status = json.getBoolean("success");			 
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -182,7 +182,7 @@ public class LoginActivity extends Activity {
 		            System.out.println("new_token: " + new_token);
 		        	
 		        	//System.out.println("End shared preferences");
-					Intent myIntent = new Intent(getApplicationContext(), AndroidDashboardDesignActivity.class);
+					Intent myIntent = new Intent(getApplicationContext(), DashboardActivity.class);
 					startActivityForResult(myIntent, 0);
 
 		        }else{

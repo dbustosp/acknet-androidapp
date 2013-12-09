@@ -1,10 +1,15 @@
 package org.twodee.acknet;
 
+import org.apache.http.HttpResponse;
+
+import android.app.AlertDialog;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
@@ -42,12 +47,30 @@ public class GcmIntentService extends IntentService {
         	System.out.println("key: " + key);
         	System.out.println("extras: " + extras.toString());
         	System.out.println("messageType: " + messageType);
+        	
+        	showMessage();
+        	
+
+        	
         }else{
         	System.out.println("Es empty!!");
         }
 		
 		
 		
+	}
+	
+	private void showMessage(){
+		new AsyncTask<Void, Void, HttpResponse>() {
+
+			@Override
+			protected HttpResponse doInBackground(Void... params) {
+				
+	        	// Show message from GCM
+				
+				return null;
+			}		
+		}.execute();
 	}
 	
 	// Put the message into a notification and post it.

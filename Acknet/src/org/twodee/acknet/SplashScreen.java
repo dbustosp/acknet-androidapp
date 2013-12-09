@@ -119,7 +119,7 @@ public class SplashScreen extends Activity {
 				        // else ==> User has to login
 				        if(status){
 				        	// Dashboard
-				        	Intent intent = new Intent(getApplicationContext(), AndroidDashboardDesignActivity.class);
+				        	Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
 							startActivityForResult(intent, 0);
 				        }else{
 				        	// login
