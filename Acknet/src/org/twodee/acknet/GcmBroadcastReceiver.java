@@ -18,11 +18,8 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver  {
         ComponentName comp = new ComponentName(context.getPackageName(),
         GcmIntentService.class.getName());
         // Start the service, keeping the device awake while it is launching.
-        System.out.println("Activity...");
         startWakefulService(context, (intent.setComponent(comp)));
-        setResultCode(Activity.RESULT_OK);
-        System.out.println("Fin...");
-		
+        setResultCode(Activity.RESULT_OK);		
 	}
 	
 	

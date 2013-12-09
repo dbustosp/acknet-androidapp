@@ -43,13 +43,11 @@ public class GcmIntentService extends IntentService {
         String messageType = gcm.getMessageType(intent);
         
         if (!extras.isEmpty()) {
-        	String key = extras.getString("key1");
-        	System.out.println("key: " + key);
-        	System.out.println("extras: " + extras.toString());
-        	System.out.println("messageType: " + messageType);
-        	
-        	showMessage();
-        	
+        	String type = extras.getString("type");
+        	String username = extras.getString("username");
+        	System.out.println("type: " + type);
+        	System.out.println("username: " + username);        	
+        	sendNotification(username);
 
         	
         }else{
