@@ -72,7 +72,7 @@ public class Timeline extends Activity{
 				intent.putExtra("lat", storyList.get(position).get("lat"));
 				intent.putExtra("lon", storyList.get(position).get("lon"));
 				intent.putExtra("alt", storyList.get(position).get("alt"));
-				intent.putExtra("key", storyList.get(position).get("key"));
+				intent.putExtra("key_story", storyList.get(position).get("key"));
 				startActivity(intent);
 			}
 			

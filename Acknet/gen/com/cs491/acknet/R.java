@@ -262,7 +262,7 @@ containing a value of this type.
         public static final int uwec=0x7f02004f;
     }
     public static final class id {
-        public static final int action_settings=0x7f06003c;
+        public static final int action_settings=0x7f06003d;
         public static final int artist=0x7f06002e;
         public static final int bgImage=0x7f060006;
         public static final int btnCapturePicture=0x7f060030;
@@ -276,8 +276,10 @@ containing a value of this type.
         public static final int btn_news_feed=0x7f06001e;
         public static final int btn_photos=0x7f060023;
         public static final int btn_posts=0x7f060021;
+        public static final int btn_sendComment=0x7f06003b;
         public static final int btn_video=0x7f060026;
         public static final int buttonLoadPicture=0x7f06001c;
+        public static final int comment=0x7f06003a;
         public static final int date=0x7f06002f;
         public static final int display=0x7f06000f;
         public static final int editText1=0x7f060015;
@@ -297,7 +299,7 @@ containing a value of this type.
         public static final int llStats=0x7f060007;
         public static final int login=0x7f060011;
         public static final int loginButton=0x7f060019;
-        public static final int mainLayout=0x7f06003a;
+        public static final int mainLayout=0x7f060039;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
         public static final int password=0x7f06000c;
@@ -306,14 +308,13 @@ containing a value of this type.
         public static final int register=0x7f06000e;
         public static final int registerButton=0x7f060018;
         public static final int satellite=0x7f060002;
-        public static final int see_comments=0x7f06003b;
+        public static final int see_comments=0x7f06003c;
         public static final int send_post=0x7f060029;
         public static final int signup=0x7f060012;
         public static final int terrain=0x7f060003;
         public static final int textView1=0x7f060035;
         public static final int textView2=0x7f060036;
         public static final int textView3=0x7f060037;
-        public static final int textView4=0x7f060038;
         public static final int thumbnail=0x7f06002b;
         public static final int title=0x7f06002d;
         public static final int txtEarned=0x7f060009;
@@ -322,7 +323,7 @@ containing a value of this type.
         public static final int txtSignUp=0x7f060010;
         public static final int username=0x7f06000b;
         public static final int videoPreview=0x7f060033;
-        public static final int youtubeplayerview=0x7f060039;
+        public static final int youtubeplayerview=0x7f060038;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
@@ -345,11 +346,10 @@ containing a value of this type.
         public static final int messages_layout=0x7f03000e;
         public static final int news_feed_layout=0x7f03000f;
         public static final int photos_layout=0x7f030010;
-        public static final int posts=0x7f030011;
-        public static final int single_list_item_view=0x7f030012;
-        public static final int story=0x7f030013;
-        public static final int timeline=0x7f030014;
-        public static final int youtube_player_view=0x7f030015;
+        public static final int single_list_item_view=0x7f030011;
+        public static final int story=0x7f030012;
+        public static final int timeline=0x7f030013;
+        public static final int youtube_player_view=0x7f030014;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;

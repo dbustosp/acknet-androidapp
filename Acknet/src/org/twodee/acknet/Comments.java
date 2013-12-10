@@ -44,7 +44,7 @@ public class Comments extends Activity {
 		
 		// Get story_key from intent
 		Bundle extras = getIntent().getExtras();
-		key_story = extras.getString("key");
+		key_story = extras.getString("key_story");
 		
 		System.out.println("key_story: " + key_story);
 		
