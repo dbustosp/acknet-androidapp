@@ -6,8 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -65,10 +63,9 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 
 			@Override
 			public void onClick(View arg0) {
-				
 				Intent comments_intent = new Intent(getApplicationContext(), Comments.class);
+				comments_intent.putExtra("key", key_comment );
 				startActivityForResult(comments_intent, 0);
-			
 			}
 	    });
 	    
