@@ -17,7 +17,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,30 +39,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import com.cs491.acknet.R;
 
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "SimpleDateFormat" })
 public class AndroidListViewActivity extends ListActivity {
 	private static final int RESULT_LOAD_IMAGE = 1;
 	 private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-	    private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
 	    public static final int MEDIA_TYPE_IMAGE = 1;
 	    public static final int MEDIA_TYPE_VIDEO = 2;
 	    Uri picUri;
 	    String imgPath;
 	    ImageView imgUser;
 	    
-	    
-	    private static final int CAMERA_IMAGE_CAPTURE = 0;
-	    
-	    
-	    // directory name to store captured images and videos
-	    private static final String IMAGE_DIRECTORY_NAME = "Acknet";
-	    
+
 	    private Uri fileUri; // file url to store image/video
 	
 	
-	    private String selectedImagePath = "";
-	    final private int PICK_IMAGE = 1;
-	    final private int CAPTURE_IMAGE = 2;
+
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,8 +87,6 @@ public class AndroidListViewActivity extends ListActivity {
 	              }; 
 	              break;
 	              case 3: videos(); break;
-	              case 4: checkGCM(); break;
-	              case 5: UnRegisterGCM(); break;
 	              }
               }
             	 
@@ -215,26 +203,7 @@ public class AndroidListViewActivity extends ListActivity {
 		Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startActivityForResult(i, RESULT_LOAD_IMAGE);
 	}
-	
-	private void captureImage() {
-		Intent myIntent = new Intent(getApplicationContext(), AndroidYoutube.class);
-    	startActivityForResult(myIntent, 0);	
-	}
-	 	
 
-	private void checkGCM(){
-		System.out.println("check CGM");
-		
-		Intent myIntent = new Intent(getApplicationContext(), DemoActivity.class);
-    	startActivityForResult(myIntent, 0);	
-		
-	}
-	
-	private void UnRegisterGCM(){
-		System.out.println("Unregister GCM");
-		Intent myIntent = new Intent(getApplicationContext(), UnregisterActivity.class);
-    	startActivityForResult(myIntent, 0);
-	}
 	
 	private void videos(){
 		System.out.println("Videos");
@@ -268,9 +237,8 @@ public class AndroidListViewActivity extends ListActivity {
 				//Implementation send request post to 
 				String IP = Connection.getInstance().getIp();
 				String URL = IP + "/upload_image";
-			    HttpResponse response = null;
 			    
-			    JSONObject json = new JSONObject();
+			    
 			    
 			    
 			    Bitmap bitmap = BitmapFactory.decodeFile(url);
@@ -286,7 +254,9 @@ public class AndroidListViewActivity extends ListActivity {
 				nameValuePairs.add(new BasicNameValuePair("image",image_str));
 				nameValuePairs.add(new BasicNameValuePair("username",username));
 				
-				json = makeRequest(URL, nameValuePairs);			    
+				JSONObject json = new JSONObject();
+				json = makeRequest(URL, nameValuePairs);		    
+				System.out.println(json);
 				
 				return null;
 			}

@@ -431,7 +431,7 @@ public class RegisterActivity extends Activity{
     private SharedPreferences getGCMPreferences(Context context) {
         // This sample app persists the registration ID in shared preferences, but
         // how you store the regID in your app is up to you.
-        return getSharedPreferences(DemoActivity.class.getSimpleName(),
+        return getSharedPreferences(DashboardActivity.class.getSimpleName(),
                 Context.MODE_PRIVATE);
     }
 	

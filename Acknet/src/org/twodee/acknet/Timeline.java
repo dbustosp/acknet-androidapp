@@ -45,6 +45,7 @@ public class Timeline extends Activity{
     LazyAdapter adapter;
 	
 	ArrayList<HashMap<String, String>> storyList;
+	ArrayList<String> story_keys;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +70,10 @@ public class Timeline extends Activity{
 				intent.putExtra("body", storyList.get(position).get("body"));
 				intent.putExtra("url", storyList.get(position).get("url"));
 				intent.putExtra("type", storyList.get(position).get("type"));
-				
 				intent.putExtra("lat", storyList.get(position).get("lat"));
 				intent.putExtra("lon", storyList.get(position).get("lon"));
 				intent.putExtra("alt", storyList.get(position).get("alt"));
-				
+				intent.putExtra("key", storyList.get(position).get("key"));
 				startActivity(intent);
 			}
 			
@@ -113,11 +113,10 @@ public class Timeline extends Activity{
 			        		jsonPosts = response_json.getJSONArray("stories");
 			        		for(int i=0;i<jsonPosts.length();i++){
 			        			HashMap<String, String> map = new HashMap<String, String>();
+			        			story_keys = new ArrayList();
 			        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
-			        			
-			        			System.out.println(childJSONObject);
-			        			
-			        			
+			        						        			
+			        			// Get fields
 			        			String body = childJSONObject.getString("body");
 			        			String username = childJSONObject.getString("username");
 			        			String date = childJSONObject.getString("date");
@@ -130,11 +129,18 @@ public class Timeline extends Activity{
 			        			String lon = geolocation.getString("lon");
 			        			String alt  = geolocation.getString("alt");
 			        			
+			        			// Get keys
+			        			String key = childJSONObject.getString("_id");
+			        			story_keys.add(key);
+			        			
+			   
+			        			
 			        			System.out.println(body);
 			        			System.out.println(username);
 			        			System.out.println(date);
 			        			System.out.println(type);
 			        			System.out.println(url);
+			        			System.out.println(key);
 			        			
 			        					        			
 			        			
@@ -150,7 +156,7 @@ public class Timeline extends Activity{
 			        			map.put("lat", lat);
 			        			map.put("lon", lon);
 			        			map.put("alt", alt);
-			        			
+			        			map.put("key", key);			        			
 			        			//map.put("link", )
 			        			// adding HashList to ArrayList
 			        			storyList.add(map);

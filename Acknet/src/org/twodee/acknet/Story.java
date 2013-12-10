@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +38,7 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 	String lon;
 	String alt;
 	String body;
+	String key_comment;
 	TextView txtView_username;
 	TextView txtView_body;
 	
@@ -54,6 +58,20 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 		
 		System.out.println("onCreate -- Story");
 		
+		//TextView
+	    final TextView see_comments = (TextView) findViewById(R.id.see_comments);
+	    // Listener for see comments
+	    see_comments.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				
+				Intent comments_intent = new Intent(getApplicationContext(), Comments.class);
+				startActivityForResult(comments_intent, 0);
+			
+			}
+	    });
+	    
 		//get Data from Intent
 		Bundle extras = getIntent().getExtras(); 		
 		username = extras.getString("username");
@@ -64,6 +82,7 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 		lon = extras.getString("lon");
 		alt = extras.getString("alt");
 		body = extras.getString("body");
+		key_comment = extras.getString("key");
 
 		if(type.equals("image")){
 			// Post image
@@ -76,6 +95,12 @@ public class Story extends YouTubeBaseActivity implements YouTubePlayer.OnInitia
 			// Post only text
 			setInformationText();
 		}
+		
+		
+		
+		
+		
+		
 	}
 	
 	private void setInformationText(){
