@@ -45,7 +45,6 @@ public class Timeline extends Activity{
     LazyAdapter adapter;
 	
 	ArrayList<HashMap<String, String>> storyList;
-	ArrayList<String> story_keys;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +112,6 @@ public class Timeline extends Activity{
 			        		jsonPosts = response_json.getJSONArray("stories");
 			        		for(int i=0;i<jsonPosts.length();i++){
 			        			HashMap<String, String> map = new HashMap<String, String>();
-			        			story_keys = new ArrayList();
 			        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
 			        						        			
 			        			// Get fields
@@ -131,7 +129,6 @@ public class Timeline extends Activity{
 			        			
 			        			// Get keys
 			        			String key = childJSONObject.getString("_id");
-			        			story_keys.add(key);
 			        			
 			   
 			        			
