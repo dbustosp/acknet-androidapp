@@ -1,5 +1,10 @@
 package org.twodee.acknet;
 
-public class Notification {
+import java.util.Date;
 
+public class Notification {
+	
+	String message;
+	Date date;
+	
 }
