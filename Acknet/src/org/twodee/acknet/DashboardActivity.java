@@ -67,7 +67,7 @@ public class DashboardActivity extends Activity{
         Button btn_friends = (Button) findViewById(R.id.btn_friends);
          
         // Dashboard Messages button
-        Button btn_messages = (Button) findViewById(R.id.btn_messages);
+        Button btn_notifications = (Button) findViewById(R.id.btn_notifications);
          
         // Dashboard Places button
         Button btn_posts = (Button) findViewById(R.id.btn_posts);
@@ -107,12 +107,12 @@ public class DashboardActivity extends Activity{
        
        
         // Listening Messages button click
-        btn_messages.setOnClickListener(new View.OnClickListener() {
+        btn_notifications.setOnClickListener(new View.OnClickListener() {
              
             @Override
             public void onClick(View view) {
                 // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), MessagesActivity.class);
+                Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
                 startActivity(i);
             }
         });

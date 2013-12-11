@@ -20,10 +20,10 @@
      
     <!--  Messages Button -->
     <Button
-        android:id="@+id/btn_messages"
+        android:id="@+id/btn_notifications"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_messages"
-        android:text="@string/messages" />
+        android:text="@string/notifications" />
      
     <!--  Places Button -->
     <Button

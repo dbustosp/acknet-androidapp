@@ -102,7 +102,7 @@
         <activity android:name="org.twodee.acknet.NewsFeedActivity" ></activity>
         <activity android:name="org.twodee.acknet.FriendsActivity" ></activity>
         <activity android:name="org.twodee.acknet.PostActivity" ></activity>
-        <activity android:name="org.twodee.acknet.MessagesActivity" ></activity>
+        <activity android:name="org.twodee.acknet.NotificationActivity" ></activity>
         <activity android:name="org.twodee.acknet.PhotosActivity" ></activity>
         <activity android:name="org.twodee.acknet.AndroidListViewActivity" ></activity>
         <activity android:name="org.twodee.acknet.SingleListItem"
