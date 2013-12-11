@@ -50,13 +50,7 @@ public class Comments extends Activity {
 		
 		// ListView que ser‡ renderizado
 		list_comments = (ListView) findViewById(R.id.list);		
-		loadComments();
-		
-		
-		
-		
-		
-		
+		loadComments();	
 	}
 	
 	public void loadComments(){

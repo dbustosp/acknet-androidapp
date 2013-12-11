@@ -214,12 +214,12 @@ public class DashboardActivity extends Activity{
 				editor.remove(PROPERTY_APP_VERSION);
 		        editor.commit();
 		        System.out.println("Parameters in Shared preference reseted");
-				Intent i = new Intent(getApplicationContext(), SplashScreen.class);
-                startActivity(i);
+				
+		        
+		        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+		        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities        	
+		        startActivity(i);
 			}
-			
-			
-			
 		}.execute();
 	}
 	

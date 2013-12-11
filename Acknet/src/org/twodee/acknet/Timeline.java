@@ -8,9 +8,13 @@ import java.util.HashMap;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,12 +24,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 import com.cs491.acknet.R;
 
@@ -90,108 +97,149 @@ public class Timeline extends Activity{
 			protected HttpResponse doInBackground(Void... params) {
 				storyList = new ArrayList<HashMap<String, String>>();
 				//Get Post from get request
-				HttpClient httpclient = new DefaultHttpClient();
+				DefaultHttpClient httpclient = new DefaultHttpClient();
 			    HttpResponse response = null;
 			    
-			    try{
-			    	
-			    	response = httpclient.execute(new HttpGet(URL));
-			    	StatusLine statusLine = response.getStatusLine();
-			    	
-			    	if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-			    		ByteArrayOutputStream out = new ByteArrayOutputStream();
-						response.getEntity().writeTo(out);
-						out.close();
-						String responseString = out.toString();
-						
-						JSONObject response_json = new JSONObject(responseString);
-						Boolean status = response_json.getBoolean("success");
-						
-						if(status){
-							jsonPosts = new JSONArray();
-			        		jsonPosts = response_json.getJSONArray("stories");
-			        		for(int i=0;i<jsonPosts.length();i++){
-			        			HashMap<String, String> map = new HashMap<String, String>();
-			        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
-			        						        			
-			        			// Get fields
-			        			String body = childJSONObject.getString("body");
-			        			String username = childJSONObject.getString("username");
-			        			String date = childJSONObject.getString("date");
-			        			JSONObject attachment = childJSONObject.getJSONObject("attachment");
-			        			String type = attachment.getString("type");
-			        			String url = attachment.getString("url");
-			        			
-			        			JSONObject geolocation = childJSONObject.getJSONObject("geolocation");
-			        			String lat = geolocation.getString("lat");
-			        			String lon = geolocation.getString("lon");
-			        			String alt  = geolocation.getString("alt");
-			        			
-			        			// Get keys
-			        			String key = childJSONObject.getString("_id");
-			        			
+			    CredentialsProvider credProvider = new BasicCredentialsProvider();
 			   
-			        			
-			        			System.out.println(body);
-			        			System.out.println(username);
-			        			System.out.println(date);
-			        			System.out.println(type);
-			        			System.out.println(url);
-			        			System.out.println(key);
-			        			
-			        					        			
-			        			
-			        			System.out.println();
-			        			
-			        			
-			        			map.put(KEY_BODY, body);
-			        			map.put(KEY_USERNAME, username);
-			        			map.put(KEY_DATE, date);
-			        			map.put("date", date);
-			        			map.put("type", type);
-			        			map.put("url", url);
-			        			map.put("lat", lat);
-			        			map.put("lon", lon);
-			        			map.put("alt", alt);
-			        			map.put("key", key);			        			
-			        			//map.put("link", )
-			        			// adding HashList to ArrayList
-			        			storyList.add(map);
-			        		}
-			        			        		
-			        		adapter = new LazyAdapter(Timeline.this, storyList);
-			        		
-			        		runOnUiThread(new Runnable() {
-			        		     public void run() {			        		
-			        		    	list.setAdapter(adapter);
-			        		    }
-			        		});
+			    
+			    SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+			    String user = SP.getString("username", "");
+			    String token = SP.getString("token", "");
+			    
+			    if(!(user.equals("")) && (!token.equals(""))){
+				    // Set headers for auth
+				    credProvider.setCredentials(
+				    		new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
+				    		new UsernamePasswordCredentials(user, token)
+				    );
+				    httpclient.setCredentialsProvider(credProvider);
+			    
+				    
+				    try{
+				    	
+				    	HttpGet connection_get = new HttpGet(URL);			    				    	
+				    	response = httpclient.execute(connection_get);
+				    	StatusLine statusLine = response.getStatusLine();
+				    	
+				    	if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+				    		ByteArrayOutputStream out = new ByteArrayOutputStream();
+							response.getEntity().writeTo(out);
+							out.close();
+							String responseString = out.toString();
+							
+							JSONObject response_json = new JSONObject(responseString);
+							Boolean status = response_json.getBoolean("success");
+							
+							if(status){
+								jsonPosts = new JSONArray();
+				        		jsonPosts = response_json.getJSONArray("stories");
+				        		for(int i=0;i<jsonPosts.length();i++){
+				        			HashMap<String, String> map = new HashMap<String, String>();
+				        			JSONObject childJSONObject = jsonPosts.getJSONObject(i);
+				        						        			
+				        			// Get fields
+				        			String body = childJSONObject.getString("body");
+				        			String username = childJSONObject.getString("username");
+				        			String date = childJSONObject.getString("date");
+				        			JSONObject attachment = childJSONObject.getJSONObject("attachment");
+				        			String type = attachment.getString("type");
+				        			String url = attachment.getString("url");
+				        			
+				        			JSONObject geolocation = childJSONObject.getJSONObject("geolocation");
+				        			String lat = geolocation.getString("lat");
+				        			String lon = geolocation.getString("lon");
+				        			String alt  = geolocation.getString("alt");
+				        			
+				        			// Get keys
+				        			String key = childJSONObject.getString("_id");
+				        			
+				   
+				        			
+				        			System.out.println(body);
+				        			System.out.println(username);
+				        			System.out.println(date);
+				        			System.out.println(type);
+				        			System.out.println(url);
+				        			System.out.println(key);
+				        			
+				        					        			
+				        			
+				        			System.out.println();
+				        			
+				        			
+				        			map.put(KEY_BODY, body);
+				        			map.put(KEY_USERNAME, username);
+				        			map.put(KEY_DATE, date);
+				        			map.put("date", date);
+				        			map.put("type", type);
+				        			map.put("url", url);
+				        			map.put("lat", lat);
+				        			map.put("lon", lon);
+				        			map.put("alt", alt);
+				        			map.put("key", key);			        			
+				        			//map.put("link", )
+				        			// adding HashList to ArrayList
+				        			storyList.add(map);
+				        		}
+				        			        		
+				        		adapter = new LazyAdapter(Timeline.this, storyList);
+				        		
+				        		runOnUiThread(new Runnable() {
+				        		     public void run() {			        		
+				        		    	list.setAdapter(adapter);
+				        		    }
+				        		});
 
-						}else{
-							AlertDialog.Builder builder = new AlertDialog.Builder(Timeline.this);
-					        builder.setTitle("success: FALSE!")
-					        .setMessage("Show message here :) ")
-					        .setCancelable(false)
-					        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
-					            public void onClick(DialogInterface dialog, int id) {
-					                dialog.cancel();
-					            }
-					        });
-					        AlertDialog alert = builder.create();
-					        alert.show();	
-						}
-			    	}	
-			    }catch (ClientProtocolException e) {
-					System.out.println("ClientProtocolException");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("IOException");
-					e.printStackTrace();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					System.out.println("JSONException");
-					e.printStackTrace();
-				}
+							}else{
+								AlertDialog.Builder builder = new AlertDialog.Builder(Timeline.this);
+						        builder.setTitle("success: FALSE!")
+						        .setMessage("Show message here :) ")
+						        .setCancelable(false)
+						        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+						            public void onClick(DialogInterface dialog, int id) {
+						                dialog.cancel();
+						            }
+						        });
+						        AlertDialog alert = builder.create();
+						        alert.show();	
+							}
+				    	}	
+				    }catch (ClientProtocolException e) {
+						System.out.println("ClientProtocolException");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("IOException");
+						e.printStackTrace();
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						System.out.println("JSONException");
+						e.printStackTrace();
+					}
+				    
+			    
+			    }else{
+			    	// Alert registrarion wrong
+					final AlertDialog.Builder builder = new AlertDialog.Builder(Timeline.this);
+			        builder.setTitle("I am sorry, you are not a logged user.")
+			        .setMessage("Try again! :) ")
+			        .setCancelable(false)
+			        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int id) {
+			                dialog.cancel();
+			            }
+			        });
+			        runOnUiThread(new Runnable() {
+	        		     public void run() {
+	        		    	AlertDialog alert = builder.create();
+	     			        alert.show();
+	        		    }
+	        		});
+			        
+			    
+			    }
+			    
+
 			    
 				return null;
 			}
