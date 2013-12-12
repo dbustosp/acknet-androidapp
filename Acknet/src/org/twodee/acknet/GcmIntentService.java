@@ -1,21 +1,19 @@
 package org.twodee.acknet;
 
 import org.apache.http.HttpResponse;
+import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
-import com.cs491.acknet.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class GcmIntentService extends IntentService {
@@ -23,6 +21,8 @@ public class GcmIntentService extends IntentService {
 	public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
+    
+    public String URL = Connection.getInstance().getIp() + "/notification";
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -63,10 +63,18 @@ public class GcmIntentService extends IntentService {
 		
 		if(type.equals("0")){
 			String username = extras.getString("username");
-			System.out.println("type: " + type + "   username: " + username);  
+	    	String message =  "User " + username + " has been registered in ACKNET.";
+    		
+	    	//handle_get_request();
+    		
+    		System.out.println(message); 
     		sendNotification(username);
 		}	
 	}
+	
+
+	
+	
 	
 	// Put the message into a notification and post it.
     // This is just one simple example of what you might choose to do with

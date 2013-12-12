@@ -2,23 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f8f9fe"
     android:orientation="vertical" >
-
-    <include layout="@layout/actionbar_layout" />
-
-    <LinearLayout
+	 
+	<ListView
+        android:id="@+id/list_notifications"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dip"
-            android:text="Messages Screen"
-            android:textColor="#ff29549f"
-            android:textSize="25dip"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+        android:layout_height="wrap_content"
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector" />
+    
 </LinearLayout>
+
