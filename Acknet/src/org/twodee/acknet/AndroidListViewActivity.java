@@ -41,10 +41,6 @@ import com.cs491.acknet.R;
 
 @SuppressLint({ "NewApi", "SimpleDateFormat" })
 public class AndroidListViewActivity extends ListActivity {
-	private static final int RESULT_LOAD_IMAGE = 1;
-	 private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-	    public static final int MEDIA_TYPE_IMAGE = 1;
-	    public static final int MEDIA_TYPE_VIDEO = 2;
 	    Uri picUri;
 	    String imgPath;
 	    ImageView imgUser;
@@ -80,9 +76,7 @@ public class AndroidListViewActivity extends ListActivity {
     }
 	
 	public void chooseLanguage(){
-		
+		Intent myIntent = new Intent(getApplicationContext(), ChangelanguageActivity.class);
+    	startActivityForResult(myIntent, 0);			
 	}
-	
-	
-	
 }

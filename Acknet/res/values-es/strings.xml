@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ACKNET Project</string>
+    <string name="spinner_title">Seleccione lenguage</string>
+    <string name="category">Categoría</string>
+    
+    <string name="choose_your_language">Escoja su lenguaje.</string>
+    
+    
+    
+    <!-- Dashboard -->
+    <string name="string_timeline">Línea de tiempo</string>
+    <string name="settings">Configuración</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="write_post">Escribe una historia</string>
+    <string name="logout">Salir</string>
+    <string name="friends">Amigos</string>
+    
+</resources>

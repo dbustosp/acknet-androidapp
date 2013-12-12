@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	
+	<!-- Dashboard -->
+    <string name="string_timeline">Línea de tiempo</string>
+    <string name="settings">Settings</string>
+    <string name="notifications">Notifications</string>
+    <string name="write_post">Write a story</string>
+    <string name="logout">Logout</string>
+    <string name="friends">Friends</string>
+    
+	
+	
+	<string name="app_name">ACKNET Project</string>
+    <string name="spinner_title">Select language</string>
+    
+    
+    <string name="choose_your_language">Choose your language</string>
+    <string name="category">Category</string>
+    
+    
     
     
     <string name="app_name">Acknet</string>
@@ -23,18 +41,18 @@
     <string name="playing">are playing right now</string>
     <string name="earned">earned</string>
     <string name="text_true">true</string>
-    <string name="new_feed">Timeline</string>
-    <string name="notifications">Notifications</string>
-    <string name="places">Write a Post</string>
+    
+    
     <string name="events">Events</string> 
-    <string name="photos">Photos</string>
-	<string name="friends">Friends</string>
+    
+	
 	<string name="url_acknet">www.acknet.com</string>
 	<string name="logIn">Log In</string>
 	<string name="register">Register</string>
 	<string name="email">Email</string>
+	<string name="spinner_title">spinner_title</string>
 	
-	<string name="logout">Logout</string>
+	
 	
 	
 	<string name="writeStory">Write your story</string>

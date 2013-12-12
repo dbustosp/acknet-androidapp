@@ -9,7 +9,7 @@
         android:id="@+id/btn_news_feed"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_newsfeed"
-        android:text="@string/new_feed" />
+        android:text="@string/string_timeline" />
      
     <!--  Friends Button -->
     <Button
@@ -30,7 +30,7 @@
         android:id="@+id/btn_posts"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_places"
-        android:text="@string/places" />
+        android:text="@string/write_post" />
  
     <!--  Events Button -->
     <Button
@@ -44,6 +44,6 @@
         android:id="@+id/btn_settings"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_photos"
-        android:text="@string/photos" />
+        android:text="@string/settings" />
  
 </org.twodee.acknet.DashboardLayout>
