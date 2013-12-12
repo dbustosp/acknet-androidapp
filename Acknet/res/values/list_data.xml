@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="adobe_products">
-        <item>View pictures</item>
-        <item>Send picture from gallery </item>
-        <item>Take picture and send it</item>
-        <item>Videos</item>
-        <item>GCM Register</item>
-        <item>GCM UnRegister</item>
+    <string-array name="options_settings">
+        <item>Change language</item>
     </string-array>
 </resources>

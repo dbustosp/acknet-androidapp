@@ -154,20 +154,6 @@ public class Timeline extends Activity{
 				        			// Get keys
 				        			String key = childJSONObject.getString("_id");
 				        			
-				   
-				        			
-				        			System.out.println(body);
-				        			System.out.println(username);
-				        			System.out.println(date);
-				        			System.out.println(type);
-				        			System.out.println(url);
-				        			System.out.println(key);
-				        			
-				        					        			
-				        			
-				        			System.out.println();
-				        			
-				        			
 				        			map.put(KEY_BODY, body);
 				        			map.put(KEY_USERNAME, username);
 				        			map.put(KEY_DATE, date);

@@ -41,7 +41,7 @@
  
     <!--  Photos Button -->
     <Button
-        android:id="@+id/btn_photos"
+        android:id="@+id/btn_settings"
         style="@style/DashboardButton"
         android:drawableTop="@drawable/btn_photos"
         android:text="@string/photos" />

@@ -60,16 +60,26 @@ public class NotificationActivity extends Activity {
 				JSONArray jsonNotifications = new JSONArray();
 				try {
 					jsonNotifications = response_json.getJSONArray("notifications");
+					
+					System.out.println(response_json);
+					System.out.println();
+					System.out.println();
+					System.out.println(jsonNotifications.length());
+					
+					
+					
 					for(int i=0;i<jsonNotifications.length();i++){
+						
 						HashMap<String, String> map = new HashMap<String, String>();
 	        			JSONObject childJSONObject = jsonNotifications.getJSONObject(i);
 						
+	        			System.out.println("Child:");
 	        			System.out.println(childJSONObject);
 	        			
 	        			
 	        			map.put("body", childJSONObject.getString("message"));
 						map.put("date", childJSONObject.getString("date"));
-						map.put("username", Integer.toString(i++));
+						map.put("username", Integer.toString(i+1));
 						notificationsList.add(map);
 					}
 					

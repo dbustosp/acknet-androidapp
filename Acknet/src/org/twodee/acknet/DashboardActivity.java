@@ -76,7 +76,7 @@ public class DashboardActivity extends Activity{
         Button btn_events = (Button) findViewById(R.id.btn_events);
          
         // Dashboard Photos button
-        Button btn_photos = (Button) findViewById(R.id.btn_photos);
+        Button btn_settings = (Button) findViewById(R.id.btn_settings);
          
         /**
          * Handling all button click events
@@ -141,7 +141,7 @@ public class DashboardActivity extends Activity{
         });
          
         // Listening to Photos button click
-        btn_photos.setOnClickListener(new View.OnClickListener() {
+        btn_settings.setOnClickListener(new View.OnClickListener() {
              
             @Override
             public void onClick(View view) {

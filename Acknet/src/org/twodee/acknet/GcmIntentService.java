@@ -1,6 +1,7 @@
 package org.twodee.acknet;
 
 import org.apache.http.HttpResponse;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.IntentService;
@@ -65,11 +66,41 @@ public class GcmIntentService extends IntentService {
 			String username = extras.getString("username");
 	    	String message =  "User " + username + " has been registered in ACKNET.";
     		
-	    	//handle_get_request();
+	    	handle_post_request(message);
     		
     		System.out.println(message); 
     		sendNotification(username);
 		}	
+	}
+	
+	public void handle_post_request (final String message){
+			
+			new AsyncTask<Void, Void, HttpResponse>() {
+
+				@Override
+				protected HttpResponse doInBackground(Void... params) {
+					
+					SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+				    String user = SP.getString("username", "");
+				    String token = SP.getString("token", "");
+				    
+				    JSONObject response_json = new JSONObject();
+				    try {
+						response_json.put("message", message);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					response_json = Connection.getInstance().make_post_request(user, token, URL,response_json);
+					
+					
+					
+					return null;
+				}
+				
+				
+				
+			}.execute();
 	}
 	
 

@@ -9,7 +9,7 @@ package com.cs491.acknet;
 
 public final class R {
     public static final class array {
-        public static final int adobe_products=0x7f0a0000;
+        public static final int options_settings=0x7f0a0000;
     }
     public static final class attr {
         /** 
@@ -274,9 +274,9 @@ containing a value of this type.
         public static final int btn_library=0x7f060023;
         public static final int btn_news_feed=0x7f06001d;
         public static final int btn_notifications=0x7f06001f;
-        public static final int btn_photos=0x7f060022;
         public static final int btn_posts=0x7f060020;
         public static final int btn_sendComment=0x7f06003a;
+        public static final int btn_settings=0x7f060022;
         public static final int btn_video=0x7f060025;
         public static final int comment=0x7f060039;
         public static final int date=0x7f06002e;
