@@ -3,11 +3,8 @@ package org.twodee.acknet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.http.HttpResponse;
-
 import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +55,10 @@ public class LazyAdapter extends BaseAdapter{
         song = data.get(position);
         
         // Setting all values in listview
-        title.setText(song.get(Timeline.KEY_BODY));
-        date.setText(song.get(Timeline.KEY_DATE));
-        username.setText(song.get(Timeline.KEY_USERNAME));
-        imageLoader.DisplayImage(song.get(Timeline.KEY_THUMB_URL), thumb_image);
+        title.setText(song.get(TimelineActivity.KEY_BODY));
+        date.setText(song.get(TimelineActivity.KEY_DATE));
+        username.setText(song.get(TimelineActivity.KEY_USERNAME));
+        imageLoader.DisplayImage(song.get(TimelineActivity.KEY_THUMB_URL), thumb_image);
         return vi;
     }
 

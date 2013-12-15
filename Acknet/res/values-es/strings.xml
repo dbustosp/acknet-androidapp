@@ -29,8 +29,12 @@
     <string name="you_need_username_to_register_and_password">Usted necesita un username y contraseña para registrar.</string>
     
     <string name="impossible_connect_to_server">Lo siento, es imposible conectar al servidor..</string>
-    <string name="error_in_connection">Hubo un error en la conección.</string>
+    <string name="error_in_connection">Hubo un error en la conexión.</string>
     
+    <!-- Timeline -->
+    <string name="example_body_story">Ejemplo de historia.</string>
+    <string name="example_username">Ejemplo de username.</string>
+    <string name="example_date">06/15/2013</string>
     
     
     

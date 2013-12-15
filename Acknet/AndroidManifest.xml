@@ -85,7 +85,7 @@
 		     </intent-filter>
 		</activity>
 		
-         <activity  android:name="org.twodee.acknet.Timeline">
+         <activity  android:name="org.twodee.acknet.TimelineActivity">
 		     <intent-filter>
 		        <action android:name="android.intent.action.TIMELINE" />                   
 		     </intent-filter>

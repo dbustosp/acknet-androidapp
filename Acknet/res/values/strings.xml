@@ -15,7 +15,12 @@
     <string name="email">Email</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    
 	
+    <!-- Timeline -->
+    <string name="example_body_story">Example body story.</string>
+	<string name="example_username">Example username.</string>
+    <string name="example_date">06/15/2013</string>
 	
     <!-- Alerts -->
     <string name="miss_parameters">You should put all the parameters.</string>

@@ -88,7 +88,7 @@ public class DashboardActivity extends Activity{
             @Override
             public void onClick(View view) {
                 // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), Timeline.class);
+                Intent i = new Intent(getApplicationContext(), TimelineActivity.class);
                 startActivity(i);
             }
         });

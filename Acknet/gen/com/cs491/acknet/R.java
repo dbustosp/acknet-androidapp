@@ -335,37 +335,37 @@ containing a value of this type.
         public static final int activity_notifications=0x7f030005;
         public static final int activity_register=0x7f030006;
         public static final int activity_splash=0x7f030007;
-        public static final int dashboard_layout=0x7f030008;
-        public static final int footer_layout=0x7f030009;
-        public static final int fragment_layout=0x7f03000a;
-        public static final int friends_layout=0x7f03000b;
-        public static final int layout_posts=0x7f03000c;
-        public static final int list_item=0x7f03000d;
-        public static final int list_row=0x7f03000e;
-        public static final int news_feed_layout=0x7f03000f;
-        public static final int photos_layout=0x7f030010;
-        public static final int single_list_item_view=0x7f030011;
-        public static final int story=0x7f030012;
-        public static final int timeline=0x7f030013;
+        public static final int activity_timeline=0x7f030008;
+        public static final int dashboard_layout=0x7f030009;
+        public static final int footer_layout=0x7f03000a;
+        public static final int fragment_layout=0x7f03000b;
+        public static final int friends_layout=0x7f03000c;
+        public static final int layout_posts=0x7f03000d;
+        public static final int list_item=0x7f03000e;
+        public static final int list_row=0x7f03000f;
+        public static final int news_feed_layout=0x7f030010;
+        public static final int photos_layout=0x7f030011;
+        public static final int single_list_item_view=0x7f030012;
+        public static final int story=0x7f030013;
         public static final int youtube_player_view=0x7f030014;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
     }
     public static final class string {
-        public static final int action_check_updates=0x7f070047;
-        public static final int action_contacts=0x7f070045;
-        public static final int action_help=0x7f070046;
-        public static final int action_location_found=0x7f070043;
-        public static final int action_refresh=0x7f070044;
+        public static final int action_check_updates=0x7f07004a;
+        public static final int action_contacts=0x7f070048;
+        public static final int action_help=0x7f070049;
+        public static final int action_location_found=0x7f070046;
+        public static final int action_refresh=0x7f070047;
         /**  Action Bar action items 
          */
-        public static final int action_search=0x7f070042;
-        public static final int action_settings=0x7f07002e;
+        public static final int action_search=0x7f070045;
+        public static final int action_settings=0x7f070031;
         /**  Activity titles 
          */
-        public static final int activity_location_found=0x7f070041;
-        public static final int app_name=0x7f07002a;
+        public static final int activity_location_found=0x7f070044;
+        public static final int app_name=0x7f07002d;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -389,8 +389,8 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f070014;
-        public static final int category=0x7f07002d;
-        public static final int choose_your_language=0x7f07002c;
+        public static final int category=0x7f070030;
+        public static final int choose_your_language=0x7f07002f;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -462,53 +462,59 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070013;
-        public static final int desc=0x7f070036;
-        public static final int earned=0x7f07003b;
+        public static final int desc=0x7f070039;
+        public static final int earned=0x7f07003e;
         public static final int email=0x7f070022;
-        public static final int error_in_connection=0x7f070029;
-        public static final int events=0x7f07003d;
+        public static final int error_in_connection=0x7f07002c;
+        public static final int events=0x7f070040;
+        /**  Timeline 
+ Timeline 
+         */
+        public static final int example_body_story=0x7f070025;
+        public static final int example_date=0x7f070027;
+        public static final int example_username=0x7f070026;
         public static final int friends=0x7f07001f;
-        public static final int go_camera=0x7f070037;
-        public static final int haveAccount=0x7f070032;
-        public static final int hello_world=0x7f07002f;
-        public static final int hint_=0x7f070039;
-        public static final int impossible_connect_to_server=0x7f070028;
-        public static final int load=0x7f070035;
-        public static final int logIn=0x7f07003f;
+        public static final int go_camera=0x7f07003a;
+        public static final int haveAccount=0x7f070035;
+        public static final int hello_world=0x7f070032;
+        public static final int hint_=0x7f07003c;
+        public static final int impossible_connect_to_server=0x7f07002b;
+        public static final int load=0x7f070038;
+        public static final int logIn=0x7f070042;
         public static final int login=0x7f070024;
-        public static final int login_2=0x7f070033;
+        public static final int login_2=0x7f070036;
         public static final int logout=0x7f07001e;
         /**  Alerts 
  Alerts 
          */
-        public static final int miss_parameters=0x7f070025;
-        public static final int newString=0x7f070031;
+        public static final int miss_parameters=0x7f070028;
+        public static final int newString=0x7f070034;
         public static final int notifications=0x7f07001c;
         public static final int password=0x7f070021;
-        public static final int pick_photo=0x7f070038;
-        public static final int playing=0x7f07003a;
-        public static final int post=0x7f070034;
+        public static final int pick_photo=0x7f07003b;
+        public static final int playing=0x7f07003d;
+        public static final int post=0x7f070037;
         public static final int register=0x7f070023;
         /**  Search  
          */
-        public static final int search_hint=0x7f070048;
+        public static final int search_hint=0x7f07004b;
         public static final int settings=0x7f07001b;
-        public static final int signup=0x7f070030;
-        public static final int spinner_title=0x7f07002b;
+        public static final int signup=0x7f070033;
+        public static final int spinner_title=0x7f07002e;
         /**  Dashboard 
  Dashboard 
          */
         public static final int string_timeline=0x7f07001a;
-        public static final int text_true=0x7f07003c;
-        public static final int url_acknet=0x7f07003e;
+        public static final int text_true=0x7f07003f;
+        public static final int url_acknet=0x7f070041;
         /**  Register Activity 
  Register Activity 
          */
         public static final int username=0x7f070020;
-        public static final int writeStory=0x7f070040;
+        public static final int writeStory=0x7f070043;
         public static final int write_post=0x7f07001d;
-        public static final int you_need_username_to_register=0x7f070026;
-        public static final int you_need_username_to_register_and_password=0x7f070027;
+        public static final int you_need_username_to_register=0x7f070029;
+        public static final int you_need_username_to_register_and_password=0x7f07002a;
     }
     public static final class style {
         /**  Added 

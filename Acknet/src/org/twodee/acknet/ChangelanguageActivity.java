@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.cs491.acknet.R;
 
@@ -41,10 +40,11 @@ OnItemSelectedListener{
         
         // Spinner Drop down elements
         List<String> languages = new ArrayList<String>();
+        languages.add("Japanese");
         languages.add("English");
         languages.add("Spanish");
         languages.add("Portuguese");
-        languages.add("Japanese");
+        
         
      // Creating adapter for spinner
      ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languages);
@@ -67,10 +67,10 @@ OnItemSelectedListener{
 		if(check > 1){
 			System.out.println("Item seleccionado: " + position);
 			//String item = parent.getItemAtPosition(position).toString();
-			if(position == 0){
+			if(position == 1){
 				System.out.println("Clicking English");
 				setLocale("en");
-			}else if (position == 1){
+			}else if (position == 2){
 				System.out.println("Clicking Spanish");
 				setLocale("es");
 			}
