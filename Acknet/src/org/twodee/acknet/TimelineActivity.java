@@ -2,7 +2,10 @@ package org.twodee.acknet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
@@ -12,7 +15,6 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -20,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -28,7 +31,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -69,7 +71,6 @@ public class TimelineActivity extends Activity{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				System.out.println("Position: " + position);
 				Intent intent = new Intent(TimelineActivity.this, Story.class);
 				intent.putExtra("username", storyList.get(position).get("username") );
 				intent.putExtra("date", storyList.get(position).get("date") );
@@ -82,17 +83,15 @@ public class TimelineActivity extends Activity{
 				intent.putExtra("key_story", storyList.get(position).get("key"));
 				startActivity(intent);
 			}
-			
 		});
-		
-			
 	}
 	
-	
+	@SuppressLint("SimpleDateFormat")
 	public void loadStories(){
 		
 		new AsyncTask<Void, Void, HttpResponse>() {
 
+			@SuppressLint("SimpleDateFormat")
 			@Override
 			protected HttpResponse doInBackground(Void... params) {
 				storyList = new ArrayList<HashMap<String, String>>();
@@ -154,10 +153,17 @@ public class TimelineActivity extends Activity{
 				        			// Get keys
 				        			String key = childJSONObject.getString("_id");
 				        			
+				        			//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+				        			//Date date_ = formatter.parse(date);		
+				        			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+				        			SimpleDateFormat output = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd ");
+				        			Date d = sdf.parse(date);
+				        			String formattedTime = output.format(d);
+				        			
 				        			map.put(KEY_BODY, body);
 				        			map.put(KEY_USERNAME, username);
 				        			map.put(KEY_DATE, date);
-				        			map.put("date", date);
+				        			map.put("date", formattedTime);
 				        			map.put("type", type);
 				        			map.put("url", url);
 				        			map.put("lat", lat);
@@ -201,6 +207,9 @@ public class TimelineActivity extends Activity{
 						// TODO Auto-generated catch block
 						System.out.println("JSONException");
 						e.printStackTrace();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				    
 			    
@@ -221,12 +230,7 @@ public class TimelineActivity extends Activity{
 	     			        alert.show();
 	        		    }
 	        		});
-			        
-			    
-			    }
-			    
-
-			    
+			    }	    
 				return null;
 			}
 		}.execute();	
