@@ -16,4 +16,23 @@
     <string name="logout">Salir</string>
     <string name="friends">Amigos</string>
     
+    <!-- Register Activity -->
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="email">Correo electrónico</string>
+    <string name="register">Registrar</string>
+    <string name="login">Loguear</string>
+    
+    <!-- Alerts -->
+    <string name="miss_parameters">Debe proporcionar todos los parámetros.</string>
+    <string name="you_need_username_to_register">Usted necesita un usernam para registrar.</string>
+    <string name="you_need_username_to_register_and_password">Usted necesita un username y contraseña para registrar.</string>
+    
+    <string name="impossible_connect_to_server">Lo siento, es imposible conectar al servidor..</string>
+    <string name="error_in_connection">Hubo un error en la conección.</string>
+    
+    
+    
+    
+    
 </resources>

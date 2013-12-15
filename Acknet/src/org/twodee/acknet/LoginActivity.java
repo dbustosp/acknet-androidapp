@@ -25,7 +25,9 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -96,10 +98,6 @@ public class LoginActivity extends Activity {
 			}
 	    });
 	    
-	    
-	    
-	    
-	    
 	    login_username = (EditText)findViewById(R.id.username);
 	    login_password = (EditText)findViewById(R.id.password);
 	    	 
@@ -111,9 +109,6 @@ public class LoginActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				// TODO Auto-generated method stub
-				System.out.println("Click Login");
-				
 				username = login_username.getText().toString();
 			    password = login_password.getText().toString();
 				
@@ -121,11 +116,20 @@ public class LoginActivity extends Activity {
 				
 				// Check if email and password are not null
 				if(username.equals("") || password.equals("")){
-					System.out.println("||");
-					System.out.println("username" +  username);
-					
-					//FireMissilesDialogFragment dialog = new FireMissilesDialogFragment();
-					//dialog.show(getFragmentManager(), "missiles");
+					// Username null
+					AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+			        String message = getString(R.string.miss_parameters);
+					String you_need_username_to_register = getString(R.string.you_need_username_to_register_and_password);
+			        builder.setTitle(message)
+			        .setMessage(you_need_username_to_register)
+			        .setCancelable(false)
+			        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int id) {
+			                dialog.cancel();
+			            }
+			        });
+			        AlertDialog alert = builder.create();
+			        alert.show();					
 				}else{
 					// Check if is a real email
 					System.out.println("else ||");
@@ -142,6 +146,7 @@ public class LoginActivity extends Activity {
 				}
 			}
 	    });
+	    
 	}
 	
 	
@@ -300,11 +305,8 @@ public class LoginActivity extends Activity {
     private void sendRegistrationIdToBackend(String regid) {
         // Your implementation here.
     	String URL = Connection.getInstance().getIp() + "/registerDevice";
-    	HttpResponse response = null;
     	JSONObject json = new JSONObject();    	
     	SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-    	String username = SP.getString("token", this.username);
-
     	try {
 			json.put("regid", regid);
 			json.put("username", this.username);

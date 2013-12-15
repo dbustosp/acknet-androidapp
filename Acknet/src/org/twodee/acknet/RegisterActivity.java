@@ -92,8 +92,9 @@ public class RegisterActivity extends Activity{
 				if(username.equals("")){
 					// Username null
 					AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-			        builder.setTitle("Username is required")
-			        .setMessage("You need an username to register. Thanks. ")
+					String miss_username = getString(R.string.you_need_username_to_register);
+					builder.setTitle(miss_username)
+			        .setMessage(miss_username)
 			        .setCancelable(false)
 			        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int id) {
@@ -157,9 +158,6 @@ public class RegisterActivity extends Activity{
 			}
 		});
 	}
-	
-	
-	
 	
 	public void handle_post_request(final String user, final String token, final JSONObject json_put, final String URL ) {
 		
