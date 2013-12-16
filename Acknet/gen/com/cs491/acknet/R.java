@@ -260,8 +260,9 @@ containing a value of this type.
         public static final int textlines=0x7f02004d;
     }
     public static final class id {
-        public static final int action_settings=0x7f060037;
+        public static final int action_settings=0x7f060039;
         public static final int artist=0x7f060034;
+        public static final int body=0x7f060036;
         public static final int btnLogin=0x7f06000d;
         public static final int btn_camera=0x7f06002c;
         public static final int btn_events=0x7f060029;
@@ -275,6 +276,7 @@ containing a value of this type.
         public static final int btn_video=0x7f06002d;
         public static final int comment=0x7f060021;
         public static final int date=0x7f060035;
+        public static final int date_comment=0x7f060037;
         public static final int display=0x7f06000f;
         public static final int editText1=0x7f060016;
         public static final int editText2=0x7f060017;
@@ -298,7 +300,7 @@ containing a value of this type.
         public static final int normal=0x7f060001;
         public static final int password=0x7f06000c;
         public static final int pick_photo=0x7f060014;
-        public static final int product_label=0x7f060036;
+        public static final int product_label=0x7f060038;
         public static final int register=0x7f06000e;
         public static final int registerButton=0x7f060019;
         public static final int satellite=0x7f060002;
@@ -338,9 +340,10 @@ containing a value of this type.
         public static final int layout_posts=0x7f03000e;
         public static final int list_item=0x7f03000f;
         public static final int list_row=0x7f030010;
-        public static final int news_feed_layout=0x7f030011;
-        public static final int single_list_item_view=0x7f030012;
-        public static final int youtube_player_view=0x7f030013;
+        public static final int list_row_comment=0x7f030011;
+        public static final int news_feed_layout=0x7f030012;
+        public static final int single_list_item_view=0x7f030013;
+        public static final int youtube_player_view=0x7f030014;
     }
     public static final class menu {
         public static final int main=0x7f0c0000;
