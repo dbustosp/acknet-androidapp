@@ -111,7 +111,7 @@
         <activity android:name="org.twodee.acknet.DemoActivity" ></activity>
        <activity android:name="org.twodee.acknet.RegisterActivity" ></activity>
         
-        <activity android:name="org.twodee.acknet.Story" ></activity>
+        <activity android:name="org.twodee.acknet.StoryActivity" ></activity>
         <activity android:name="org.twodee.acknet.Comments" ></activity>
         <activity android:name="org.twodee.acknet.ChangelanguageActivity" ></activity>
 	

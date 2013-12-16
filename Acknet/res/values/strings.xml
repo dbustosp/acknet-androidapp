@@ -30,6 +30,13 @@
     <string name="impossible_connect_to_server">I am sorry, is impossible connect to server.</string>
     <string name="error_in_connection">Error in the connection.</string>
     
+    <!-- Story Activity -->
+    <string name="here_body_post">Here is the post body.</string>
+    <string name="post_your_comment_here">Post your comment here.</string>
+    <string name="send_comment">Send comment.</string>
+    <string name="see_all_comments">See all comments.</string>
+    
+    
 	<string name="app_name">ACKNET Project</string>
     <string name="spinner_title">Select language</string>
     

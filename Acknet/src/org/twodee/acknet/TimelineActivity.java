@@ -71,7 +71,7 @@ public class TimelineActivity extends Activity{
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				Intent intent = new Intent(TimelineActivity.this, Story.class);
+				Intent intent = new Intent(TimelineActivity.this, StoryActivity.class);
 				intent.putExtra("username", storyList.get(position).get("username") );
 				intent.putExtra("date", storyList.get(position).get("date") );
 				intent.putExtra("body", storyList.get(position).get("body"));
