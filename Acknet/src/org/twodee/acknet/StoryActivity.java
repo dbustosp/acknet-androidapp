@@ -135,7 +135,7 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		see_comments.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				Intent comments_intent = new Intent(getApplicationContext(), Comments.class);
+				Intent comments_intent = new Intent(getApplicationContext(), CommentsActivity.class);
 				comments_intent.putExtra("key_story", key_story );
 				startActivityForResult(comments_intent, 0);
 			}
@@ -180,7 +180,7 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 						.setCancelable(false)
 						.setNegativeButton("OK",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								Intent comments_intent = new Intent(getApplicationContext(), Comments.class);
+								Intent comments_intent = new Intent(getApplicationContext(), CommentsActivity.class);
 								comments_intent.putExtra("key_story", key_story );
 								startActivityForResult(comments_intent, 0);
 							}
