@@ -42,5 +42,8 @@
     <string name="send_comment">Enviar comentario.</string>
     <string name="see_all_comments">Ver todos los comentarios.</string>
     
+    <!-- List comments -->
+    <string name="remove_comment">Eliminar comentario.</string>
+    
     
 </resources>

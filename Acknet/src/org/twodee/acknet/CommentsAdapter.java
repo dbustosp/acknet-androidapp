@@ -51,10 +51,20 @@ public class CommentsAdapter extends BaseAdapter{
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
         
+        
         // Setting all values in listview
         body.setText(song.get(TimelineActivity.KEY_BODY));
         date.setText(song.get(TimelineActivity.KEY_DATE));
         username.setText(song.get(TimelineActivity.KEY_USERNAME));
+                
+        if(song.get("can_remove") == "false"){
+        	setRemoveTextLayerInvisible(vi);
+        }
+        
         return vi;
     }
+	public void setRemoveTextLayerInvisible(View vi){
+		TextView remove = (TextView) vi.findViewById(R.id.remove_comment_text);
+		remove.setVisibility(View.GONE);
+	}
 }

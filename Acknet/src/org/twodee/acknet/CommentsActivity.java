@@ -19,7 +19,10 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.cs491.acknet.R;
 
@@ -30,6 +33,8 @@ public class CommentsActivity extends Activity {
 	String key_story;
 	JSONArray jsonComments;
 	CommentsAdapter adapter;
+	String user;
+	String token;
 
 
 
@@ -47,10 +52,21 @@ public class CommentsActivity extends Activity {
 		String URL = Connection.getInstance().getIp() + "/comment/" + key_story;
 
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		String user = SP.getString("username", "null");
-		String token = SP.getString("token", "null");
+		user = SP.getString("username", "null");
+		token = SP.getString("token", "null");
 
 		loadComments(user, token, URL);	
+		
+		
+		// Add Listener List View
+		list_comments.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				
+				
+			}	
+		});
 	}
 
 	public void loadComments(final String user, final String token, final String URL){
@@ -81,6 +97,7 @@ public class CommentsActivity extends Activity {
 
 							// Get fields
 							String key_comment = childJSONObject.getString("_id");
+							System.out.println("key_comment: " + key_comment);
 							String body_comment = childJSONObject.getString("body");
 							String date_comment = childJSONObject.getString("date");
 							String username_comment = childJSONObject.getString("username");
@@ -94,9 +111,15 @@ public class CommentsActivity extends Activity {
 							map.put("body", body_comment);
 							map.put("date", formattedTime);
 							map.put("username", username_comment);
-
+							
+							System.out.println(user + " == " + username_comment + " ? " );
+							
+							if(user.equals(username_comment)){
+								map.put("can_remove", "true");
+							}else{
+								map.put("can_remove", "false");
+							}
 							commentsList.add(map);
-
 						}
 
 						adapter = new CommentsAdapter(CommentsActivity.this, commentsList);
