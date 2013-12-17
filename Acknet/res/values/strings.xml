@@ -21,6 +21,7 @@
     <string name="example_body_story">Example body story.</string>
 	<string name="example_username">Example username.</string>
     <string name="example_date">06/15/2013</string>
+    <string name="remove">Remove</string>
 	
     <!-- Alerts -->
     <string name="miss_parameters">You should put all the parameters.</string>
@@ -35,6 +36,7 @@
     <string name="post_your_comment_here">Post your comment here.</string>
     <string name="send_comment">Send comment.</string>
     <string name="see_all_comments">See all comments.</string>
+    <string name="remove_this_story">Remove this story.</string>
     
     
     <!-- List comments -->

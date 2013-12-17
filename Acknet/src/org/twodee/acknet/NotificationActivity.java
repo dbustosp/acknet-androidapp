@@ -23,7 +23,7 @@ import com.cs491.acknet.R;
 public class NotificationActivity extends Activity {
 	
 	ArrayList<HashMap<String, String>> notificationsList;
-	LazyAdapter adapter;
+	StoriesAdapter adapter;
 	ListView list;
 	Boolean is_not = false;
 	public String URL = Connection.getInstance().getIp() + "/notification";
@@ -83,7 +83,7 @@ public class NotificationActivity extends Activity {
 						notificationsList.add(map);
 					}
 					
-					adapter = new LazyAdapter(NotificationActivity.this, notificationsList);
+					adapter = new StoriesAdapter(NotificationActivity.this, notificationsList);
 	        		
 	        		runOnUiThread(new Runnable() {
 	        		     public void run() {			        		

@@ -51,7 +51,7 @@ public class TimelineActivity extends Activity{
 	static final String KEY_THUMB_URL = "thumb_url";
 	
 	ListView list;
-    LazyAdapter adapter;
+    StoriesAdapter adapter;
 	
 	ArrayList<HashMap<String, String>> storyList;
 	
@@ -63,8 +63,7 @@ public class TimelineActivity extends Activity{
 		
 		// ListView que ser‡ renderizado
 		list = (ListView) findViewById(R.id.list);		
-		loadStories();
-		
+		loadStories();		
 		
 		// Add Listener List View
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -159,6 +158,7 @@ public class TimelineActivity extends Activity{
 				        			SimpleDateFormat output = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd ");
 				        			Date d = sdf.parse(date);
 				        			String formattedTime = output.format(d);
+				        				
 				        			
 				        			map.put(KEY_BODY, body);
 				        			map.put(KEY_USERNAME, username);
@@ -169,20 +169,31 @@ public class TimelineActivity extends Activity{
 				        			map.put("lat", lat);
 				        			map.put("lon", lon);
 				        			map.put("alt", alt);
-				        			map.put("key", key);			        			
-				        			//map.put("link", )
-				        			// adding HashList to ArrayList
+				        			map.put("key", key);
+				        			
+				        			System.out.println("body: " + body);
+				        			System.out.println("username: " + username);
+				        			System.out.println("user session: " + user);
+				        			System.out.println("\n\n");
+				        			
+				        			
+				        			if(user.equals(username)){
+				        				System.out.println("Putting true ");
+				        				map.put("can_remove", "true");
+				        			}else{
+				        				System.out.println("Putting false ");
+				        				map.put("can_remove", "false");
+				        			}
 				        			storyList.add(map);
 				        		}
 				        			        		
-				        		adapter = new LazyAdapter(TimelineActivity.this, storyList);
+				        		adapter = new StoriesAdapter(TimelineActivity.this, storyList);
 				        		
 				        		runOnUiThread(new Runnable() {
 				        		     public void run() {			        		
 				        		    	list.setAdapter(adapter);
 				        		    }
 				        		});
-
 							}else{
 								AlertDialog.Builder builder = new AlertDialog.Builder(TimelineActivity.this);
 						        builder.setTitle("success: FALSE!")
@@ -210,9 +221,7 @@ public class TimelineActivity extends Activity{
 					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
-				    
-			    
+					}   
 			    }else{
 			    	// Alert registrarion wrong
 					final AlertDialog.Builder builder = new AlertDialog.Builder(TimelineActivity.this);

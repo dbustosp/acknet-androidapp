@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/border_layout"
     android:padding="20dp" >
 
@@ -86,6 +86,22 @@
                 android:textColor="#0030FF"
                 android:textSize="15sp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/remove_story"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/remove_this_story"
+                android:textColor="#0030FF" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

@@ -9,17 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.cs491.acknet.R;
 
-public class CommentsAdapter extends BaseAdapter{
+public class StoriesAdapter extends BaseAdapter{
 	
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
     
-    public CommentsAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
+    public StoriesAdapter(Activity a, ArrayList<HashMap<String, String>> d) {
         activity = a;
         data=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,31 +43,24 @@ public class CommentsAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
         if(convertView==null)
-            vi = inflater.inflate(R.layout.list_row_comment, null);
+            vi = inflater.inflate(R.layout.list_row, null);
 
-        TextView body = (TextView)vi.findViewById(R.id.body); 
-        TextView username = (TextView)vi.findViewById(R.id.username); 
-        TextView date = (TextView)vi.findViewById(R.id.date_comment); 
-                
+        TextView title = (TextView)vi.findViewById(R.id.title); 
+        TextView username = (TextView)vi.findViewById(R.id.artist); 
+        TextView date = (TextView)vi.findViewById(R.id.date); 
+        
+        ImageView thumb_image=(ImageView)vi.findViewById(R.id.list_image);
+        
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
         
-        
         // Setting all values in listview
-        body.setText(song.get(TimelineActivity.KEY_BODY));
+        title.setText(song.get(TimelineActivity.KEY_BODY));
         date.setText(song.get(TimelineActivity.KEY_DATE));
         username.setText(song.get(TimelineActivity.KEY_USERNAME));
-        
-        String can_remove = song.get("can_remove");
-        
-        if(can_remove.equals("false")){
-        	setRemoveTextLayerInvisible(vi);
-        }
-        
+               
+        imageLoader.DisplayImage(song.get(TimelineActivity.KEY_THUMB_URL), thumb_image);
         return vi;
     }
-	public void setRemoveTextLayerInvisible(View vi){
-		TextView remove = (TextView) vi.findViewById(R.id.remove_comment_text);
-		remove.setVisibility(View.INVISIBLE);
-	}
+
 }

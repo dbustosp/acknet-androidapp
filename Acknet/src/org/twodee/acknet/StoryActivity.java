@@ -48,6 +48,7 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 	String key_story;
 	TextView txtView_body;
 	JSONObject json;
+	Boolean is_owner;
 	public static final String API_KEY = "AIzaSyCcdRKwLTXED-Lq27t94kI3kPrqmL-c1hk";
 	public String VIDEO_ID;
 	private ImageView imageView;
@@ -61,6 +62,7 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		setContentView(R.layout.activity_story);
 
 		final TextView see_comments = (TextView) findViewById(R.id.see_comments);
+		final TextView remove_story = (TextView) findViewById(R.id.remove_story);
 		final Button btn_sendComment = (Button) findViewById(R.id.btn_sendComment);
 		final EditText edit_comment = (EditText) findViewById(R.id.comment);
 
@@ -75,7 +77,15 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		alt = extras.getString("alt");
 		body = extras.getString("body");
 		key_story = extras.getString("key_story");
-
+		
+		SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		String user = SP.getString("username", "null");
+		
+		// If they are not the same so remove the option to remove the story
+		if(!user.equals(username)){
+			setInvisibleRemove();
+		}
+	
 		if(type.equals("image")){
 			// Post image
 			setVideoLayerInvisible();
@@ -90,7 +100,77 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 			setInformationText();
 		}
 
-
+		remove_story.setOnClickListener(new OnClickListener(){
+			JSONObject response;
+			
+			@Override
+			public void onClick(View v) {
+				// Alert first
+				AlertDialog.Builder builder = new AlertDialog.Builder(StoryActivity.this);
+				builder.setTitle("Stop!")
+				.setMessage("Are you sure that do you want to remove this story?")
+				.setCancelable(true)
+				.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();						
+					}
+				})
+				
+				.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// user
+						SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+						String user = SP.getString("username", "null");
+						String token = SP.getString("token", "null");
+						String URL = Connection.getInstance().getIp() + "/story/" + key_story + "/" + user;
+						response = Connection.getInstance().make_delete_request(user, token, URL);
+					
+						try {
+							if(response.getString("success").equals("true")){
+								AlertDialog.Builder builder2 = new AlertDialog.Builder(StoryActivity.this);
+								builder2.setTitle("Stop!")
+								.setMessage(response.getString("message"))
+								.setCancelable(true)
+								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										Intent intent = new Intent(StoryActivity.this, TimelineActivity.class);		
+										startActivity(intent);
+									}
+								});
+								AlertDialog alert2 = builder2.create();
+								alert2.show();
+							}else{
+								AlertDialog.Builder builder3 = new AlertDialog.Builder(StoryActivity.this);
+								builder3.setTitle("Stop!")
+								.setMessage(response.getString("message"))
+								.setCancelable(true)
+								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.cancel();						
+									}
+								});
+								AlertDialog alert3 = builder3.create();
+								alert3.show();								
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+				AlertDialog alert = builder.create();
+				alert.show();
+			
+				
+				
+				
+				
+			}
+		});
+		
 		btn_sendComment.setOnClickListener(new OnClickListener(){
 
 			@Override
@@ -137,11 +217,18 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 			public void onClick(View arg0) {
 				Intent comments_intent = new Intent(getApplicationContext(), CommentsActivity.class);
 				comments_intent.putExtra("key_story", key_story );
+				comments_intent.putExtra("username_owner", username );
 				startActivityForResult(comments_intent, 0);
 			}
 		});
 	}
 
+	public void setInvisibleRemove(){
+		TextView remove = (TextView) findViewById(R.id.remove_story);
+		remove.setVisibility(View.GONE);
+	}
+	
+	
 	public void setVideoLayerInvisible(){
 		LinearLayout youtube = (LinearLayout) findViewById(R.id.layout_youtube);
 		youtube.setVisibility(View.GONE);

@@ -14,6 +14,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -33,7 +34,7 @@ public final class Connection {
 	
 	
 	private Connection(){
-		IP = "http://137.28.241.216:3000";	
+		IP = "http://arcane-crag-4782.herokuapp.com";	
 	}
 	
 	public static Connection getInstance(){
@@ -115,10 +116,7 @@ public final class Connection {
 			    in.close();
 			    
 			    return new JSONObject(body);
-			    
-				
-				
-				
+			    	
 			}catch (URISyntaxException e) {
 			      e.printStackTrace();
 			   } catch (UnsupportedEncodingException e) {
@@ -138,5 +136,44 @@ public final class Connection {
 			return null;
 		}
 
-		
+		public JSONObject  make_delete_request(final String user, final String token, final String URL){
+			try{
+				DefaultHttpClient httpclient = new DefaultHttpClient();
+				CredentialsProvider credProvider = new BasicCredentialsProvider();
+			    
+			    credProvider.setCredentials(
+			    		new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
+			    		new UsernamePasswordCredentials(user, token)
+			    );
+			    httpclient.setCredentialsProvider(credProvider);
+			    
+			    URI uri = new URI(String.format(URL));
+				HttpDelete delete = new HttpDelete(uri);
+											    
+			    HttpResponse response = httpclient.execute(delete);
+			    
+			    Scanner in = new Scanner(response.getEntity().getContent());
+			    in.useDelimiter("\\Z");
+			    String body = in.next();
+			    in.close();
+			    
+			    return new JSONObject(body);
+			    	
+			}catch (URISyntaxException e) {
+			      e.printStackTrace();
+			   } catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			   } catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			   } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			   } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
 }
