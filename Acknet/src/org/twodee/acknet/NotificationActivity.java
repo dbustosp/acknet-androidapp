@@ -34,8 +34,6 @@ public class NotificationActivity extends Activity {
         setContentView(R.layout.activity_notifications);
         
         notificationsList = new ArrayList<HashMap<String, String>>();
-        int num_notifications = 0;
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         list = (ListView) findViewById(R.id.list_notifications);
         
         handle_get_request();

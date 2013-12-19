@@ -48,6 +48,7 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 	String key_story;
 	TextView txtView_body;
 	JSONObject json;
+	JSONObject json_delete;
 	Boolean is_owner;
 	public static final String API_KEY = "AIzaSyCcdRKwLTXED-Lq27t94kI3kPrqmL-c1hk";
 	public String VIDEO_ID;
@@ -101,7 +102,6 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		}
 
 		remove_story.setOnClickListener(new OnClickListener(){
-			JSONObject response;
 			
 			@Override
 			public void onClick(View v) {
@@ -124,41 +124,9 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 						String user = SP.getString("username", "null");
 						String token = SP.getString("token", "null");
 						String URL = Connection.getInstance().getIp() + "/story/" + key_story + "/" + user;
-						response = Connection.getInstance().make_delete_request(user, token, URL);
-					
-						try {
-							if(response.getString("success").equals("true")){
-								AlertDialog.Builder builder2 = new AlertDialog.Builder(StoryActivity.this);
-								builder2.setTitle("Stop!")
-								.setMessage(response.getString("message"))
-								.setCancelable(true)
-								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										Intent intent = new Intent(StoryActivity.this, TimelineActivity.class);		
-										startActivity(intent);
-									}
-								});
-								AlertDialog alert2 = builder2.create();
-								alert2.show();
-							}else{
-								AlertDialog.Builder builder3 = new AlertDialog.Builder(StoryActivity.this);
-								builder3.setTitle("Stop!")
-								.setMessage(response.getString("message"))
-								.setCancelable(true)
-								.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										dialog.cancel();						
-									}
-								});
-								AlertDialog alert3 = builder3.create();
-								alert3.show();								
-							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						deleteStory(user, token, URL);
+						
+
 					}
 				});
 				AlertDialog alert = builder.create();
@@ -233,18 +201,62 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 		LinearLayout youtube = (LinearLayout) findViewById(R.id.layout_youtube);
 		youtube.setVisibility(View.GONE);
 	}
+	
+	public void deleteStory(final String user, final String token, final String URL){
+		new AsyncTask<Void, Void, HttpResponse>() {
+
+			@Override
+			protected HttpResponse doInBackground(Void... params) {
+				json_delete = new JSONObject();
+				json_delete = Connection.getInstance().make_delete_request(user, token, URL);
+				return null;
+			}
+			
+			@Override
+			protected void onPostExecute(HttpResponse response){
+				try {
+					if(json_delete.getString("success").equals("true")){
+						AlertDialog.Builder builder2 = new AlertDialog.Builder(StoryActivity.this);
+						builder2.setTitle("Stop!")
+						.setMessage(json_delete.getString("message"))
+						.setCancelable(true)
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(StoryActivity.this, TimelineActivity.class);		
+								startActivity(intent);
+							}
+						});
+						AlertDialog alert2 = builder2.create();
+						alert2.show();
+					}else{
+						AlertDialog.Builder builder3 = new AlertDialog.Builder(StoryActivity.this);
+						builder3.setTitle("Stop!")
+						.setMessage(json_delete.getString("message"))
+						.setCancelable(true)
+						.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.cancel();						
+							}
+						});
+						AlertDialog alert3 = builder3.create();
+						alert3.show();								
+					}
+				} catch (JSONException e) {
+					
+					e.printStackTrace();
+				}		
+			}	
+		}.execute();
+	}
 
 	public void sendComment(final String user, final String token, final JSONObject json_put){
 
 		new AsyncTask<Void, Void, HttpResponse>() {
 
 			@Override
-			protected HttpResponse doInBackground(Void... params) {
-				System.out.println("Haciendo comentario");
-				System.out.println(user);
-				System.out.println(token);
-				System.out.println(json_put);
-				
+			protected HttpResponse doInBackground(Void... params) {				
 				json = new JSONObject();
 				String URL = Connection.getInstance().getIp() + "/comment";				
 				json = Connection.getInstance().make_post_request(user, token, URL, json_put);
@@ -289,7 +301,7 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 						alert.show();	
 					}
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
@@ -344,13 +356,13 @@ public class StoryActivity extends YouTubeBaseActivity implements YouTubePlayer.
 			@Override
 			protected void onPostExecute(Bitmap bmap){
 				imageView.setImageBitmap(bmap);
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(300,300);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(500,500);
 				imageView.setLayoutParams(lp);
 				ImageView img2 = new ImageView(StoryActivity.this);
 				img2.setImageBitmap(bmap);
 				ImageView img3 = new ImageView(StoryActivity.this);
 				img3.setImageBitmap(bmap);
-				mainLayout.addView(imageView, lp);
+				mainLayout.addView(imageView);
 				//mainLayout.addView(img2, lp);
 				//mainLayout.addView(img3, lp);
 			}

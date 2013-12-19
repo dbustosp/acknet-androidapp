@@ -23,8 +23,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,6 +55,8 @@ public class PostActivity extends Activity {
 	JSONObject json;
 	
 	Boolean status;
+	
+	private ProgressDialog Dialog;
 	
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private static final int RESULT_LOAD_IMAGE = 1;
@@ -96,6 +98,8 @@ public class PostActivity extends Activity {
        final Button btn_camera = (Button) findViewById(R.id.btn_camera);
        final Button btn_video = (Button) findViewById(R.id.btn_video);
        final Button btn_send_post = (Button) findViewById (R.id.send_post);
+       
+       Dialog = new ProgressDialog(PostActivity.this);
        
        btn_send_post.setOnClickListener(new View.OnClickListener() {
 
@@ -146,7 +150,7 @@ public class PostActivity extends Activity {
 				
 				final EditText input = new EditText(PostActivity.this);
 				final AlertDialog.Builder builder = new AlertDialog.Builder(PostActivity.this);
-				input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+				input.setInputType(InputType.TYPE_CLASS_TEXT);
 				
 				
 				
@@ -218,16 +222,6 @@ public class PostActivity extends Activity {
        return cursor.getString(idx); 
    }
    
-   private String getRealPathFromURI2(Uri contentURI) {
-	    Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
-	    if (cursor == null) { // Source is Dropbox or other similar local file path
-	        return contentURI.getPath();
-	    } else { 
-	        cursor.moveToFirst(); 
-	        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA); 
-	        return cursor.getString(idx); 
-	    }
-	}
    
    
    
@@ -245,18 +239,7 @@ public class PostActivity extends Activity {
 	     }
 	   }
 	 }
-   
-   private String getRealPathFromURI4(Uri contentUri) {
-	   System.out.println("getRealPathFromURI4: " + contentUri); 
-	   
-	   String[] proj = { MediaStore.Images.Media.DATA };
-	    CursorLoader loader = new CursorLoader(PostActivity.this, contentUri, proj, null, null, null);
-	    Cursor cursor = loader.loadInBackground();
-	    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-	    cursor.moveToFirst();
-	    return cursor.getString(column_index);
-	}
-   
+      
 	
    private static Uri getOutputMediaFileUri(int type) {
 	    return Uri.fromFile(getOutputMediaFile(type));
@@ -286,24 +269,17 @@ public class PostActivity extends Activity {
 
 	}
    
-   
-   
    private void putNewPost(final View v) {		
 		
 		new AsyncTask<Void, Void, HttpResponse>() {
 
 			@Override
 			protected HttpResponse doInBackground(Void... params) {
-				
-				HttpResponse response = null;
 				json = new JSONObject();
-				
 				try{
 					
 					SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 					username = SP.getString("username", "null");
-					
-					
 					
 					// Push in json username and body
 					json.put("username",username);
@@ -365,9 +341,16 @@ public class PostActivity extends Activity {
 			}
 			
 			@Override
+			protected void onPreExecute()
+		    {
+				String message = getString(R.string.posting_post);
+		        Dialog.setMessage(message);
+		        Dialog.show();
+		    }
+			
+			@Override
 			protected void onPostExecute(HttpResponse response){
-				System.out.println("onPostExecute - Init");
-				
+				Dialog.dismiss();				
 				try {
 					Boolean status = json.getBoolean("success");
 					if(status){
@@ -378,7 +361,8 @@ public class PostActivity extends Activity {
 				        .setCancelable(false)
 				        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
 				            public void onClick(DialogInterface dialog, int id) {
-				                dialog.cancel();
+				            	Intent i = new Intent(PostActivity.this, TimelineActivity.class);
+								startActivity(i);
 				            }
 				        });
 				        AlertDialog alert = builder.create();
@@ -391,7 +375,7 @@ public class PostActivity extends Activity {
 				        .setCancelable(false)
 				        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
 				            public void onClick(DialogInterface dialog, int id) {
-				                dialog.cancel();
+								dialog.cancel();
 				            }
 				        });
 				        AlertDialog alert = builder.create();

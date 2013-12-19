@@ -173,12 +173,8 @@ public class DashboardActivity extends Activity{
 					URL url = new URL(address);
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("DELETE");
-					int responseCode = connection.getResponseCode();
-
 				} catch (MalformedURLException e) {
 					// SHOW A MESSAGE 
-					
-					
 					e.printStackTrace();
 				}catch(IOException e){
 					// TODO Auto-generated catch block
@@ -190,8 +186,7 @@ public class DashboardActivity extends Activity{
 			
 			@Override
 			protected void onPostExecute(HttpResponse response){
-				// Unregister GCM
-				
+				// Unregister GCM			
 				context = getApplicationContext();
 				if (checkPlayServices()) {
 					gcm = GoogleCloudMessaging.getInstance(DashboardActivity.this);
@@ -315,14 +310,10 @@ public class DashboardActivity extends Activity{
 				
 				// Prepare the URL
 				String address = Connection.getInstance().getIp() + "/device/" + device;
-
 				try {
-					
 					URL url = new URL(address);
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("DELETE");
-					int responseCode = connection.getResponseCode();
-
 				} catch (MalformedURLException e) {
 					// SHOW A MESSAGE 
 					e.printStackTrace();

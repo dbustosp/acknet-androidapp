@@ -37,6 +37,7 @@
     <string name="send_comment">Send comment.</string>
     <string name="see_all_comments">See all comments.</string>
     <string name="remove_this_story">Remove this story.</string>
+    <string name="posting_post">Posting post....</string>
     
     
     <!-- List comments -->
@@ -49,7 +50,13 @@
     <string name="choose_your_language">Choose your language</string>
     <string name="category">Category</string>
     
-    
+     
+     
+    <string name="write_here_your_story">Write here your story....</string>
+    <string name="attach_picture">Attach picture</string>
+    <string name="camera">Camera</string>
+    <string name="video">Video</string>
+     
     
     
     <string name="app_name">Acknet</string>

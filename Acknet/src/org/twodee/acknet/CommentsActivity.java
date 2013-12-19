@@ -21,7 +21,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,6 +40,7 @@ public class CommentsActivity extends Activity {
 	String token;
 	Boolean is_owner;
 	TextView remove_comment;
+	JSONObject response_delete;
 
 
 
@@ -98,42 +98,7 @@ public class CommentsActivity extends Activity {
 		                SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		        		String user = SP.getString("username", "null");
 		        		String token = SP.getString("token", "null");
-		        		JSONObject response = Connection.getInstance().make_delete_request(user, token, URL);
-		        		
-		        		try {
-							if(response.getString("success").equals("true")){
-								AlertDialog.Builder builder2 = new AlertDialog.Builder(CommentsActivity.this);
-						        builder2.setTitle(" Great! ")
-						        .setMessage(response.getString("message"))
-						        .setCancelable(false)
-						        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
-						            public void onClick(DialogInterface dialog, int id) {
-						            	Intent intent = new Intent(CommentsActivity.this, TimelineActivity.class);
-						                startActivity(intent);
-						            }
-						        });
-						        AlertDialog alert2 = builder2.create();
-						        alert2.show();   
-							}else{
-								AlertDialog.Builder builder3 = new AlertDialog.Builder(CommentsActivity.this);
-						        builder3.setTitle(" Bad! ")
-						        .setMessage(response.getString("message"))
-						        .setCancelable(false)
-						        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
-						            public void onClick(DialogInterface dialog, int id) {
-						            	dialog.cancel();
-						            }
-						        });
-						        AlertDialog alert3 = builder3.create();
-						        alert3.show();
-								
-							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		        		
-		        		
+		        		deleteComment(user, token, URL);
 		            }
 		        });
 		        
@@ -145,6 +110,53 @@ public class CommentsActivity extends Activity {
 		});
 	}
 
+	public void deleteComment(final String user, final String token, final String URL){
+		new AsyncTask<Void, Void, HttpResponse>() {
+
+			@Override
+			protected HttpResponse doInBackground(Void... params) {
+				response_delete = new JSONObject();
+				response_delete = Connection.getInstance().make_delete_request(user, token, URL);
+				return null;
+			}
+			
+			@Override
+			protected void onPostExecute(HttpResponse response){
+				try {
+					if(response_delete.getString("success").equals("true")){
+						AlertDialog.Builder builder2 = new AlertDialog.Builder(CommentsActivity.this);
+				        builder2.setTitle(" Great! ")
+				        .setMessage(response_delete.getString("message"))
+				        .setCancelable(false)
+				        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+				            public void onClick(DialogInterface dialog, int id) {
+				            	Intent intent = new Intent(CommentsActivity.this, TimelineActivity.class);
+				                startActivity(intent);
+				            }
+				        });
+				        AlertDialog alert2 = builder2.create();
+				        alert2.show();   
+					}else{
+						AlertDialog.Builder builder3 = new AlertDialog.Builder(CommentsActivity.this);
+				        builder3.setTitle(" Bad! ")
+				        .setMessage(response_delete.getString("message"))
+				        .setCancelable(false)
+				        .setNegativeButton("OK",new DialogInterface.OnClickListener() {
+				            public void onClick(DialogInterface dialog, int id) {
+				            	dialog.cancel();
+				            }
+				        });
+				        AlertDialog alert3 = builder3.create();
+				        alert3.show();		
+					}
+				} catch (JSONException e) {
+					
+					e.printStackTrace();
+				}	
+			}
+		}.execute();
+	}
+	
 	public void loadComments(final String user, final String token, final String URL){
 
 		new AsyncTask<Void, Void, HttpResponse>() {
